@@ -74,7 +74,9 @@ $(function(){
 		var item_id = $(this).attr('data-id');
 
 		$.get('/update-rating/' + newRating + '/' + item_id, function(data) {
-			/*optional stuff to do after success */
+			$('.ratingContainer > i.fa').each(function(index, el) {
+				$(this).attr('data-original-rating', newRating);
+			});
 		});
 	});
 
