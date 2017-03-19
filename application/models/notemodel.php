@@ -16,6 +16,13 @@ class NoteModel extends CI_Model
 		$this->db->insert('cd-notes', $data);
 	}
 
+	function getItemNotes($itemId) {
+        $notes = $this->db->select()
+                ->where('cd_id', $itemId)
+                ->get('notes');
+
+        return $notes->result();
+    }
 }
 
 ?>

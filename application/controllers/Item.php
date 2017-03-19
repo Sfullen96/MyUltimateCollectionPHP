@@ -6,6 +6,8 @@ class Item extends CI_Controller {
 	public function __construct() {
         parent::__construct();
         $this->load->model('ItemModel');
+        $this->load->model('NoteModel');
+        $this->load->model('TrackModel');
 	}
 
 	public function index()
@@ -17,9 +19,13 @@ class Item extends CI_Controller {
 
      	
      	$data['item_info'] = $this->ItemModel->getItemInfo($itemId);
-     	$data['notes'] = $this->ItemModel->getItemNotes($itemId);
+     	$data['notes'] = $this->NoteModel->getItemNotes($itemId);
+     	$data['tracks'] = $this->TrackModel->getItemTracks($itemId);
 
-		$data['title'] = "CD Library | Item";
+     	$title = $data['item_info'][0]->title;
+     	$artist = $data['item_info'][0]->artist_name;
+
+		$data['title'] = $title . ' | ' . $artist;
         $data['main_content'] = 'individual-item';
         $this->load->view('includes/template', $data);
 	}

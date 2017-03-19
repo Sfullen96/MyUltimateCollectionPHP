@@ -57,4 +57,24 @@
 .ratingContainer > i.fa {
 	font-size: 30px;
 	cursor: pointer;
+	margin-right: 0px;
+}
+.ratingContainer > i.fa-star {
+	color: #fde164;
+}
+.container {
+	background-color: #fff;
+}
+body {
+	background-color: #f6f6f6;
+}
+.moreInfoBanner {
+	min-height: 70px;
+	color: #fff;
+	background-color: #333;
+	line-height: 70px;
+}
+.moreInfoBanner h5 {
+	text-align: center;
+	line-height: 70px;
 }

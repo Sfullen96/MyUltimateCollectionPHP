@@ -56,3 +56,6 @@ $route['item/(:num)'] = 'item/showIndividualItem/$1';
 $route['home'] = 'pages';
 $route['get-rating/(:num)'] = 'item/rating/$1';
 $route['update-rating/(:num)/(:num)'] = 'item/updateRating/$1/$2';
+$route['spotify'] = 'spotify';
+$route['spotify-auth/(:any)'] = 'spotify/auth/$1';
+$route['last-fm'] = 'lastFmApi';

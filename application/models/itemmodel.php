@@ -17,14 +17,6 @@ class ItemModel extends CI_Model
 
     }
 
-    function getItemNotes($itemId) {
-        $notes = $this->db->select()
-                ->where('cd_id', $itemId)
-                ->get('notes');
-
-        return $notes->result();
-    }
-
     function getItemRating($itemId) {
         $rating = $this->db->select('rating')
                 ->where('item_id', $itemId)
