@@ -10,6 +10,7 @@ class TrackModel extends CI_Model
 	function getItemTracks($itemId) {
         $tracks = $this->db->select()
                 ->where('album_id', $itemId)
+                ->order_by('track_album_number ASC')
                 ->get('tracks');
 
         return $tracks->result();

@@ -46,4 +46,25 @@ class Item extends CI_Controller {
 		}
 
 	}
+
+	public function temp() {
+		$query = $this->db->select()
+			->get('library');
+
+		foreach ($query->result() as $row) {
+			$sql = $this->db->select()
+				->where('format_name', $row->format)
+				->get('formats');
+
+			$stuff = $sql->result();
+
+			$data = array(
+	            'format' => $stuff[0]->format_id
+	        );
+
+	        $this->db->where('item_id', $row->item_id);
+	        $this->db->update('library', $data);
+			// echo "<pre>" . print_r($sql->result(), TRUE) . "</pre><br>";
+		}
+	}
 }

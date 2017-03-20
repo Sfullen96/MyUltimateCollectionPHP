@@ -50,16 +50,14 @@
     margin-top: 10px;
 }	
 .ratingContainer {
-	height: 80px;
-	line-height: 80px;
-	text-align: right;
+	text-align: left;
 }
-.ratingContainer > i.fa {
-	font-size: 30px;
+.ratingContainer i.fa {
+	font-size: 28px;
 	cursor: pointer;
 	margin-right: 0px;
 }
-.ratingContainer > i.fa-star {
+.ratingContainer i.fa-star {
 	color: #fde164;
 }
 .container {
@@ -72,9 +70,17 @@ body {
 	min-height: 70px;
 	color: #fff;
 	background-color: #333;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.moreInfoBanner p {
+	text-align: center;
 	line-height: 70px;
 }
 .moreInfoBanner h5 {
 	text-align: center;
 	line-height: 70px;
+}
+.ratingContainer .albumFormat, .ratingContainer .albumTitle, .ratingContainer .extraInfo, .ratingContainer i.fa {
+	margin-bottom: 10px;
 }

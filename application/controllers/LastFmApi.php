@@ -14,11 +14,19 @@ class lastFmApi extends CI_Controller {
 
 		$query = $this->db->select()
 				->join('artists', 'library.artist_id = artists.artist_id')
-				// ->limit(10)
+				->limit(200)
 				->get('library');
 
 		$found = 0;
 		$notFound = 0;
+
+		$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist=Cher&album=Believe&format=json';
+
+			$response = json_decode(file_get_contents($url));
+
+			echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
+
+			die();
 
 		foreach ($query->result() as $row) {
 
@@ -26,9 +34,11 @@ class lastFmApi extends CI_Controller {
 			$artist = urlencode($row->artist_name);
 
 			// $url = 'https://api.spotify.com/v1/search?q=album:'. $album .'artist:'. $artist;
-			$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist='. $artist .'&album='. $album .'&format=json';
+			$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist=Cher&album=Believe&format=xml';
 
 			$response = json_decode(file_get_contents($url));
+
+			echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 
 			// if (!isset($response->error)) {
 
@@ -93,10 +103,10 @@ class lastFmApi extends CI_Controller {
 				// } else {
 				// 	 echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 				// }
-			} else {
-					 // echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
-				$notFound++;
-			}
+			// } else {
+			// 		 // echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
+			// 	$notFound++;
+			// }
 			
 			// echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 

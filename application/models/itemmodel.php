@@ -10,6 +10,7 @@ class ItemModel extends CI_Model
 
         $query = $this->db->select()
                 ->join('artists', 'artists.artist_id = library.artist_id')
+                ->join('formats', 'formats.format_id = library.format_id')
                 ->where('item_id', $itemId)
                 ->get('library');
 

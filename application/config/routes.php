@@ -59,3 +59,4 @@ $route['update-rating/(:num)/(:num)'] = 'item/updateRating/$1/$2';
 $route['spotify'] = 'spotify';
 $route['spotify-auth/(:any)'] = 'spotify/auth/$1';
 $route['last-fm'] = 'lastFmApi';
+$route['temp'] = 'item/temp';

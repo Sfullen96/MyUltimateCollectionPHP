@@ -24,7 +24,7 @@ $(function(){
 		running = true;
 	});
 
-	$(document).on('mouseover', '.ratingContainer > i.fa', function(event) {
+	$(document).on('mouseover', '.ratingContainer i.fa', function(event) {
 
 			var starNum = $(this).attr('id');
 
@@ -45,7 +45,7 @@ $(function(){
 
 	});
 
-	$(document).on('mouseleave', '.ratingContainer > i.fa', function(event) {
+	$(document).on('mouseleave', '.ratingContainer i.fa', function(event) {
 
 			var starNum = $(this).attr('data-original-rating');
 
@@ -65,7 +65,7 @@ $(function(){
 
 	});
 
-	$(document).on('click', '.ratingContainer > i.fa', function(event) {
+	$(document).on('click', '.ratingContainer i.fa', function(event) {
 		var newRating = $(this).attr('id');
 		newRating = newRating.replace('star', '');
 		newRating = parseInt(newRating);
@@ -74,7 +74,7 @@ $(function(){
 		var item_id = $(this).attr('data-id');
 
 		$.get('/update-rating/' + newRating + '/' + item_id, function(data) {
-			$('.ratingContainer > i.fa').each(function(index, el) {
+			$('.ratingContainer i.fa').each(function(index, el) {
 				$(this).attr('data-original-rating', newRating);
 			});
 		});
