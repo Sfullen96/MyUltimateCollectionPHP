@@ -34,6 +34,21 @@ class ItemModel extends CI_Model
         $this->db->where('item_id', $itemId);
         $this->db->update('library', $data);
     }
+
+    function updateItem($field, $value, $table, $itemId) {
+        $data = array(
+            $field => htmlspecialchars($value)
+        );
+
+        $this->db->where('item_id', $itemId);
+        $query = $this->db->update($table, $data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
  
 

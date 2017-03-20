@@ -35,7 +35,7 @@ if(!empty($tracks)) {
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
 			<h5 class="albumFormat"> <?= $item->format_name ?> | #<?= $item->item_id; ?> </h5>
-			<h2 class="albumTitle"> <?= $item_info[0]->title ?> </h2>
+			<h2 class="albumTitle editable"> <?= $item_info[0]->title ?> </h2>
 			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= $item_info[0]->artist_name ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
 			<?php 
 
@@ -54,7 +54,7 @@ if(!empty($tracks)) {
 				}
 
 			?>
-			<p class="albumSummary">
+			<p class="albumSummary editable">
 				<?= (isset($item->summary)?$item->summary:'No summary, <a href="" class="addSummary"> Add a summary </a>') ?>
 			</p>
 		</div>
@@ -115,19 +115,23 @@ if(!empty($tracks)) {
 		</table>
 	</div>
 	<div class="col-xs-12 col-sm-6 notesContainer">
+		<h4> Notes </h4>
 		<div class="notes">
 			<?php 
 
 				foreach ($notes as $note) {
 					echo '
 						<div class="note">
-							<p> '. $note->note .' | '. date('d/m/y H:i:s', strtotime($note->note_timestamp)) .' </p>
+							<p> '. $note->note .' | <small>'. date('d/m/y H:i:s', strtotime($note->note_timestamp)) .'</small> </p>
+							<hr>
 						</div>
 					';
 				}
 
 			?>
 		</div>
+		<textarea class="form-control noteText" id="textarea" data-id="<?= $item->item_id; ?>" rows="3" placeholder="Add a note..."></textarea>
+		<button class="btn addNote"> Add Note </button>
 	</div>
 </div>
 

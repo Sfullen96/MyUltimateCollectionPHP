@@ -49,6 +49,14 @@ class Item extends CI_Controller {
 
 	}
 
+	public function updateItem($field, $value, $table, $itemId) {
+		if($this->ItemModel->updateItem($field, $value, $table, $itemId)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function temp() {
 		$query = $this->db->select()
 			->get('library');

@@ -120,3 +120,43 @@ body {
 .similarArtist > .overlay > .text > a:hover {
 	text-decoration: underline;
 }
+.notes {
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid #e11f27;
+    max-height: 185px;
+    overflow-y: scroll;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.notes small {
+    color: #e11f27;
+    font-style: italic;
+}
+.notes hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-color: rgba(0,0,0,0.7);
+}
+.notesContainer h4 {
+	margin-bottom: 15px;
+}
+.addNote {
+	border-radius: 0px;
+	background-color: #e11f27;
+	color: #fff;
+	margin-top: 15px;
+	width: 100%;
+}
+.addNote:hover {
+	color: #fff;
+}
+.editable {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

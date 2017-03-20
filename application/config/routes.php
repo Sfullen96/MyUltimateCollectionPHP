@@ -60,3 +60,5 @@ $route['spotify'] = 'spotify';
 $route['spotify-auth/(:any)'] = 'spotify/auth/$1';
 $route['last-fm'] = 'lastFmApi';
 $route['temp'] = 'item/temp';
+$route['add-note/(:num)/(:any)'] = 'note/addNote/$1/$2';
+$route['updateItem/(:any)/(:any)/(:any)/(:any)'] = 'item/updateItem/$1/$2/$3/$4';

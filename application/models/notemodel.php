@@ -7,18 +7,21 @@ class NoteModel extends CI_Model
         parent::__construct();
     }
 
-	public function addNote($cd_id, $note) {
+	public function addNote($item_id, $note) {
 		$data = array(
-		   	'cd_id' => $cd_id,
+		   	'item_id' => $item_id,
 		   	'note' => $note
 		);
 
-		$this->db->insert('cd-notes', $data);
+		$this->db->insert('notes', $data);
+
+        return true;
 	}
 
 	function getItemNotes($itemId) {
         $notes = $this->db->select()
-                ->where('cd_id', $itemId)
+                ->where('item_id', $itemId)
+                ->order_by('note_timestamp DESC')
                 ->get('notes');
 
         return $notes->result();
