@@ -3,6 +3,7 @@ if (isset($_GET['debug'])) {
 	echo "<pre>" . print_r($item_info, TRUE) . "</pre><br>";
 	echo "<pre>" . print_r($tracks, TRUE) . "</pre><br>";
 	echo "<pre>" . print_r($notes, TRUE) . "</pre><br>";
+	echo "<pre>" . print_r($similar_artists, TRUE) . "</pre><br>";
 }
 
 $item = $item_info[0];
@@ -130,3 +131,28 @@ if(!empty($tracks)) {
 	</div>
 </div>
 
+<!-- Similar Artists -->
+<h3> Similar Artists to <?= $item->artist_name; ?> </h3>
+
+<div class="row">
+	<?php 
+
+		foreach ($similar_artists->similarartists->artist as $similarArtist) {
+			$column = 12 / count($similar_artists->similarartists->artist);
+
+			echo '
+			<div class="col-xs-6 col-sm-'. $column .'">
+				<div class="similarArtist" style="background-image: url(\''. $similarArtist->image[2]->{'#text'} .'\');background-size: cover">
+					<div class="overlay">
+						<div class="text">
+							<h6 class="similarName"> '. $similarArtist->name .' </h6>
+							<a href="https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords='. $similarArtist->name .'" target="_blank" class="amazonLink"> Search on Amazon </a>
+						</div>
+					</div>
+				</div>
+			</div>
+			';
+		}
+
+	?>
+</div>

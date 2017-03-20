@@ -20,7 +20,7 @@ class lastFmApi extends CI_Controller {
 		$found = 0;
 		$notFound = 0;
 
-		$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist=Cher&album=Believe&format=json';
+		$url = 'http://ws.audioscrobbler.com/2.0?method=track.getInfo&api_key=797d57115973701485bcb92ebb8ea847&artist=cher&track=believe&format=json';
 
 			$response = json_decode(file_get_contents($url));
 
@@ -123,6 +123,14 @@ class lastFmApi extends CI_Controller {
 		echo "Found: " . $found . "<br>";
 		echo "Not Found: " . $notFound;
 		
+	}
+
+	public function getSimilarArtists($artistName) {
+		$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='. urlencode($artistName) .'&api_key=797d57115973701485bcb92ebb8ea847&format=json';
+
+		$response = json_decode(file_get_contents($url));
+
+		echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 	}
 
 }

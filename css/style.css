@@ -15,6 +15,17 @@
     font-weight: 800;
     font-size: 25px;
 }
+.overlay .text {
+	position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #333;
+    font-weight: 800;
+    font-size: 25px;
+}
 .homeSquare > .text > i.fa {
 	font-size: 40px;
 	color: #e11f27;
@@ -83,4 +94,29 @@ body {
 }
 .ratingContainer .albumFormat, .ratingContainer .albumTitle, .ratingContainer .extraInfo, .ratingContainer i.fa {
 	margin-bottom: 10px;
+}
+.similarArtist {
+	position: relative;
+	padding: 15px;
+	height: 200px;
+	border: 1px solid #333;
+	margin-bottom: 20px; 
+}
+.similarArtist > .overlay {
+    position: absolute;
+    left: 0;
+    height: 200px;
+    width: 100%;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.similarArtist > .overlay > .text > h6 {
+	color: #fff;
+}
+.similarArtist > .overlay > .text > a {
+	color: #fff;
+	font-weight: bold;
+}
+.similarArtist > .overlay > .text > a:hover {
+	text-decoration: underline;
 }

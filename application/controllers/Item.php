@@ -8,6 +8,7 @@ class Item extends CI_Controller {
         $this->load->model('ItemModel');
         $this->load->model('NoteModel');
         $this->load->model('TrackModel');
+        $this->load->model('ArtistModel');
 	}
 
 	public function index()
@@ -21,6 +22,7 @@ class Item extends CI_Controller {
      	$data['item_info'] = $this->ItemModel->getItemInfo($itemId);
      	$data['notes'] = $this->NoteModel->getItemNotes($itemId);
      	$data['tracks'] = $this->TrackModel->getItemTracks($itemId);
+     	$data['similar_artists'] = $this->ArtistModel->getSimilarArtists($data['item_info'][0]->artist_name);
 
      	$title = $data['item_info'][0]->title;
      	$artist = $data['item_info'][0]->artist_name;
