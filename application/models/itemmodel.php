@@ -37,7 +37,7 @@ class ItemModel extends CI_Model
 
     function updateItem($field, $value, $table, $itemId) {
         $data = array(
-            $field => htmlspecialchars($value)
+            $field => $value
         );
 
         $this->db->where('item_id', $itemId);

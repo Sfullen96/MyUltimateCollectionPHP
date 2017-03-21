@@ -35,8 +35,9 @@ if(!empty($tracks)) {
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
 			<h5 class="albumFormat"> <?= $item->format_name ?> | #<?= $item->item_id; ?> </h5>
-			<h2 class="albumTitle editable"> <?= $item_info[0]->title ?> </h2>
+			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= $item->item_id ?>"> <?= $item_info[0]->title ?> </h2>
 			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= $item_info[0]->artist_name ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
+			<div class="rating">
 			<?php 
 
 				foreach ($item_info as $data) {
@@ -54,8 +55,11 @@ if(!empty($tracks)) {
 				}
 
 			?>
-			<p class="albumSummary editable">
-				<?= (isset($item->summary)?$item->summary:'No summary, <a href="" class="addSummary"> Add a summary </a>') ?>
+			</div>
+			<a href="/review/<?= $item->item_id; ?>" class="reviewLink"> Review This Album </a>
+			<br>
+			<p class="albumSummary " id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
+				<?= (isset($item->summary)?trim($item->summary):'No summary, double click here to add one'); ?>
 			</p>
 		</div>
 	</div>
@@ -65,22 +69,17 @@ if(!empty($tracks)) {
 	<div class="moreInfoBanner col-xs-12">
 		<div class="row">
 			<div class="col-xs-12 col-sm-3">
-				<p> Purchased On: <?= (
-					isset($item->purchase_date) && $item->purchase_date > ''
-					?$item->purchase_date
-					:
-					'N/A'
-					); ?>
-				</p>
+				<p> Purchased On: <span class="editable" id="purchase_date" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchase_date) && $item->purchase_date > ''?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?>
+				</span></p>
 			</div>
 			<div class="col-xs-12 col-sm-3">
-				<p> Purchased at: <?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></p>
+				<p> Purchased at: <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span></p>
 			</div>
 			<div class="col-xs-12 col-sm-3">
-				<p> Item Ref: <?= (isset($item->reference)?$item->reference:'N/A'); ?> </p>
+				<p> Item Ref: <span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span></p>
 			</div>
 			<div class="col-xs-12 col-sm-3">
-				<p> CD Count: <?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </p>
+				<p> CD Count: <span class="editable" id="cd_count" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </span></p>
 			</div>
 		</div>
 	</div>
@@ -98,18 +97,32 @@ if(!empty($tracks)) {
 			</thead>
 			<tbody>
 				<?php 
+					if (!empty($tracks)) {
 
-					foreach ($tracks as $track) {
-						$duration = gmdate("i:s", $track->track_duration);
+						$trackCount = count($tracks);
+
+						foreach ($tracks as $track) {
+							$duration = gmdate("i:s", $track->track_duration);
+							echo '
+								<tr>
+									<td>'. $track->track_album_number .'</td>
+									<td class="editableTrack" id="track_name" data-trackid="'. $track->track_id .'" data-itemid="'.  .'">'. $track->track_name .'</td>
+									<td class="editableTrack" id="track_duration">'. $duration .'</td>
+								</tr>
+							';
+						}
+
+						$newTrackId = $trackCount+=1;
 						echo '
-							<tr>
-								<td>'. $track->track_album_number .'</td>
-								<td>'. $track->track_name .'</td>
-								<td>'. $duration .'</td>
+							<tr data-id="'. $newTrackId .'">
+								<td>'. $newTrackId .'</td>
+								<td><input type="text" class="form-control" placeholder="Track Name" name="trackName" /></td>
+								<td><input type="text" class="form-control" placeholder="Track Duration" name="duration" /></td>
 							</tr>
 						';
+					} else {
+						// No track listing currently
 					}
-
 				?>
 			</tbody>
 		</table>

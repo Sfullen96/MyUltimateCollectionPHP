@@ -2,7 +2,7 @@ $(function() {
 
 	var editing = false;
 
-	$(document).on('dblclick', '.editable', function(event) {
+	$(document).on('dblclick', '.editableTrack', function(event) {
 		event.preventDefault();
 
 		if (!editing) {
@@ -11,8 +11,8 @@ $(function() {
 			var elementType = $(this).prev().prop('nodeName');
 			var element = $(this);
 
-			$(this).before('<input type="text" class="form-control editing" data-id="'+ $(this).attr('id') +'" data-table="'+ $(this).attr('data-table') +'" data-itemid="'+ $(this).attr('data-itemid') +'" value="'+ text +'" />');
-			$('.editing').focus();
+			$(this).before('<input type="text" class="form-control editingTrack" data-id="'+ $(this).attr('id') +'" data-trackid="'+ $(this).attr('data-trackid') +'" data-itemid="'+ $(this).attr('data-itemid') +'" value="'+ text +'" />');
+			$('.editingTrack').focus();
 			$(this).hide();
 		} else {
 			alert('Finish editing current element');
@@ -21,7 +21,7 @@ $(function() {
 	});
 
 
-	$(document).on('blur', '.editing', function(event) {
+	$(document).on('blur', '.editingTrack', function(event) {
 		event.preventDefault();
 		editing = false;
 
@@ -37,15 +37,15 @@ $(function() {
 		});
 
 		
-		$(this).siblings('.editable').text(value);
-		$(this).siblings('.editable').show();
+		$(this).siblings('.editableTrack').text(value);
+		$(this).siblings('.editableTrack').show();
 		$(this).remove();
 
 	});
 
-	$(document).on('keyup', '.editing', function(event) {
+	$(document).on('keyup', '.editingTrack', function(event) {
 		if (event.which == 13) {
-            $('.editing').blur();
+            $('.editingTrack').blur();
         }
 	});
 	 

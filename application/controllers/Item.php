@@ -50,6 +50,9 @@ class Item extends CI_Controller {
 	}
 
 	public function updateItem($field, $value, $table, $itemId) {
+		$value = urldecode($value);
+		$value = str_replace('-slash-', '/', $value);
+
 		if($this->ItemModel->updateItem($field, $value, $table, $itemId)) {
 			return true;
 		} else {

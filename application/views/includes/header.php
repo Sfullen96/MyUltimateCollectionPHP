@@ -58,6 +58,7 @@
         <script src="<?= base_url(); ?>js/app.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/note.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/edit.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/tracks.js?cache=<?= time(); ?>"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>
