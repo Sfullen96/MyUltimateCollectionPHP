@@ -104,20 +104,22 @@ if(!empty($tracks)) {
 						foreach ($tracks as $track) {
 							$duration = gmdate("i:s", $track->track_duration);
 							echo '
-								<tr>
+								<tr data-trackid="'. $track->track_id .'">
 									<td>'. $track->track_album_number .'</td>
-									<td class="editableTrack" id="track_name" data-trackid="'. $track->track_id .'" data-itemid="'.  .'">'. $track->track_name .'</td>
-									<td class="editableTrack" id="track_duration">'. $duration .'</td>
+									<td class="editableTrack" id="track_name" data-trackid="'. $track->track_id .'" data-itemid="'. $item->item_id .'" data-order="'. $track->track_album_number .'">'. $track->track_name .'</td>
+									<td class="editableTrack" id="track_duration" data-trackid="'. $track->track_id .'" data-itemid="'. $item->item_id .'" data-order="'. $track->track_album_number .'">'. $duration .'</td>
+									<td><i class="fa fa-times deleteTrack"></i></td>
 								</tr>
 							';
 						}
 
 						$newTrackId = $trackCount+=1;
 						echo '
-							<tr data-id="'. $newTrackId .'">
+							<tr id="newTrackTr" data-id="'. $newTrackId .'" data-itemid="'. $item->item_id .'" data-artist="'. $item->artist_id .'">
 								<td>'. $newTrackId .'</td>
-								<td><input type="text" class="form-control" placeholder="Track Name" name="trackName" /></td>
+								<td><input type="text" class="form-control" placeholder="Track Name" name="trackName" id="trackName" /></td>
 								<td><input type="text" class="form-control" placeholder="Track Duration" name="duration" /></td>
+								<td><i class="fa fa-plus addTrack"></i></td>
 							</tr>
 						';
 					} else {

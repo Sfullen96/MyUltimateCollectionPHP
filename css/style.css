@@ -167,3 +167,9 @@ body {
 	float: left;
 	margin-top: 10px;
 }
+#newTrackTr i.fa-plus, .tracks i.fa {
+    cursor: pointer;
+    color: #e11f27;
+    font-size: 30px;
+    padding-top: 3px;
+}

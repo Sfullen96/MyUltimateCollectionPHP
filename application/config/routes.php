@@ -62,3 +62,5 @@ $route['last-fm'] = 'lastFmApi';
 $route['temp'] = 'item/temp';
 $route['add-note/(:num)/(:any)'] = 'note/addNote/$1/$2';
 $route['updateItem/(:any)/(:any)/(:any)/(:any)'] = 'item/updateItem/$1/$2/$3/$4';
+$route['updateTrack/(:any)/(:any)/(:any)/(:any)'] = 'track/updateTrack/$1/$2/$3/$4';
+$route['/addTrack'] = 'track/addNewTrack';

@@ -215,16 +215,6 @@ strong {
 small {
   font-size: 85%; }
 
-i {
-  position: relative;
-  top: 0;
-  left: 0;
-  display: inline-block;
-  overflow: hidden;
-  text-decoration: none;
-  font-style: normal;
-  background-repeat: no-repeat;
-  margin-right: 10px; }
 
 /*a {
   color: #b2cd3d;
