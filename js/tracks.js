@@ -60,7 +60,7 @@ $(function() {
 			var itemId = $(this).parents('tr').attr('data-itemid');
 			var order = $(this).parents('tr').attr('data-id');
 			var artist_id = $(this).parents('tr').attr('data-artist');
-			var nextId = order + 1;
+			var nextId = parseInt(order) + 1;
 			var element = $(this).parents('tr');
 
 
@@ -73,7 +73,7 @@ $(function() {
 			}, function(data) {
 				if (data > 0) {
 
-					$('.tracks').append($(element));
+					$('.tracks').append($(element)[0].outerHTML);
 
 					$(element).find('input[name=trackName]').parents('td').text(trackName);
 					$(element).find('input[name=trackName]').remove();
@@ -83,10 +83,13 @@ $(function() {
 
 					$(element).find('i.fa-plus').replaceWith('<i class="fa fa-times deleteTrack"></i>');
 					$(element).attr('data-trackid', data);
+					$(element).removeAttr('id');
+					$(element).removeAttr('data-id')
 
-					
-					$(element).remove();
-					
+					$('#newTrackTr').find('td:first-child').text(nextId);
+					$('#newTrackTr').find('td:first-child').attr('data-id', nextId);
+					$('#newTrackTr').attr('data-id', nextId);
+
 				} else {
 					alert('Unable to add');
 				}
@@ -99,11 +102,17 @@ $(function() {
 	$(document).on('click', '.deleteTrack', function(event) {
 		event.preventDefault();
 		var id = $(this).parents('tr').attr('data-trackid');
-		var element = $(this);
+		var element = $(this).parents('tr');
+		var dataId = $(this).parents('tr').find('td:first-child').text();
+
+		var newId = parseInt(dataId);
 
 		$.post('/track/deleteTrack', {id: id}, function(data) {
 			if (data == 1) {
-				$(element).parents('tr').hide(400);
+				$(element).hide(400);
+				$('#newTrackTr').attr('data-id', newId);
+				$('#newTrackTr').find('td:first-child').attr('data-id', newId);
+				$('#newTrackTr').find('td:first-child').text(newId);
 			} else {
 				alert('Unable to delete');
 			}
