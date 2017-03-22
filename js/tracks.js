@@ -107,6 +107,14 @@ $(function() {
 
 		var newId = parseInt(dataId);
 
+		$(".tracks td").each(function(index, el) {
+			var number = parseInt($(this).text());
+
+			if(number > newId) {
+				console.log('Bigger');
+			}
+		});
+
 		$.post('/track/deleteTrack', {id: id}, function(data) {
 			if (data == 1) {
 				$(element).hide(400);
