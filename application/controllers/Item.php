@@ -9,6 +9,7 @@ class Item extends CI_Controller {
         $this->load->model('NoteModel');
         $this->load->model('TrackModel');
         $this->load->model('ArtistModel');
+        $this->load->model('ReviewModel');
 	}
 
 	public function index()
@@ -26,6 +27,8 @@ class Item extends CI_Controller {
 
      	$title = $data['item_info'][0]->title;
      	$artist = $data['item_info'][0]->artist_name;
+
+     	$data['review'] = $this->ReviewModel->doesItemHaveReview($itemId);
 
 		$data['title'] = $title . ' | ' . $artist;
         $data['main_content'] = 'individual-item';

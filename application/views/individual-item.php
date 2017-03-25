@@ -56,7 +56,8 @@ if(!empty($tracks)) {
 
 			?>
 			</div>
-			<a href="/review/<?= $item->item_id; ?>" class="reviewLink"> Review This Album </a>
+			<?= ($review?'<a href="/review-edit/' . $item->item_id . '" class="reviewLink"> Edit Album Review </a>':'<a href="/review/' . $item->item_id . '" class="reviewLink"> Review This Album </a>'); ?>
+			
 			<br>
 			<p class="albumSummary " id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
 				<?= (isset($item->summary)?trim($item->summary):'No summary, double click here to add one'); ?>
@@ -124,6 +125,15 @@ if(!empty($tracks)) {
 						';
 					} else {
 						// No track listing currently
+						$newTrackId = 1;
+						echo '
+							<tr id="newTrackTr" data-id="'. $newTrackId .'" data-itemid="'. $item->item_id .'" data-artist="'. $item->artist_id .'">
+								<td>'. $newTrackId .'</td>
+								<td><input type="text" class="form-control" placeholder="Track Name" name="trackName" id="trackName" /></td>
+								<td><input type="text" class="form-control" placeholder="Track Duration" name="duration" /></td>
+								<td><i class="fa fa-plus addTrack"></i></td>
+							</tr>
+						';
 					}
 				?>
 			</tbody>

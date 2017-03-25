@@ -64,3 +64,5 @@ $route['add-note/(:num)/(:any)'] = 'note/addNote/$1/$2';
 $route['updateItem/(:any)/(:any)/(:any)/(:any)'] = 'item/updateItem/$1/$2/$3/$4';
 $route['updateTrack/(:any)/(:any)/(:any)/(:any)'] = 'track/updateTrack/$1/$2/$3/$4';
 $route['/addTrack'] = 'track/addNewTrack';
+$route['review/(:num)'] = 'review/index/$1';
+$route['review-edit/(:num)'] = 'review/editReviewView/$1';
