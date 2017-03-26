@@ -1,4 +1,4 @@
-<form action="/review/addReview" method="POST" role="form">
+<form action="<?= (isset($edit)?'/review/updateReview':'/review/addReview'); ?>" method="POST" role="form">
 	<legend><?= (isset($edit)?'Update a review':'Post a review'); ?></legend>
 	<input type="hidden" name="item_id" value="<?= $item_id; ?>">
 

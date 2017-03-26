@@ -48,9 +48,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://use.fontawesome.com/f2ac442258.js"></script>
         <script src="//cdn.rawgit.com/tonystar/bootstrap-hover-tabs/master/bootstrap-hover-tabs.js"></script>
+        <script
+          src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+          integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+          crossorigin="anonymous"></script>
         <!-- CSS LIBS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/jquery-ui-theme.css?cache=<?= time(); ?>">
         <!-- CSS -->
         <link href="<?= base_url(); ?>css/main.css?cache=<?= time(); ?>" media="screen" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/css/style.css?cache<?= time(); ?>">
@@ -59,6 +64,7 @@
         <script src="<?= base_url(); ?>js/note.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/edit.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/tracks.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/add-cd.js?cache=<?= time(); ?>"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>

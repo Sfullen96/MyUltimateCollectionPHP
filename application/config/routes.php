@@ -66,3 +66,4 @@ $route['updateTrack/(:any)/(:any)/(:any)/(:any)'] = 'track/updateTrack/$1/$2/$3/
 $route['/addTrack'] = 'track/addNewTrack';
 $route['review/(:num)'] = 'review/index/$1';
 $route['review-edit/(:num)'] = 'review/editReviewView/$1';
+$route['add-cd'] = 'item/addCdForm';

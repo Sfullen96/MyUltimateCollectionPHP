@@ -133,4 +133,20 @@ class lastFmApi extends CI_Controller {
 		echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 	}
 
+	public function getInfo() {
+		if (!$_POST) {
+			die('Access Denied');
+		} else {
+			$url = 'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist='. urlencode($_POST['artist']) .'&album='. urlencode($_POST['album']) .'&format=json';
+
+			$response = file_get_contents($url);
+
+			if (isset($response)) {
+				echo $response;
+			} else {
+				echo 'No Data Found for Album: ' + $_POST['album'] + '. Artist: ' + $_POST['artist'];
+			}
+		}
+	}
+
 }

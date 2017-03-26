@@ -49,6 +49,12 @@ class ItemModel extends CI_Model
             return false;
         }
     }
+
+    function getList($table) {
+        $query = $this->db->get($table);
+
+        return $query;
+    }
 }
  
 

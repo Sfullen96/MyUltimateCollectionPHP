@@ -24,6 +24,15 @@ class ArtistModel extends CI_Model
 		return $response;
 	}
 
+	public function getArtists($text) {
+		$query = $this->db->select()
+				->like('artist_name', $text)
+				->get('artists');
+
+		return $query->result();
+
+	}
+
 }
 
 ?>

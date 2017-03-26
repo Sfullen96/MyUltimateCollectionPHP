@@ -83,4 +83,21 @@ class Item extends CI_Controller {
 			// echo "<pre>" . print_r($sql->result(), TRUE) . "</pre><br>";
 		}
 	}
+
+	public function addCdForm() {
+
+		$data['formats'] = $this->ItemModel->getList('formats');
+
+		$data['title'] = 'Add a CD';
+        $data['main_content'] = 'add-cd';
+        $this->load->view('includes/template', $data);
+	}
+
+	public function addCd() {
+		echo "<pre>" . print_r($_POST, TRUE) . "</pre><br>"; 
+	}
+
+	public function getList($table) {
+		echo $this->ItemModel->getList($table);
+	}
 }

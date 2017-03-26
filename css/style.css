@@ -176,3 +176,52 @@ body {
 .addReview {
 	margin-bottom: 15px;
 }
+.stepHeader {
+	width: 100%;
+	float: left;
+	height: 50px;
+	line-height: 50px;
+	text-align: left;
+	background-color: #e11f27;
+	color: #fff;
+	border: 1px solid #333;
+	border-bottom: none;
+}
+.stepHeader > h4 {
+	line-height: 50px;
+	font-weight: 500;
+	padding-left: 15px;
+}
+.step {
+	width: 100%;
+	float: left;
+	border: 1px solid #333;
+	min-height: 100px;
+	margin-bottom: 30px;
+	padding: 15px;
+}
+.existingArtist {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+.options {
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+.options > .option {
+	margin-bottom: 8px;
+	cursor: pointer;
+}
+.highlight {
+    background: red;
+    color: white;
+}
+.step input, .step textarea {
+	margin-bottom: 20px;
+}
+.existingArtist {
+	margin-bottom: 0px !important;
+}
+.step .albumImage {
+	display: none;
+}

@@ -28,7 +28,23 @@ class Review extends CI_Controller {
 		if (isset($_POST)) {
 			if (!empty($_POST['review'])) {
 				if($this->ReviewModel->addReview($_POST['item_id'], $_POST['review'])) {
-					return true;
+					redirect(base_url() . 'item/'.$_POST['item_id']);
+					exit();
+				} else {
+					return false;
+				}
+			}
+		} else {
+			return false;
+		}
+	}
+
+	public function updateReview() {
+		if (isset($_POST)) {
+			if (!empty($_POST['review'])) {
+				if($this->ReviewModel->updateReview($_POST['item_id'], $_POST['review'])) {
+					redirect(base_url() . 'item/'.$_POST['item_id']);
+					exit();
 				} else {
 					return false;
 				}

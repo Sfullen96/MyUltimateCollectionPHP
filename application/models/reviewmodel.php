@@ -21,6 +21,21 @@ class ReviewModel extends CI_Model
         }
     }
 
+    function updateReview($id, $review) {
+        $data = array(
+            'review' => $review
+        );
+
+        $this->db->where('item_id', $id);
+        $query = $this->db->update('reviews', $data);
+
+        if($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function getReview($item_id) {
         $query = $this->db->select()
             ->where('item_id', $item_id)
