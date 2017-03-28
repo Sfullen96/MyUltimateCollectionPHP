@@ -33,6 +33,31 @@ class ArtistModel extends CI_Model
 
 	}
 
+	public function getArtist($name) {
+		$query = $this->db->select()
+				->where('artist_name', $name)
+				->get('artists');
+
+		if($query->num_rows() > 0) {
+			$results = $query->result();
+			return $results[0]->artist_id;
+		} else {
+			return 0;
+		}
+
+	}
+
+	public function createNewArtist($name, $az) {
+		$data = array(
+	        'artist_name' => $name,
+	        'artist_az_name' => $az
+		);
+
+		$query = $this->db->insert('artists', $data);
+
+		return $this->db->insert_id();
+	}
+
 }
 
 ?>

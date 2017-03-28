@@ -55,6 +55,40 @@ class ItemModel extends CI_Model
 
         return $query;
     }
+
+    function addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price) {
+
+        $data = array(
+            'artist_id' => $artist_id,
+            'format_id' => $format_id,
+            'cd_count' => $cd_count,
+            'title' => $title,
+            'reference' => $reference,
+            'purchase_date' => $purchaseDate,
+            'purchased_from' => $purchasedFrom,
+            'price' => $price,
+            'summary' => $summary,
+            'album_image' => $image
+        );
+
+        $query = $this->db->insert('library', $data);
+
+        return $this->db->insert_id();
+
+    }
+
+    function checkIfExists($name, $artist) {
+        $query = $this->db->select()
+                ->where('title', $name)
+                ->where('artist_id', $artist)
+                ->get('library');
+
+        if($query->num_rows() > 0) {
+            return $query->result()[0]->item_id;
+        } else {
+            return 0;
+        }
+    }
 }
  
 

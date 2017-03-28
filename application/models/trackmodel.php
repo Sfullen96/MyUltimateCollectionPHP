@@ -71,6 +71,20 @@ class TrackModel extends CI_Model
             return false;
         }
     }
+
+    public function addTrack($item_id, $artist_id, $name, $order, $duration) {
+        $data = array(
+            'item_id' => $item_id,
+            'artist_id' => $artist_id,
+            'track_name' => $name,
+            'track_album_number' => $order,
+            'track_duration' => $duration
+        );
+
+        $query = $this->db->insert('tracks', $data);
+
+    }
+
 }
 
 ?>
