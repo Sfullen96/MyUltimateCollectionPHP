@@ -89,6 +89,15 @@ class ItemModel extends CI_Model
             return 0;
         }
     }
+
+    function getAllitems() {
+        $query = $this->db->select()
+                ->join('artists', 'artists.artist_id = library.artist_id')
+                ->join('formats', 'formats.format_id = library.format_id')
+                ->get('library');
+
+       return $query->result();
+    }
 }
  
 
