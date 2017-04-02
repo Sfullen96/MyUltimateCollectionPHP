@@ -37,15 +37,15 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td> CD's Bought this week: </td>
+			<td> CD's added this week: </td>
 			<td> 0 </td>
 		</tr>
 		<tr>
-			<td> CD's Bought this month: </td>
+			<td> CD's added this month: </td>
 			<td> 0 </td>
 		</tr>
 		<tr>
-			<td> CD's Bought this year: </td>
+			<td> CD's added this year: </td>
 			<td> 0 </td>
 		</tr>
 	</tbody>

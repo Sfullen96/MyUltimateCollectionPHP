@@ -33,9 +33,17 @@ class ArtistModel extends CI_Model
 
 	}
 
-	public function getArtist($name) {
+	public function getArtist($identifier) {
+		if(is_numeric($identifier)) {
+			// ID
+			$column = 'artist_id';
+		} else {
+			// Name
+			$column = 'artist_name';
+		}
+
 		$query = $this->db->select()
-				->where('artist_name', $name)
+				->where($column, $identifier)
 				->get('artists');
 
 		if($query->num_rows() > 0) {
@@ -58,6 +66,42 @@ class ArtistModel extends CI_Model
 		return $this->db->insert_id();
 	}
 
-}
+	public function getArtistAlbums($id) {
+		$query = $this->db->select()
+				->where('artist_id', $id)
+				->get('library');
+
+		return $query->result();
+	}
+
+	public function getArtistInfo($id) {
+		$query = $this->db->select()
+			->where('artist_id', $id)
+			->get('artists');
+
+		return $query->result();
+	}
+
+	public function getAllArtists() {
+		$sql = "
+			SELECT a.artist_id, a.artist_name, a.artist_az_name, (
+				SELECT COUNT(item_id) FROM library WHERE artist_id = a.artist_id
+			) AS cd_count
+			FROM artists a
+			ORDER BY artist_id DESC
+		";
+
+		// echo "SELECT a.artist_id, a.artist_name, a.artist_az_name, (
+		// 		SELECT COUNT(item_id) FROM library WHERE artist_id = a.artist_id
+		// 	) AS cd_count
+		// 	FROM artists a
+		// 	ORDER BY artist_id DESC";
+		// 	die();
+
+		$query = $this->db->query($sql);
+
+		return $query->result();
+	}
+}	
 
 ?>

@@ -1,3 +1,18 @@
+.navbar {
+	border-radius: 0px;
+	height: 70px;
+	border-bottom: none !important;
+	border: none !important;
+}
+.navbar li > a {
+	height: 70px;
+    line-height: 40px;
+    width: 200px;
+    text-align: center;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	background-color: #e11f27;
+}
 .homeSquare {
 	border: 2px solid #333;
 	padding: 15px 30px 30px 30px;
@@ -224,4 +239,30 @@ body {
 }
 .step .albumImage {
 	display: none;
+}
+.loading {
+	position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	display: none;
+	z-index: 9999;
+}
+.albumImage {
+	width: 100%;
+}
+#step3Header, .step3 {
+	display: none;
+}
+#libraryTable_wrapper {
+	padding-top: 20px;
+}
+.albumPreview {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.albumPreview > img {
+	width: 100%;
+	height: 100%;
 }

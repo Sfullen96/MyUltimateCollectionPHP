@@ -94,10 +94,66 @@ class Item extends CI_Controller {
 	}
 
 	public function addCd() {
-		echo "<pre>" . print_r($_POST, TRUE) . "</pre><br>"; 
+
+
+		// Deal with artist first, need to check if it is an existing artist or a new one
+		$checkArtist = $this->ArtistModel->getArtist($_POST['artist']);
+
+		if(!$checkArtist > 0) {
+			$artist_id = $this->ArtistModel->createNewArtist($_POST['artist'], $_POST['artist_az']);
+		} else {
+			$artist_id = $checkArtist;
+
+			$checkIfExists = $this->ItemModel->checkIfExists($_POST['title'], $artist_id);
+
+			if($checkIfExists > 0) {
+				redirect($_SERVER['HTTP_REFERER'] . '?exists=1&id=' . $checkIfExists);
+				exit();
+			}
+		}
+
+		$title = isset($_POST['title']) ? $_POST['title'] : '';
+		$reference = isset($_POST['reference']) ? $_POST['reference'] : '';
+		$summary = isset($_POST['summary']) ? $_POST['summary'] : '';
+		$format_id = isset($_POST['format']) ? $_POST['format'] : '';
+		$cd_count = isset($_POST['cd_count']) ? $_POST['cd_count'] : '';
+		$image = isset($_POST['image']) ? $_POST['image'] : '';
+		$purchasedFrom = isset($_POST['purchased_from']) ? $_POST['purchased_from'] : '';
+		$purchaseDate = isset($_POST['purchase_date']) ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
+		$price = isset($_POST['price']) ? '&pound;' . $_POST['price'] : '';
+
+		$item_id = $this->ItemModel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price);
+
+		$tracksInserted = false;
+
+		// Add track listing
+		if (isset($_POST['tracks'])) {
+			foreach ($_POST['tracks'] as $track) {
+
+				$name = $track['name'];
+				$order = $track['order'];
+				$duration = $track['duration'];
+
+				if($this->TrackModel->addTrack($item_id, $artist_id, $name, $order, $duration)) {
+					$tracksInserted = true;
+				}
+
+			}
+		}
+
+		redirect('/item/' . $item_id . '?success=1');
+
 	}
 
 	public function getList($table) {
 		echo $this->ItemModel->getList($table);
+	}
+
+	public function library() {
+		$data['items'] = $this->ItemModel->getAllitems();
+
+		$data['title'] = "Library | CD Library";
+        $data['main_content'] = 'library';
+        $this->load->view('includes/template', $data);
 	}
 }

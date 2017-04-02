@@ -1,3 +1,17 @@
+<div class="loading">
+	<img src="<?= base_url() ?>/images/loading-gif1.gif">
+</div>
+
+<?php if(isset($_GET['exists'])) { ?>
+		
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		Looks like this item already exists in the library. If you want to edit it you can do so here: <br>
+		<a href="/item/<?= $_GET['id']; ?>"> Item </a>
+	</div>
+
+<?php } ?>
+
 <form action="/item/addCd" method="POST" role="form">
 	<legend> Add a new CD to the library </legend>
 	<div class="stepHeader">
@@ -7,11 +21,14 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<label> Choose from an existing artist, or add a new artist: </label>
-				<input type="text" name="artist" class="form-control existingArtist" placeholder="Artist Name" />
+				<input type="text" name="artist" class="form-control existingArtist" placeholder="Artist Name" autocomplete="off" required />
+				<br>
+				<label id="az"> Artist A-Z Name </label>
+				<input type="text" name="artist_az" class="form-control" placeholder="Artist A-Z Name" autocomplete="off" />
 			</div>
 			<div class="col-xs-12 col-sm-6">
 				<label for="title"> Album Title </label>
-				<input type="text" id="title" class="form-control" name="title" placeholder="Album Title" />
+				<input type="text" id="title" class="form-control" name="title" placeholder="Album Title" autocomplete="off" required />
 			</div>
 		</div>
 	</div>
@@ -61,10 +78,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="stepHeader">
+	<div class="stepHeader" id="step3Header">
 		<h4> Step 3: Tracklist </h4>
 	</div>
-	<div class="step">
+	<div class="step step3">
 		<table class="table table-hover tracks">
 			<thead>
 				<tr>
@@ -74,6 +91,7 @@
 				</tr>
 			</thead>
 			<tbody>
+			
 			</tbody>
 		</table>
 	</div>
