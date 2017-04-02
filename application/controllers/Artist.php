@@ -10,6 +10,26 @@ class Artist extends CI_Controller {
         $this->load->model('TrackModel');
         $this->load->model('ArtistModel');
         $this->load->model('ReviewModel');
+        $this->load->model('GigModel');
+	}
+
+	public function index() {
+		$data['artists'] = $this->ArtistModel->getAllArtists();
+		$data['title'] = "CD Library | Artists";
+        $data['main_content'] = 'artists';
+        
+        $this->load->view('includes/template', $data);
+	}
+
+	public function showIndividualArtist($id) {
+		$data['artist'] = $this->ArtistModel->getArtistInfo($id);
+		$data['albums'] = $this->ArtistModel->getArtistAlbums($id);
+		$data['gigs_attended'] = $this->GigModel->getArtistGigs($id)->result();
+		$data['gigs_attended_count'] = $this->GigModel->getArtistGigs($id)->num_rows();
+		$data['title'] = "CD Library | Artists";
+        $data['main_content'] = 'artist';
+        
+        $this->load->view('includes/template', $data);
 	}
 
 	public function ajaxFindArtist() {

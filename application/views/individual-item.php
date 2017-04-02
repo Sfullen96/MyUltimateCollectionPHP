@@ -28,9 +28,19 @@ if(!empty($tracks)) {
 }
 
 ?>
+
+<?php if(isset($_GET['exists'])) { ?>
+		
+	<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		Item successfully added. You can edit the item here, you can also add a track listing.
+	</div>
+
+<?php } ?>
+
 <div class="row">
 	<div class="col-xs-12 col-sm-4">
-		<img src="<?= ($item->album_image > ''?$item->album_image:base_url().'images/default.png'); ?>" class="img-responsive">
+		<img src="<?= ($item->album_image > ''?$item->album_image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">

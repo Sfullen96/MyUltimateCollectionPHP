@@ -16,7 +16,7 @@
 		<?php foreach($items as $item) { ?>
 		<tr>
 			<td style="display: none"><?= $item->item_id; ?></td>
-			<td><?= $item->title; ?></td>
+			<td><a href="/item/<?=$item->item_id;  ?>"><?= $item->title; ?></a></td>
 			<td><?= $item->artist_name; ?></td>
 			<td><?= $item->artist_az_name; ?></td>
 			<td><?= $item->reference; ?></td>
