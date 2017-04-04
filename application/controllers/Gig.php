@@ -10,5 +10,10 @@ class Gig extends CI_Controller {
         $this->load->model('TrackModel');
         $this->load->model('ArtistModel');
         $this->load->model('ReviewModel');
+        $this->load->model('GigModel');
 	}
+
+	public function getGigByDate($date, $artistName) {
+		echo $this->GigModel->getGigByDate($date, $artistName);
+	} 
 }

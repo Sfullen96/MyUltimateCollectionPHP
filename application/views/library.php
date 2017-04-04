@@ -17,7 +17,7 @@
 		<tr>
 			<td style="display: none"><?= $item->item_id; ?></td>
 			<td><a href="/item/<?=$item->item_id;  ?>"><?= $item->title; ?></a></td>
-			<td><?= $item->artist_name; ?></td>
+			<td><a href="/artist/<?= $item->artist_id; ?>"><?= $item->artist_name; ?></a></td>
 			<td><?= $item->artist_az_name; ?></td>
 			<td><?= $item->reference; ?></td>
 			<td><?= ($item->purchase_date != null?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?></td>

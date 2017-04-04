@@ -67,6 +67,7 @@
         <script src="<?= base_url(); ?>js/edit.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/tracks.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/add-cd.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/setlist.js?cache=<?= time(); ?>"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>
@@ -123,7 +124,7 @@
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/add-cd'?'active':'') ?>"><a href="/add-cd">Add to Library</a></li>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/library'?'active':'') ?>"><a href="/library">View Library</a></li>
-                                <li><a href="/artists"> Artists </a></li>
+                                <li><a class="<?= ($_SERVER['REQUEST_URI'] == '/artists'?'active':'') ?>" href="/artists"> Artists </a></li>
                                 <?php if(empty($this->session->userdata('is_logged_in'))) { ?>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/login'?'active':'') ?>"><a href="/login">Login</a></li>
                                 <?php } else { ?>
