@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <!--/ Primary Navigation -->
-                <div class="container">
+                <div class="container main-content">
                     <?php
                     if(empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login') {
                     header('Location: ' . base_url() . 'login');

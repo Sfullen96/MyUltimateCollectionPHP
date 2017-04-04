@@ -4,6 +4,9 @@
 	border-bottom: none !important;
 	border: none !important;
 }
+.main-content {
+	padding-top: 15px;
+}
 .navbar li > a {
 	height: 70px;
     line-height: 40px;
@@ -289,4 +292,11 @@ body {
 }
 .margin-bottom {
 	margin-bottom: 15px;
+}
+.attendedGigs {
+	text-align: center;	
+}
+.setlistHeader {
+	text-align: center;
+	color: #333;
 }

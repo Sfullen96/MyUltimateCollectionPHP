@@ -9,7 +9,9 @@ class GigModel extends CI_Model
 
     public function getArtistGigs($id) {
     	$query = $this->db->select()
+                ->join('setlists', 'setlists.gig_id = gigs.gig_id')
     			->where('gig_artist_id', $id)
+                ->group_by('setlists.gig_id')
     			->get('gigs');
 
     	return $query;
@@ -28,22 +30,13 @@ class GigModel extends CI_Model
 
             $counter = 0;
 
-            // if (isset($gig->setlist->sets->set)) {
-            //     foreach ($gig->setlist->sets->set->song as $key => $value) {   
-            //         $setlist[$counter] = $value['name'];
-            //         $counter++;
-            //     }
-            // }
-
-            // print
-            // die();
-
             $returnData = array(
                 'tour' => (isset($gig->setlist[0]['tour'])?$gig->setlist[0]['tour']:''),
                 'venue' => (isset($gig->setlist->venue[0]['name'])?$gig->setlist->venue[0]['name']:''),
                 'city' => (isset($gig->setlist->venue->city[0]['name'])?$gig->setlist->venue->city[0]['name']:''),
                 'country' => (isset($gig->setlist->venue->city->country[0]['name'])?$gig->setlist->venue->city->country[0]['name']:''),
                 'date' => date('Y-m-d h:i:s', strtotime($date)),
+                'setlist_id' => $gig->setlist['id'],
             );
 
             return json_encode($returnData, JSON_FORCE_OBJECT);
@@ -62,6 +55,7 @@ class GigModel extends CI_Model
             'gig_city' => $params['city'],
             'gig_country' => $params['country'],
             'gig_artist_id' => $params['artistId'],
+            'status' => 1,
         );
 
         $query = $this->db->insert('gigs', $data);

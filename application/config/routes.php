@@ -72,3 +72,4 @@ $route['logout'] = 'login/logout';
 $route['login'] = 'login/index';
 $route['artists'] = 'artist/index';
 $route['artist/(:num)'] = 'artist/showIndividualArtist/$1';
+$route['setlist/(:any)'] = 'setlist/showSetlistView/$1';
