@@ -5,11 +5,12 @@
 	<div class="col-xs-12 col-sm-6">
 		<h4 class="text-center attendedGigsHeader"> Attended a gig(s) for <?= $artist[0]->artist_name ?>? </h4>
 		<?php if($gigs_attended_count > 0) { ?>
-		<?php foreach ($attended_gigs as $gigs) { ?>
-		
+		<?php foreach ($gigs_attended as $gig) { ?>
+			<p> <?= $artist[0]->artist_name; ?> at <?= ($gig->gig_venue?$gig->gig_venue.', ':'unknown venue'); ?><?= ($gig->gig_city?$gig->gig_city.', ':''); ?><?= ($gig->gig_country?$gig->gig_country:''); ?> on <?= ($gig->gig_date?date('d/m/Y', strtotime($gig->gig_date)):'unknown date'); ?></p>
+			<small class="margin-bottom"> <a href="/setlist/<?= $gig->gig_id; ?>"> View Setlist </a> </small>
 		<?php } ?>
 		<?php } else { ?>
-		<form action="" method="POST">
+		<form action="/gig/addGig" method="POST">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<input type="text" name="date" class="gigDate form-control margin-bottom" id="datepicker" placeholder="Gig Date">

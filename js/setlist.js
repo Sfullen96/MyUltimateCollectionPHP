@@ -12,6 +12,15 @@ $(function() {
 			var venue = obj.venue[0];
 			var city = obj.city[0];
 			var country = obj.country[0];
+
+			if(obj.setlist) {
+				console.log(obj.setlist);
+				
+				obj.setlist.forEach(function(key, value) {
+					console.log(key);
+					console.log(value);
+				});
+			}
 			
 			$('input[name=venue]').removeAttr('disabled').removeAttr('title').val(venue);
 			$('input[name=city]').removeAttr('disabled').removeAttr('title').val(city);
