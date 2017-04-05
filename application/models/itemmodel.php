@@ -98,6 +98,50 @@ class ItemModel extends CI_Model
 
        return $query->result();
     }
+
+    function getItemByTrackName($name) {
+        $query = $this->db->select('item_id')
+                ->where('track_name', $name)
+                ->get('tracks');
+
+        if ($query->num_rows() > 0) {
+            return $query->result()[0]->item_id;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function cdStats($timeframe) {
+        switch ($timeframe) {
+            case 'week':
+                $day = date('w');
+                $from = date('m-d-Y', strtotime('-'.$day.' days'));
+                $to = date('m-d-Y', strtotime('+'.(6-$day).' days'));
+                break;
+            case 'month':
+                $from = '';
+                $to = '';
+                break;
+            case 'year':
+                $from = '';
+                $to = '';
+                break;
+            default:
+                
+                break;
+        }
+
+        // echo strtotime($from) . "<br>";
+        // echo strtotime($to);
+
+        $query = $this->db->select()
+                ->where('created_at', '>=', $from)
+                ->where('created_at', '<=', $to)
+                ->get('library');
+
+        echo $query->num_rows();
+    }
 }
  
 

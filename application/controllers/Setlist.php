@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Setlist extends CI_Controller {
@@ -14,15 +15,22 @@ class Setlist extends CI_Controller {
         $this->load->model('SetlistModel');
 	}
 
+    public function index() {
+        
+    }
+
     public function showSetlistView($id) {
         
         if (is_numeric($id)) {
             // gig ID 
-            $data['db_tracks'] = $this->GigModel->getGig($id);
+            $data['gig'] = $this->GigModel->getGig($id);
+            $data['setlist'] = $this->GigModel->getSetlist($id);
         } else {
             // Setlist ID
             $data['fm_tracks'] = $this->SetlistModel->getSetList($id);
         }
+
+               
 
         // if($tracks = $this->SetlistModel->getSetList($id) !== false) {
         //     // Found setlist on setlist.fm
@@ -36,6 +44,11 @@ class Setlist extends CI_Controller {
         $data['main_content'] = 'setlist';
         $this->load->view('includes/template', $data);
 
+    }
+
+    public function addSetlistTracks() {
+        print_r($_POST);
+        die();
     }
 	
 }

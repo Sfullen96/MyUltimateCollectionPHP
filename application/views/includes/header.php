@@ -54,13 +54,14 @@
         crossorigin="anonymous"></script>
         <script type="text/javascript" src=//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js></script>
         <!-- CSS LIBS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/jquery-ui-theme.css?cache=<?= time(); ?>">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         <!-- CSS -->
         <link href="<?= base_url(); ?>css/main.css?cache=<?= time(); ?>" media="screen" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/css/style.css?cache<?= time(); ?>">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
         <!-- JS -->
         <script src="<?= base_url(); ?>js/app.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/note.js?cache=<?= time(); ?>"></script>
@@ -68,6 +69,7 @@
         <script src="<?= base_url(); ?>js/tracks.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/add-cd.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/setlist.js?cache=<?= time(); ?>"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>

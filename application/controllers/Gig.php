@@ -46,4 +46,31 @@ class Gig extends CI_Controller {
             die('Could not add gig');
         }
     }
+
+    public function addSetlist() {
+
+        $gigId = $_POST['gig_id'];
+
+
+        foreach ($_POST['tracks'] as $key => $value) {
+            $order = $key + 1;
+            $name = $value;
+
+            if (!$item_id = $this->ItemModel->getItemByTrackName($name) > 0) {
+                $item_id = 0;
+            } 
+
+            $data = array(
+                'gig_id' => $gigId,
+                'track_name' => $value,
+                'item_id' => $item_id,
+                'setlist_order' => $order,
+                'item_id' => $item_id
+            );
+
+            $this->db->insert('setlists', $data);
+        }
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }

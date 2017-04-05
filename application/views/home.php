@@ -1,19 +1,19 @@
-<div class="row">
-	<div class="col-xs-12 col-sm-5 homeSquare left">
-		<div class="text text-center">
-			<i class="fa fa-music"></i><br>
-			<h5> Recently Added </h5>
-		</div>
-		<div class="recentlyAdded">
+<!-- <div class="row">
+		<div class="col-xs-12 col-sm-5 homeSquare left">
+				<div class="text text-center">
+						<i class="fa fa-music"></i><br>
+						<h5> Recently Added </h5>
+				</div>
+				<div class="recentlyAdded">
 			<?php
 				$count = 0;
 				foreach ($recently_added as $item) {
 					echo '
 						<div id="item'. $count .'">
-								<p>
-									'. $item->title .' - '. $item->artist_name .'
-								</p>
-								<a href="/item/'. $item->item_id .'" class="viewItemBtn"> View </a>
+									<p>
+											'. $item->title .' - '. $item->artist_name .'
+									</p>
+									<a href="/item/'. $item->item_id .'" class="viewItemBtn"> View </a>
 						</div>
 					';
 					$count++;
@@ -28,7 +28,8 @@
 			<h5> Recently Listened </h5>
 		</div>
 	</div>
-</div>
+</div> -->
+
 <table class="table table-hover">
 	<thead>
 		<tr>

@@ -306,3 +306,10 @@ body {
 .setName {
 	width: 75%;
 }
+.homeCarItem {
+	text-align: center;
+}
+.homeCarItem img {
+	margin: 0 auto !important;
+	width: 250px;
+}

@@ -49,7 +49,7 @@ class Login extends CI_Controller
 
 
                 $this->session->set_userdata($data);
-                redirect(base_url() . 'library');
+                redirect(base_url() . 'home');
 
             }
             else

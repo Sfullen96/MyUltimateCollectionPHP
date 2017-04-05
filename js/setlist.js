@@ -85,26 +85,27 @@ $(function() {
 	});
 
 	$(document).on('click', '.addSetTrack', function(event) {
-		event.preventDefault();
 
 		var currentTrack = $(this).parents('tr').find('.setOrder').text();
-		// currentTrack = currentTrack.parseInt();
+		nextTrack = parseInt(currentTrack) + 1;
 
 		if ($(this).parents('tr').find('.setName input').val() > '') {
 
 			var name = $(this).parents('tr').find('input').val();
 
-			$(this).parents('tr').find('input').attr('type', 'hidden');
-			$(this).parents('tr').find('.setName').text(name);
 
-			$(this).parents('table').append('<tr>
-					<td class="setOrder"> 1 </td>
-					<td class="setName"><input type="text" name="track[]" class="form-control"></td>
-					<td><i class="fa fa-plus addSetTrack"></i></td>
+			// $(this).parents('tr').find('input').attr('type', 'hidden');
+			// $(this).parents('tr').find('.setName').text(name);
+
+			$(this).parents('table').append('<tr>\
+					<td class="setOrder"> '+ nextTrack +' </td>\
+					<td class="setName"><input type="text" name="tracks[]" class="form-control"></td>\
+					<td><i class="fa fa-plus addSetTrack"></i></td>\
 				</tr>');
 		} else {
 			alert('Please enter a track name');
 		}
+
 	});
 
 });

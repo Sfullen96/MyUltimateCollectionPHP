@@ -89,6 +89,19 @@ class GigModel extends CI_Model
 
     }
 
+    function getSetlist($gigId) {
+        $query = $this->db->select()
+                // ->join('')
+                ->where('gig_id', $gigId)
+                ->get('setlists');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
     // function doesGigHaveSetlist($gigId) {
     //     $query = $this->db->select()
     //         ->where('gig_id', $gigId)
