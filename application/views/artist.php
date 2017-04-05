@@ -5,10 +5,15 @@
 	<div class="col-xs-12 col-sm-6 attendedGigs">
 		<h4 class="text-center attendedGigsHeader"> Attended a gig(s) for <?= $artist[0]->artist_name ?>? </h4>
 		<?php if($gigs_attended_count > 0) { ?>
+
 		<?php foreach ($gigs_attended as $gig) { ?>
 			<h6> <?= (isset($gig->gig_tour)?'' . $gig->gig_tour:''); ?> </h6>
 			<p> <?= $artist[0]->artist_name; ?> at <?= ($gig->gig_venue?$gig->gig_venue.', ':'unknown venue'); ?><?= ($gig->gig_city?$gig->gig_city.', ':''); ?><?= ($gig->gig_country?$gig->gig_country:''); ?> on <?= ($gig->gig_date?date('d/m/Y', strtotime($gig->gig_date)):'unknown date'); ?></p>
-			<small class="margin-bottom"> <a href="/setlist/<?= $gig->setlist_id; ?>"> View Setlist </a> </small><br><br>
+			<?php if($gig->setlistId) { ?>
+			<small class="margin-bottom"> <a href="/setlist/<?= $gig->setlistId; ?>"> View Setlist </a> </small><br><br>
+			<?php } else { ?>
+			<small class="margin-bottom"> <a href="/setlist/<?= $gig->gig_id; ?>"> Add Setlist </a> </small><br><br>
+			<?php } ?>
 		<?php } ?>
 		<form action="/gig/addGig" method="POST">
 			<div class="row">

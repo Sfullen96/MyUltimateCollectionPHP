@@ -33,8 +33,12 @@ class Gig extends CI_Controller {
 
             if($gigId = $this->GigModel->addGig($params) > 0) {
 
-            	$this->SetlistModel->findSetList($_POST['setlist_id'], $gigId);
+                if($_POST['setlist_id'] != 0) {
+            	   $this->SetlistModel->findSetList($_POST['setlist_id'], $gigId);
+                } 
+
             	redirect($_SERVER['HTTP_REFERER']);
+                
             } else {
             	die('Error please try again later');
             }

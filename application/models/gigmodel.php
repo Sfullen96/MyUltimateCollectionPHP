@@ -8,13 +8,25 @@ class GigModel extends CI_Model
     }
 
     public function getArtistGigs($id) {
-    	$query = $this->db->select()
-                ->join('setlists', 'setlists.gig_id = gigs.gig_id')
-    			->where('gig_artist_id', $id)
-                ->group_by('setlists.gig_id')
-    			->get('gigs');
+    	// $query = $this->db->select()
+     //            ->join('setlists', 'setlists.gig_id = gigs.gig_id', 'left outer')
+    	// 		->where('gig_artist_id', $id)
+     //            ->group_by('setlists.gig_id')
+    	// 		->get('gigs');
 
-    	return $query;
+        $query = "SELECT 
+          *,
+          (SELECT 
+            setlist_id 
+          FROM
+            setlists 
+          WHERE setlists.`gig_id` = gigs.`gig_id`) AS setlistId 
+        FROM
+          `gigs` 
+        WHERE `gig_artist_id` = '498' 
+        ";
+
+    	return $this->db->query($query);
     }
 
     public function getGigByDate($date, $artistName) {
@@ -23,7 +35,7 @@ class GigModel extends CI_Model
 
         $response = @file_get_contents($url);
 
-        if (isset($response)) {
+        if ($response) {
             $gig = simplexml_load_string($response);
 
             $setlist = array(); 
@@ -42,7 +54,7 @@ class GigModel extends CI_Model
             return json_encode($returnData, JSON_FORCE_OBJECT);
 
         } else {
-            echo 'No data found';
+            return false;
         }
     }
 
@@ -62,5 +74,31 @@ class GigModel extends CI_Model
 
         return $this->db->insert_id();
     }
+
+    public function getGig($id) {
+        $query = $this->db->select()
+                ->join('artists', 'gigs.gig_artist_id = artists.artist_id')
+                ->where('gig_id', $id)
+                ->get('gigs');
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+
+    }
+
+    // function doesGigHaveSetlist($gigId) {
+    //     $query = $this->db->select()
+    //         ->where('gig_id', $gigId)
+    //         ->get('setlists');
+
+    //     if($query->num_rows() > 0) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }	
 

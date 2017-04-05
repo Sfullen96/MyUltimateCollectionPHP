@@ -185,7 +185,7 @@ body {
 	float: left;
 	margin-top: 10px;
 }
-#newTrackTr i.fa-plus, .tracks i.fa {
+#newTrackTr i.fa-plus, .tracks i.fa, .addSetTrack {
     cursor: pointer;
     color: #e11f27;
     font-size: 30px;
@@ -299,4 +299,10 @@ body {
 .setlistHeader {
 	text-align: center;
 	color: #333;
+}
+.setOrder {
+	width: 25%;
+}
+.setName {
+	width: 75%;
 }
