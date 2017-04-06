@@ -39,15 +39,15 @@
 	<tbody>
 		<tr>
 			<td> CD's added this week: </td>
-			<td> 0 </td>
+			<td> <?= $cd_week; ?> </td>
 		</tr>
 		<tr>
 			<td> CD's added this month: </td>
-			<td> 0 </td>
+			<td> <?= $cd_month; ?> </td>
 		</tr>
 		<tr>
 			<td> CD's added this year: </td>
-			<td> 0 </td>
+			<td> <?= $cd_year; ?> </td>
 		</tr>
 	</tbody>
 </table>

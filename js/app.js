@@ -1,5 +1,7 @@
 $(function(){
 
+	$('[data-toggle="tooltip"]').tooltip(); 
+
 	var currentItem = 0; // Always gonna be 0 to start with
 	var running = true; // Boolean used to pause on hover
 

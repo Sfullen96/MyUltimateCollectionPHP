@@ -69,6 +69,7 @@
         <script src="<?= base_url(); ?>js/tracks.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/add-cd.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/setlist.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/library.js?cache=<?= time(); ?>"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->

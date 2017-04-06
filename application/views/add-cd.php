@@ -1,7 +1,7 @@
-<div class="loading">
+<!-- <div class="loading">
 	<img src="<?= base_url() ?>/images/loading-gif1.gif">
 </div>
-
+ -->
 <?php if(isset($_GET['exists'])) { ?>
 		
 	<div class="alert alert-danger">
@@ -95,5 +95,5 @@
 			</tbody>
 		</table>
 	</div>
-	<button type="submit" class="btn btn-primary"> Add CD </button>
+	<button type="submit" class="btn btn-primary margin-bottom"> Add CD </button>
 </form>

@@ -116,31 +116,48 @@ class ItemModel extends CI_Model
         switch ($timeframe) {
             case 'week':
                 $day = date('w');
-                $from = date('m-d-Y', strtotime('-'.$day.' days'));
-                $to = date('m-d-Y', strtotime('+'.(6-$day).' days'));
+
+                if ($day == 1) {
+                    // Monday 
+                    $from = strtotime('today 12am');
+                } else {
+                    $from = strtotime('last monday midnight') + 1;
+                }
+
+                if ($day == 7) {
+                    $to = strtotime('today 23:59:59');
+                } else {
+                    $to = strtotime('next sunday 23:59:59');
+                }
                 break;
             case 'month':
-                $from = '';
-                $to = '';
+                $from = strtotime(date('Y-m-01'));
+                $to = strtotime(date('Y-m-t'));
                 break;
             case 'year':
-                $from = '';
-                $to = '';
+                $year = date('Y');
+                $from = mktime(0, 0, 0, 1, 1, $year);
+                $to = mktime(0, 0, 0, 12, 31, $year);
                 break;
             default:
                 
                 break;
         }
 
-        // echo strtotime($from) . "<br>";
-        // echo strtotime($to);
+       
+        $sql = "
+            SELECT 
+              * 
+            FROM
+              library 
+            WHERE created_at BETWEEN FROM_UNIXTIME($from) 
+            AND FROM_UNIXTIME($to)
+        ";
 
-        $query = $this->db->select()
-                ->where('created_at', '>=', $from)
-                ->where('created_at', '<=', $to)
-                ->get('library');
+        $query = $this->db->query($sql);
+       
 
-        echo $query->num_rows();
+        return $query->num_rows();
     }
 }
  

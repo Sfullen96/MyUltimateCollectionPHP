@@ -25,8 +25,10 @@ class Pages extends CI_Controller {
         $data['recently_added'] = $query->result();
 
         $data['cd_week'] = $this->ItemModel->cdStats('week');
-        $data['cd_week'] = $this->ItemModel->cdStats('month');
-        $data['cd_week'] = $this->ItemModel->cdStats('year');
+        $data['cd_month'] = $this->ItemModel->cdStats('month');
+        $data['cd_year'] = $this->ItemModel->cdStats('year');
+
+     
 
 		$data['title'] = "CD Library | Home";
         $data['main_content'] = 'home';

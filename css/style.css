@@ -244,13 +244,13 @@ body {
 	display: none;
 }
 .loading {
-	position: absolute;
+	/*position: absolute;
     width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 	display: none;
-	z-index: 9999;
+	z-index: 9999;*/
 }
 .albumImage {
 	width: 100%;
@@ -260,6 +260,9 @@ body {
 }
 #libraryTable_wrapper {
 	padding-top: 20px;
+}
+#libraryTable {
+	width: 100% !important;
 }
 .albumPreview {
 	margin-top: 15px;
@@ -312,4 +315,11 @@ body {
 .homeCarItem img {
 	margin: 0 auto !important;
 	width: 250px;
+}
+.noSelect {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+  cursor: pointer;
 }

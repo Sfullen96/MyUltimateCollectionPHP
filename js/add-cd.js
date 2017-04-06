@@ -8,7 +8,7 @@ $(function(){
 			if(data != 'no data') {
 				if(text > '') {
 					$('.existingArtist').parent().find('.options').remove();
-					$('.existingArtist').parent().append('<div class="options">'+ data +'</div>');
+					$('.existingArtist').after('<div class="options">'+ data +'</div>');
 				} else {
 					$('.existingArtist').val('');
 					$('.existingArtist').attr('value', '');
