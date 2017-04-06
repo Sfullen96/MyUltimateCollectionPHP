@@ -45,7 +45,7 @@
 			<input type="submit" class="btn btn-primary" name="submit" value="Add Gig">
 		</form>
 		<?php } else { ?>
-		<h4 class="text-center attendedGigsHeader"> Add a Gig <?= $artist[0]->artist_name ?>? </h4>
+		<h4 class="text-center attendedGigsHeader"> Add a Gig for <?= $artist[0]->artist_name ?>? </h4>
 		<form action="/gig/addGig" method="POST">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">

@@ -174,6 +174,63 @@ class ItemModel extends CI_Model
 
         return $query->num_rows();
     }
+
+    public function addView($id) {
+        $data = array(
+            'item_id' => $id,
+        );
+
+        $query = $this->db->insert('item_views', $data);
+
+        if($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getFavAlbums() {
+        $sql = "
+            SELECT COUNT(view_id) as views, item_views.item_id, title
+            FROM item_views
+            LEFT JOIN library 
+            ON library.item_id = item_views.item_id
+            GROUP BY item_views.item_id
+            ORDER BY COuNT(view_id) DESC,
+            timestamp DESC
+            LIMIT 5
+        ";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getRecentlyViewed() {
+        $sql = "
+            SELECT *
+            FROM item_views v
+            LEFT JOIN library l
+            ON l.item_id = v.item_id
+            LEFT JOIN artists a
+            ON a.artist_id = l.artist_id
+            ORDER BY timestamp DESC
+            LIMIT 5
+        ";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
 }
  
 

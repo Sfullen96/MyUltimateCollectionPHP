@@ -116,12 +116,12 @@
                                     </ul>
                                 </li> -->
                             </ul>
-                            <!-- <form class="navbar-form navbar-left">
+                            <form class="navbar-form navbar-left" method="POST" action="/search/index">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
+                                    <input type="text" class="form-control" name="keyword" placeholder="Search" value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
                                 </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form> -->
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
@@ -140,7 +140,7 @@
                     </div>
                 </div>
                 <!--/ Primary Navigation -->
-                <div class="container main-content">
+                <div class="<?= ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/home'?'container-fluid':'container') ?> main-content">
                     <?php
                     if(empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login') {
                     header('Location: ' . base_url() . 'login');

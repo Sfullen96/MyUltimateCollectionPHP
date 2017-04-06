@@ -22,6 +22,9 @@ class Artist extends CI_Controller {
 	}
 
 	public function showIndividualArtist($id) {
+
+		$this->ArtistModel->addView($id);
+		
 		$data['artist'] = $this->ArtistModel->getArtistInfo($id);
 		$data['albums'] = $this->ArtistModel->getArtistAlbums($id);
 		$data['gigs_attended'] = $this->GigModel->getArtistGigs($id)->result();

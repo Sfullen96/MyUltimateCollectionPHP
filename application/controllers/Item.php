@@ -19,6 +19,7 @@ class Item extends CI_Controller {
 
 	public function showIndividualItem($itemId) {
 
+		$this->ItemModel->addView($itemId);
      	
      	$data['item_info'] = $this->ItemModel->getItemInfo($itemId);
      	$data['notes'] = $this->NoteModel->getItemNotes($itemId);

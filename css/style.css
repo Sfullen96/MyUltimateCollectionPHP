@@ -4,8 +4,13 @@
 	border-bottom: none !important;
 	border: none !important;
 }
+.navbar-form {
+	margin-top: 17px;
+}
 .main-content {
 	padding-top: 15px;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 .navbar li > a {
 	height: 70px;
@@ -44,8 +49,8 @@
     font-weight: 800;
     font-size: 25px;
 }
-.homeSquare > .text > i.fa {
-	font-size: 40px;
+.homeSquare > .text > i.fa, i.fa-music, i.fa-headphones {
+	font-size: 30px;
 	color: #e11f27;
 }
 .navbar {
@@ -312,9 +317,9 @@ body {
 .homeCarItem {
 	text-align: center;
 }
-.homeCarItem img {
+.homeCarItem img, .resultImage {
 	margin: 0 auto !important;
-	width: 250px;
+	width: 300px;
 }
 .noSelect {
   -webkit-user-select: none;  
@@ -346,4 +351,13 @@ footer {
 }
 footer .container {
 	background-color: #333;
+}
+.carousel-indicators li {
+	border: 1px solid #333;
+}
+.carousel-indicators .active {
+	background-color: #e11f27;
+}
+.carousel {
+	min-height: 420px;
 }

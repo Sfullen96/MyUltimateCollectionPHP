@@ -102,6 +102,42 @@ class ArtistModel extends CI_Model
 
 		return $query->result();
 	}
+
+	public function addView($id) {
+		$data = array(
+	        'artist_id' => $id,
+		);
+
+		$query = $this->db->insert('artist_views', $data);
+
+		if($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function getFavArtists() {
+        $sql = "
+            SELECT COUNT(view_id) as views, artist_views.artist_id, artist_name
+            FROM artist_views
+            LEFT JOIN artists
+            ON artists.artist_id = artist_views.artist_id
+            GROUP BY artist_views.artist_id
+            ORDER BY COUNT(view_id) DESC,
+            timestamp DESC
+            LIMIT 5
+        ";
+
+        $query = $this->db->query($sql);
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+
+    }
 }	
 
 ?>

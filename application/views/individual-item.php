@@ -70,7 +70,7 @@ if(!empty($tracks)) {
 			
 			<br>
 			<p class="albumSummary " id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
-				<?= (isset($item->summary)?trim($item->summary):'No summary, double click here to add one'); ?>
+				<?= (isset($item->summary)?trim($item->summary):'No summary found.'); ?>
 			</p>
 		</div>
 	</div>

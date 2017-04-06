@@ -30,6 +30,10 @@ class Pages extends CI_Controller {
         $data['cd_count'] = $this->ItemModel->getCDcount();
         $data['cd_listened_count'] = $this->ItemModel->getCDListenedCount();
      
+    	$data['favourite_albums'] = $this->ItemModel->getFavAlbums();
+    	$data['favourite_artists'] = $this->ArtistModel->getFavArtists();
+
+    	$data['recently_viewed'] = $this->ItemModel->getRecentlyViewed();
 
 		$data['title'] = "CD Library | Home";
         $data['main_content'] = 'home';
