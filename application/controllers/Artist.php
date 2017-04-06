@@ -26,7 +26,7 @@ class Artist extends CI_Controller {
 		$data['albums'] = $this->ArtistModel->getArtistAlbums($id);
 		$data['gigs_attended'] = $this->GigModel->getArtistGigs($id)->result();
 		$data['gigs_attended_count'] = $this->GigModel->getArtistGigs($id)->num_rows();
-		$data['title'] = "CD Library | Artists";
+		$data['title'] = $data['artist'][0]->artist_name . ' | CD Library';
         $data['main_content'] = 'artist';
         
         $this->load->view('includes/template', $data);

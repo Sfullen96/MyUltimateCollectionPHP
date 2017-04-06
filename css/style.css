@@ -297,10 +297,10 @@ body {
 	margin-bottom: 15px;
 }
 .attendedGigs {
-	text-align: center;	
+	text-align: left;	
 }
 .setlistHeader {
-	text-align: center;
+	text-align: left;
 	color: #333;
 }
 .setOrder {
@@ -322,4 +322,28 @@ body {
   -ms-user-select: none;      
   user-select: none;
   cursor: pointer;
+}
+.artistBanner {
+	background-color: #333;
+	width: 100%;
+	float: left;
+	text-align: center;
+	min-height: 100px;
+	line-height: 100px;
+}
+.artistBanner h2 {
+	line-height: 100px;
+	color: #fff;
+}
+
+footer {
+	min-height: 100px;
+	line-height: 100px;
+	background-color: #333;
+	width: 100%;
+	float: left;
+	color: #fff;
+}
+footer .container {
+	background-color: #333;
 }

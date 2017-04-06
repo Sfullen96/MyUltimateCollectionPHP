@@ -29,7 +29,11 @@
 		</div>
 	</div>
 </div> -->
-
+<div class="row">
+	<div class="artistBanner margin-bottom col-xs-12 text-center">
+		<h2> Stats </h2>
+	</div>
+</div>
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -48,6 +52,10 @@
 		<tr>
 			<td> CD's added this year: </td>
 			<td> <?= $cd_year; ?> </td>
+		</tr>
+		<tr>
+			<td> CD's Listened to: </td>
+			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> </td>
 		</tr>
 	</tbody>
 </table>

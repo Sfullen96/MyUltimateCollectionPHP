@@ -159,6 +159,21 @@ class ItemModel extends CI_Model
 
         return $query->num_rows();
     }
+
+    function getCDcount() {
+        $query = $this->db->select()
+                    ->get('library');
+
+        return $query->num_rows();
+    }
+
+    function getCDListenedCount() {
+        $query = $this->db->select()
+                ->where('listened', 1)
+                ->get('library');
+
+        return $query->num_rows();
+    }
 }
  
 
