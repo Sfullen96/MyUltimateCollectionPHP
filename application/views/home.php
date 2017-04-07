@@ -29,12 +29,12 @@
 				</div>
 				<!-- Left and right controls -->
 				<!-- <a class="left carousel-control" href="#recentlyAddedCarousel" role="button" data-slide="prev">
-							<span class="glyphicon" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
+								<span class="glyphicon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
 				</a>
 				<a class="right carousel-control" href="#recentlyAddedCarousel" role="button" data-slide="next">
-							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
 				</a> -->
 			</div>
 		</div>
@@ -58,6 +58,7 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<?php $counter = 0; ?>
+					<?php if($recently_viewed) { ?>
 					<?php foreach ($recently_viewed as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
 						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
@@ -66,51 +67,23 @@
 					</div>
 					<?php $counter++; ?>
 					<?php } ?>
+					<?php } else { ?>
+					<h4 class="margin-bottom text-center"> No items viewed yet </h4>
+					<?php } ?>
 				</div>
 				<!-- Left and right controls -->
 				<!-- <a class="left carousel-control" href="#recentlyViewedCarousel" role="button" data-slide="prev">
-						<span class="glyphicon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
+							<span class="glyphicon" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
 				</a>
 				<a class="right carousel-control" href="#recentlyViewedCarousel" role="button" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
 				</a> -->
 			</div>
 		</div>
 	</div>
 </div>
-<!-- <div class="row">
-						<div class="col-xs-12 col-sm-5 homeSquare left">
-												<div class="text text-center">
-																		<i class="fa fa-music"></i><br>
-																		<h5> Recently Added </h5>
-												</div>
-												<div class="recentlyAdded">
-			<?php
-				$count = 0;
-				foreach ($recently_added as $item) {
-					echo '
-						<div id="item'. $count .'">
-													<p>
-																			'. $item->title .' - '. $item->artist_name .'
-													</p>
-													<a href="/item/'. $item->item_id .'" class="viewItemBtn"> View </a>
-						</div>
-					';
-					$count++;
-				}
-			?>
-		</div>
-	</div>
-	<div class="col-sm-2"></div>
-	<div class="col-xs-12 col-sm-5 homeSquare">
-		<div class="text text-center">
-			<i class="fa fa-headphones"></i><br>
-			<h5> Recently Listened </h5>
-		</div>
-	</div>
-</div> -->
 <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
 		<h2> Stats </h2>
@@ -153,11 +126,15 @@
 		</tr>
 	</thead>
 	<tbody>
+		<?php if($favourite_albums) { ?>
 		<?php foreach ($favourite_albums as $album) { ?>
 		<tr>
 			<td> <?= $album->title; ?> </td>
 			<td> Viewed <?= $album->views ?> times </td>
 		</tr>
+		<?php } ?>
+		<?php } else { ?>
+		<h4 class="margin-bottom text-center"> No items viewed yet </h4>
 		<?php } ?>
 	</tbody>
 </table>
@@ -173,11 +150,15 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($favourite_artists as $artist) { ?>
-		<tr>
-			<td> <?= $artist->artist_name; ?> </td>
-			<td> Viewed <?= $artist->views ?> times </td>
-		</tr>
+		<?php if($favourite_artists) { ?>
+			<?php foreach ($favourite_artists as $artist) { ?>
+			<tr>
+				<td> <?= $artist->artist_name; ?> </td>
+				<td> Viewed <?= $artist->views ?> times </td>
+			</tr>
+			<?php } ?>
+		<?php } else { ?>
+		<h4 class="margin-bottom text-center"> No artists viewed yet </h4>
 		<?php } ?>
 	</tbody>
 </table>
