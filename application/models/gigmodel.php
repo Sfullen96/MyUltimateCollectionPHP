@@ -20,10 +20,10 @@ class GigModel extends CI_Model
             setlist_id 
           FROM
             setlists 
-          WHERE setlists.`gig_id` = gigs.`gig_id`) AS setlistId 
+          WHERE setlists.`gig_id` = gigs.`gig_id` LIMIT 1) AS setlistId 
         FROM
           `gigs` 
-        WHERE `gig_artist_id` = '498' 
+        WHERE `gig_artist_id` = $id 
         ";
 
     	return $this->db->query($query);

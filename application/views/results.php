@@ -1,4 +1,5 @@
 <h1 class="margin-bottom"> Search Results for: <?= $keyword; ?> </h1>
+<?php if($item_results) { ?>
 <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
 		<h2> <i class="fa fa-music"></i> Album Results </h2>
@@ -21,7 +22,11 @@
 <hr>
 <?php } ?>
 <?php } ?>
+<?php } else { ?>
+	<h4 class="margin-bottom"> No Albums Found </h4>
+<?php } ?>
 
+<?php if($artist_results) { ?>
 <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
 		<h2> <i class="fa fa-music"></i> Artist Results </h2>
@@ -38,4 +43,7 @@
 </div>
 <hr>
 <?php } ?>
+<?php } ?>
+<?php } else { ?>
+	<h4 class="margin-bottom"> No Artists Found </h4>
 <?php } ?>

@@ -9,11 +9,14 @@ $(function(){
 				if(text > '') {
 					$('.existingArtist').parent().find('.options').remove();
 					$('.existingArtist').after('<div class="options">'+ data +'</div>');
+					$('input[name=artist_az], #az').hide();
 				} else {
 					$('.existingArtist').val('');
 					$('.existingArtist').attr('value', '');
+					$('input[name=artist_az], #az').show();
 				}
 			} else {
+				$('input[name=artist_az], #az').show();
 				$('.existingArtist').parent().find('.options').remove();
 			}	
 		});

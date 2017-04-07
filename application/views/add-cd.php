@@ -45,6 +45,7 @@
 		<div class="form-group">
 		  	<label for="format"> Format </label>
 		  	<select class="form-control" id="format" name="format">
+		  	<option selected="selected" disabled="disabled" value="0"> Choose a CD Format </option>
 	    	<?php 
 	    		foreach ($formats->result() as $row) {
 	    			echo '<option value="'. $row->format_id .'">'. $row->format_name .'</option>';

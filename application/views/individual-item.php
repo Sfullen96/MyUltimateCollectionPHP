@@ -185,7 +185,7 @@ if(!empty($tracks)) {
 					<div class="overlay">
 						<div class="text">
 							<h6 class="similarName"> '. $similarArtist->name .' </h6>
-							<a href="https://www.amazon.co.uk/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords='. $similarArtist->name .'" target="_blank" class="amazonLink"> Search on Amazon </a>
+							<a href="https://www.amazon.co.uk/s/ref=sr_nr_p_lbr_music_artists__0?fst=as%3Aoff&rh=n%3A229816%2Ck%3A'. $similarArtist->name .'%2Cp_lbr_music_artists_browse-bin%3A'. $similarArtist->name .'&keywords='. $similarArtist->name .'&ie=UTF8&qid=1491552380&rnid=2565831031" target="_blank"> Search on Amazon </a>
 						</div>
 					</div>
 				</div>

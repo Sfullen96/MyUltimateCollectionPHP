@@ -9,11 +9,9 @@ class SearchModel extends CI_Model
     function searchItems($keyword) {
         $resultsItem = array();
 
-        $keywords = explode(' ', $keyword);
+        // $keywords = explode(' ', $keyword);
 
-        $markedWords = array();
-
-        foreach ($keywords as $keyword) {
+        // foreach ($keywords as $keyword) {
             $sqlItem = "
                 SELECT library.item_id, library.title, artists.artist_name, library.album_image, formats.format_name, library.artist_id
                 FROM library
@@ -29,7 +27,7 @@ class SearchModel extends CI_Model
             if ($item->num_rows() > 0) {
                 $resultsItem[] = $item->result();
             }
-        }
+        // }
 
         return $resultsItem;
            
@@ -39,9 +37,9 @@ class SearchModel extends CI_Model
     function searchArtists($keyword) {
         $resultsArtist = array();
 
-        $keywords = explode(' ', $keyword);
+        // $keywords = explode(' ', $keyword);
 
-        foreach ($keywords as $keyword) {
+        // foreach ($keywords as $keyword) {
             $sqlArtist = "
                 SELECT artist_name, artist_id
                 FROM artists
@@ -53,7 +51,7 @@ class SearchModel extends CI_Model
             if ($artists->num_rows() > 0) {
                 $resultsArtist[] = $artists->result();
             }
-        }
+        // }
 
         return $resultsArtist;
            

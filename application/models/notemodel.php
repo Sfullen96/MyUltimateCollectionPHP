@@ -8,6 +8,7 @@ class NoteModel extends CI_Model
     }
 
 	public function addNote($item_id, $note) {
+        $note = urldecode($note);
 		$data = array(
 		   	'item_id' => $item_id,
 		   	'note' => $note
