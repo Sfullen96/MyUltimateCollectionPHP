@@ -62,6 +62,7 @@
         <link href="<?= base_url(); ?>css/main.css?cache=<?= time(); ?>" media="screen" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/css/style.css?cache<?= time(); ?>">
         <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/responsive.css?cache=<?= time() ?>">
         <!-- JS -->
         <script src="<?= base_url(); ?>js/app.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/note.js?cache=<?= time(); ?>"></script>

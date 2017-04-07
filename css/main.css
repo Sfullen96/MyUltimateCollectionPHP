@@ -505,7 +505,7 @@ Margins
 /*-----------------------------------*/
 /* Main Menu */
 /*-----------------------------------*/
-.navbar {
+/*.navbar {
   margin-bottom: 8px; }
   @media (min-width: 768px) {
     .navbar {
@@ -525,7 +525,6 @@ Margins
 
 .navbar-primary .navbar-header {
   background: #fff;
-  /*padding: 9px 18px 5px;*/
   height: 100%; }
 
 .navbar-logo {
@@ -582,7 +581,7 @@ Margins
   border-radius: 0;
   padding: 14px 15px;
   font-size: 16px; }
-
+*/
 /*-----------------------------------*/
 /* backgrounds */
 /*-----------------------------------*/
