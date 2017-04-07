@@ -120,10 +120,10 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-8">
                                         <div class="form-group">
-                                            <input type="text" class="form-control margin-bottom" name="keyword" placeholder="What are you looking for..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
+                                            <input type="text" class="form-control margin-bottom" name="keyword" placeholder="Search..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-8">
+                                    <div class="col-xs-12 col-sm-4">
                                         <button type="submit" class="btn btn-default headerSearch">Search</button>
                                     </div>
                                 </div>
