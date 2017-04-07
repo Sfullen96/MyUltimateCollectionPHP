@@ -1,29 +1,39 @@
-.navbar-header {
-	height: 70px;
+@media (min-width: 768px) {
+	.navbar-header {
+		height: 70px;
+	}
+	.navbar {
+		border-radius: 0px;
+		height: 70px;
+		border-bottom: none !important;
+		border: none !important;
+	}
+	.navbar-form {
+		margin-top: 17px;
+	}
+	.main-content {
+		padding-top: 15px;
+	    padding-left: 100px;
+	    padding-right: 100px;
+	}
+	.navbar li > a {
+		height: 70px;
+	    line-height: 40px;
+	    width: 200px;
+	    text-align: center;
+	}
+	.navbar {
+		margin-bottom: 15px !important;
+	}
 }
-.navbar {
-	border-radius: 0px;
-	height: 70px;
-	border-bottom: none !important;
-	border: none !important;
-}
-.navbar-form {
-	margin-top: 17px;
-}
-.main-content {
-	padding-top: 15px;
-    padding-left: 100px;
-    padding-right: 100px;
-}
-.navbar li > a {
-	height: 70px;
-    line-height: 40px;
-    width: 200px;
-    text-align: center;
-}
+
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
 	background-color: #e11f27;
 }
+.navbar-inverse {
+	background-color: #333;
+}
+
 .homeSquare {
 	border: 2px solid #333;
 	padding: 15px 30px 30px 30px;
@@ -55,9 +65,6 @@
 .homeSquare > .text > i.fa, i.fa-music, i.fa-headphones {
 	font-size: 30px;
 	color: #e11f27;
-}
-.navbar {
-	margin-bottom: 15px !important;
 }
 .recentlyAdded {
 	text-align: center;

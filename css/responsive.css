@@ -22,7 +22,7 @@ only screen
 		padding-top: 20px;
 		line-height: initial;
 	}
-	.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	/*.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 		float: left;
 		width: 100%;
 	}
@@ -32,6 +32,15 @@ only screen
 	}
 	.navbar-inverse .navbar-nav>li>a {
 		width: 100%;
+	}*/
+	.headerSearch {
+		width: 100%;
+	}
+	.navbar {
+		margin-bottom: 0px;
+	}
+	.homeCarItem img, .resultImage {
+		width: 180px;
 	}
 }
 
@@ -46,11 +55,20 @@ only screen
 		padding-top: 20px;
 		line-height: initial;
 	}
-	.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	/*.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
 		float: left;
 		width: 100%;
 	}
 	.navbar-inverse .navbar-nav>li>a {
 		width: 100%;
+	}*/
+	.headerSearch {
+		width: 100%;
+	}
+	.navbar {
+		margin-bottom: 0px;
+	}
+	.homeCarItem img, .resultImage {
+		width: 180px;
 	}
 }

@@ -61,7 +61,6 @@
         <!-- CSS -->
         <link href="<?= base_url(); ?>css/main.css?cache=<?= time(); ?>" media="screen" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>/css/style.css?cache<?= time(); ?>">
-        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
         <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/responsive.css?cache=<?= time() ?>">
         <!-- JS -->
         <script src="<?= base_url(); ?>js/app.js?cache=<?= time(); ?>"></script>
@@ -118,10 +117,17 @@
                                 </li> -->
                             </ul>
                             <form class="navbar-form navbar-left" method="POST" action="/search/index">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="keyword" placeholder="Search" value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control margin-bottom" name="keyword" placeholder="What are you looking for..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8">
+                                        <button type="submit" class="btn btn-default headerSearch">Search</button>
+                                    </div>
                                 </div>
-                                <button type="submit" class="btn btn-default">Search</button>
+                                
                             </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
