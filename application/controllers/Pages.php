@@ -5,16 +5,16 @@ class Pages extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
-        $this->load->model('ReviewModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
+        $this->load->model('reviewmodel');
 	}
 
 	public function index()
 	{	
-		$this->load->model('ItemModel');
+		$this->load->model('itemmodel');
 
 		$query = $this->db->select()
 				->join('artists', 'artists.artist_id = library.artist_id')
@@ -24,16 +24,16 @@ class Pages extends CI_Controller {
 
         $data['recently_added'] = $query->result();
 
-        $data['cd_week'] = $this->ItemModel->cdStats('week');
-        $data['cd_month'] = $this->ItemModel->cdStats('month');
-        $data['cd_year'] = $this->ItemModel->cdStats('year');
-        $data['cd_count'] = $this->ItemModel->getCDcount();
-        $data['cd_listened_count'] = $this->ItemModel->getCDListenedCount();
+        $data['cd_week'] = $this->itemmodel->cdStats('week');
+        $data['cd_month'] = $this->itemmodel->cdStats('month');
+        $data['cd_year'] = $this->itemmodel->cdStats('year');
+        $data['cd_count'] = $this->itemmodel->getCDcount();
+        $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
      
-    	$data['favourite_albums'] = $this->ItemModel->getFavAlbums();
-    	$data['favourite_artists'] = $this->ArtistModel->getFavArtists();
+    	$data['favourite_albums'] = $this->itemmodel->getFavAlbums();
+    	$data['favourite_artists'] = $this->artistmodel->getFavArtists();
 
-    	$data['recently_viewed'] = $this->ItemModel->getRecentlyViewed();
+    	$data['recently_viewed'] = $this->itemmodel->getRecentlyViewed();
 
 		$data['title'] = "CD Library | Home";
         $data['main_content'] = 'home';

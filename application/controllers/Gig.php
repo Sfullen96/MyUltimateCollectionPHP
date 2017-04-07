@@ -5,17 +5,17 @@ class Gig extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
-        $this->load->model('ReviewModel');
-        $this->load->model('GigModel');
-        $this->load->model('SetlistModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
+        $this->load->model('reviewmodel');
+        $this->load->model('gigmodel');
+        $this->load->model('setlistmodel');
 	}
 
 	public function getGigByDate($date, $artistName) {
-		echo $this->GigModel->getGigByDate($date, $artistName);
+		echo $this->gigmodel->getGigByDate($date, $artistName);
 	} 
 
     public function addGig() {
@@ -31,10 +31,10 @@ class Gig extends CI_Controller {
                 'artistId' => $_POST['artist_id'],
             );
 
-            if($gigId = $this->GigModel->addGig($params) > 0) {
+            if($gigId = $this->gigmodel->addGig($params) > 0) {
 
                 if($_POST['setlist_id'] != 0) {
-            	   $this->SetlistModel->findSetList($_POST['setlist_id'], $gigId);
+            	   $this->setlistmodel->findSetList($_POST['setlist_id'], $gigId);
                 } 
 
             	redirect($_SERVER['HTTP_REFERER']);
@@ -56,7 +56,7 @@ class Gig extends CI_Controller {
             $order = $key + 1;
             $name = $value;
 
-            if (!$item_id = $this->ItemModel->getItemByTrackName($name) > 0) {
+            if (!$item_id = $this->itemmodel->getItemByTrackName($name) > 0) {
                 $item_id = 0;
             } 
 

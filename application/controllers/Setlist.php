@@ -6,13 +6,13 @@ class Setlist extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
-        $this->load->model('ReviewModel');
-        $this->load->model('GigModel');
-        $this->load->model('SetlistModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
+        $this->load->model('reviewmodel');
+        $this->load->model('gigmodel');
+        $this->load->model('setlistmodel');
 	}
 
     public function index() {
@@ -23,21 +23,21 @@ class Setlist extends CI_Controller {
         
         if (is_numeric($id)) {
             // gig ID 
-            $data['gig'] = $this->GigModel->getGig($id);
-            $data['setlist'] = $this->GigModel->getSetlist($id);
+            $data['gig'] = $this->gigmodel->getGig($id);
+            $data['setlist'] = $this->gigmodel->getSetlist($id);
         } else {
             // Setlist ID
-            $data['fm_tracks'] = $this->SetlistModel->getSetList($id);
+            $data['fm_tracks'] = $this->setlistmodel->getSetList($id);
         }
 
                
 
-        // if($tracks = $this->SetlistModel->getSetList($id) !== false) {
+        // if($tracks = $this->setlistmodel->getSetList($id) !== false) {
         //     // Found setlist on setlist.fm
         //     $data['fm_tracks'] = $tracks;
         // } else {
         //     // Couldn't find on setlist.fm, but still need gig info (venue etc), so get that from our DB
-        //     $data['db_tracks'] = $this->GigModel->getGig($id);
+        //     $data['db_tracks'] = $this->gigmodel->getGig($id);
         // }
 
         $data['title'] = 'Setlist';

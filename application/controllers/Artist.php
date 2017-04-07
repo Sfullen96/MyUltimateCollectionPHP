@@ -5,16 +5,16 @@ class Artist extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
-        $this->load->model('ReviewModel');
-        $this->load->model('GigModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
+        $this->load->model('reviewmodel');
+        $this->load->model('gigmodel');
 	}
 
 	public function index() {
-		$data['artists'] = $this->ArtistModel->getAllArtists();
+		$data['artists'] = $this->artistmodel->getAllArtists();
 		$data['title'] = "CD Library | Artists";
         $data['main_content'] = 'artists';
         
@@ -23,12 +23,12 @@ class Artist extends CI_Controller {
 
 	public function showIndividualArtist($id) {
 
-		$this->ArtistModel->addView($id);
+		$this->artistmodel->addView($id);
 		
-		$data['artist'] = $this->ArtistModel->getArtistInfo($id);
-		$data['albums'] = $this->ArtistModel->getArtistAlbums($id);
-		$data['gigs_attended'] = $this->GigModel->getArtistGigs($id)->result();
-		$data['gigs_attended_count'] = $this->GigModel->getArtistGigs($id)->num_rows();
+		$data['artist'] = $this->artistmodel->getArtistInfo($id);
+		$data['albums'] = $this->artistmodel->getArtistAlbums($id);
+		$data['gigs_attended'] = $this->gigmodel->getArtistGigs($id)->result();
+		$data['gigs_attended_count'] = $this->gigmodel->getArtistGigs($id)->num_rows();
 		$data['title'] = $data['artist'][0]->artist_name . ' | CD Library';
         $data['main_content'] = 'artist';
         
@@ -37,7 +37,7 @@ class Artist extends CI_Controller {
 
 	public function ajaxFindArtist() {
 		if ($_POST['text']) {
-			$query = $this->ArtistModel->getArtists($_POST['text']);
+			$query = $this->artistmodel->getArtists($_POST['text']);
 
 			if(count($query) > 0) {
 				foreach($query as $artist) {

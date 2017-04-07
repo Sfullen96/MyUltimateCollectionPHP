@@ -5,11 +5,11 @@ class Item extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
-        $this->load->model('ReviewModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
+        $this->load->model('reviewmodel');
 	}
 
 	public function index()
@@ -19,17 +19,17 @@ class Item extends CI_Controller {
 
 	public function showIndividualItem($itemId) {
 
-		$this->ItemModel->addView($itemId);
+		$this->itemmodel->addView($itemId);
      	
-     	$data['item_info'] = $this->ItemModel->getItemInfo($itemId);
-     	$data['notes'] = $this->NoteModel->getItemNotes($itemId);
-     	$data['tracks'] = $this->TrackModel->getItemTracks($itemId);
-     	$data['similar_artists'] = $this->ArtistModel->getSimilarArtists($data['item_info'][0]->artist_name);
+     	$data['item_info'] = $this->itemmodel->getItemInfo($itemId);
+     	$data['notes'] = $this->notemodel->getItemNotes($itemId);
+     	$data['tracks'] = $this->trackmodel->getItemTracks($itemId);
+     	$data['similar_artists'] = $this->artistmodel->getSimilarArtists($data['item_info'][0]->artist_name);
 
      	$title = $data['item_info'][0]->title;
      	$artist = $data['item_info'][0]->artist_name;
 
-     	$data['review'] = $this->ReviewModel->doesItemHaveReview($itemId);
+     	$data['review'] = $this->reviewmodel->doesItemHaveReview($itemId);
 
 		$data['title'] = $title . ' | ' . $artist;
         $data['main_content'] = 'individual-item';
@@ -37,7 +37,7 @@ class Item extends CI_Controller {
 	}
 
 	public function rating($itemId) {
-		$rating = $this->ItemModel->getItemRating($itemId);
+		$rating = $this->itemmodel->getItemRating($itemId);
 
 		$rating = $rating[0]->rating;
 
@@ -45,7 +45,7 @@ class Item extends CI_Controller {
 	}
 
 	public function updateRating($newRating, $itemId) {
-		if($this->ItemModel->updateRating($newRating, $itemId)) {
+		if($this->itemmodel->updateRating($newRating, $itemId)) {
 			return true; 
 		} else {
 			return false;
@@ -57,7 +57,7 @@ class Item extends CI_Controller {
 		$value = urldecode($value);
 		$value = str_replace('-slash-', '/', $value);
 
-		if($this->ItemModel->updateItem($field, $value, $table, $itemId)) {
+		if($this->itemmodel->updateItem($field, $value, $table, $itemId)) {
 			return true;
 		} else {
 			return false;
@@ -87,7 +87,7 @@ class Item extends CI_Controller {
 
 	public function addCdForm() {
 
-		$data['formats'] = $this->ItemModel->getList('formats');
+		$data['formats'] = $this->itemmodel->getList('formats');
 
 		$data['title'] = 'Add a CD';
         $data['main_content'] = 'add-cd';
@@ -98,14 +98,14 @@ class Item extends CI_Controller {
 
 
 		// Deal with artist first, need to check if it is an existing artist or a new one
-		$checkArtist = $this->ArtistModel->getArtist($_POST['artist']);
+		$checkArtist = $this->artistmodel->getArtist($_POST['artist']);
 
 		if(!$checkArtist > 0) {
-			$artist_id = $this->ArtistModel->createNewArtist($_POST['artist'], $_POST['artist_az']);
+			$artist_id = $this->artistmodel->createNewArtist($_POST['artist'], $_POST['artist_az']);
 		} else {
 			$artist_id = $checkArtist;
 
-			$checkIfExists = $this->ItemModel->checkIfExists($_POST['title'], $artist_id);
+			$checkIfExists = $this->itemmodel->checkIfExists($_POST['title'], $artist_id);
 
 			if($checkIfExists > 0) {
 				redirect($_SERVER['HTTP_REFERER'] . '?exists=1&id=' . $checkIfExists);
@@ -123,7 +123,7 @@ class Item extends CI_Controller {
 		$purchaseDate = isset($_POST['purchase_date']) ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
 		$price = isset($_POST['price']) ? '&pound;' . $_POST['price'] : '';
 
-		$item_id = $this->ItemModel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price);
+		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price);
 
 		$tracksInserted = false;
 
@@ -135,7 +135,7 @@ class Item extends CI_Controller {
 				$order = $track['order'];
 				$duration = $track['duration'];
 
-				if($this->TrackModel->addTrack($item_id, $artist_id, $name, $order, $duration)) {
+				if($this->trackmodel->addTrack($item_id, $artist_id, $name, $order, $duration)) {
 					$tracksInserted = true;
 				}
 
@@ -147,11 +147,11 @@ class Item extends CI_Controller {
 	}
 
 	public function getList($table) {
-		echo $this->ItemModel->getList($table);
+		echo $this->itemmodel->getList($table);
 	}
 
 	public function library() {
-		$data['items'] = $this->ItemModel->getAllitems();
+		$data['items'] = $this->itemmodel->getAllitems();
 
 		$data['title'] = "Library | CD Library";
         $data['main_content'] = 'library';

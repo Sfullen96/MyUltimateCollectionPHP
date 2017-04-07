@@ -5,10 +5,10 @@ class Track extends CI_Controller {
 
 	public function __construct() {
         parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
+        $this->load->model('itemmodel');
+        $this->load->model('notemodel');
+        $this->load->model('trackmodel');
+        $this->load->model('artistmodel');
 	}
 
 	public function index()
@@ -20,7 +20,7 @@ class Track extends CI_Controller {
 		$value = urldecode($value);
 		$value = str_replace('-slash-', '/', $value);
 
-		if($this->TrackModel->updateTrack($field, $value, $itemId, $order)) {
+		if($this->trackmodel->updateTrack($field, $value, $itemId, $order)) {
 			return true;
 		} else {
 			return false;
@@ -41,12 +41,12 @@ class Track extends CI_Controller {
 
 		$totalSecs = ($minutes * 60) + $seconds; 
 
-		echo $this->TrackModel->addNewTrack($trackName, $totalSecs, $itemId, $order, $artist);
+		echo $this->trackmodel->addNewTrack($trackName, $totalSecs, $itemId, $order, $artist);
 			
 	}
 
 	public function deleteTrack() {
-		if ($this->TrackModel->deleteTrack($_POST['id'])) {
+		if ($this->trackmodel->deleteTrack($_POST['id'])) {
 			echo '1';
 		} else {
 			echo '0';

@@ -6,10 +6,10 @@ class Search extends CI_Controller
     {
         $keyword = $_POST['keyword'];
 
-        $this->load->model('SearchModel');
+        $this->load->model('searchmodel');
 
-        $data['item_results'] = $this->SearchModel->searchItems($keyword);
-        $data['artist_results'] = $this->SearchModel->searchArtists($keyword);
+        $data['item_results'] = $this->searchmodel->searchItems($keyword);
+        $data['artist_results'] = $this->searchmodel->searchArtists($keyword);
         $data['keyword'] = $keyword;
         $data['title'] = "Search | " . $keyword;
         $data['main_content'] = 'results';

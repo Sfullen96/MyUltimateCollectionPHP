@@ -33,12 +33,12 @@ class Login extends CI_Controller
         {
             //This part of the function loads the login model.
 
-            $this->load->model('LoginModel');
+            $this->load->model('loginmodel');
 
             $email = $this->input->post('email');
             $password = hash('sha256', $this->input->post('password'));
             
-            $userInfo = $this->LoginModel->checkUser($email, $password);
+            $userInfo = $this->loginmodel->checkUser($email, $password);
 
             if($userInfo)//if users username, password and role match then create a session.
             {

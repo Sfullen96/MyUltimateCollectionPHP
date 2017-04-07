@@ -5,10 +5,7 @@ class Note extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-        $this->load->model('ItemModel');
-        $this->load->model('NoteModel');
-        $this->load->model('TrackModel');
-        $this->load->model('ArtistModel');
+        $this->load->model('notemodel');
 	}
 
 	public function index()
@@ -17,7 +14,7 @@ class Note extends CI_Controller {
 	}
 
 	public function addNote($item_id, $note) {
-		if($this->NoteModel->addNote($item_id, $note)) {
+		if($this->notemodel->addNote($item_id, $note)) {
 			echo Date('d/m/Y H:i:s', time());
 		}
 	}
