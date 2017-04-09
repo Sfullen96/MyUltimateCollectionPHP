@@ -231,6 +231,20 @@ class ItemModel extends CI_Model
             return false;
         }
     }
+
+    public function addListen($itemId) {
+        $data = array(
+            'item_id' => $itemId,
+        );
+
+        $query = $this->db->insert('cd_listens', $data);
+
+        if($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
  
 

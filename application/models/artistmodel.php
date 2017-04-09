@@ -138,6 +138,47 @@ class ArtistModel extends CI_Model
         }
 
     }
+
+    public function getSummary($id) {
+    	$query = $this->db->select()
+			->where('artist_id', $id)
+			->get('artists');
+
+		return $query->result();
+    }
+
+    public function addSummary($id, $summary) {
+    	$data = array(
+        	'artist_summary' => $summary
+		);
+
+		$this->db->where('artist_id', $id);
+		$this->db->update('artists', $data);
+
+    }
+
+    public function editSummary($id, $summary) {
+    	$data = array(
+        	'artist_summary' => $summary
+		);
+
+		$this->db->where('artist_id', $id);
+		$this->db->update('artists', $data);
+    	
+    }
+
+    public function getArtistTags($id) {
+    	$query = $this->db->select()
+    		->where('artist_id', $id)
+    		->limit(4)
+    		->get('artist_tags');
+
+    	if ($query->num_rows() > 0) {
+    		return $query->result();
+    	} else {
+    		return false;
+    	}
+    }
 }	
 
 ?>

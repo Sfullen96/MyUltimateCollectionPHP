@@ -125,6 +125,79 @@ class lastFmApi extends CI_Controller {
 		
 	}
 
+	public function getImages() {
+		// $query = $this->db->select()
+		// 			->limit(10)
+		// 			->get('artists');
+
+		$sql = "SELECT artist_name, artist_id FROM artists";
+		//  WHERE artist_image IS NULL
+		$query = $this->db->query($sql);
+
+		foreach ($query->result() as $row) {
+			$artistName = urlencode($artistName = $row->artist_name);
+
+			$url = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=". $artistName ."&api_key=797d57115973701485bcb92ebb8ea847&format=json";
+
+			$response = json_decode(file_get_contents($url));
+
+			if (!isset($response->error)) {
+				if (isset($response->artist->tags)) {
+					foreach ($response->artist->tags->tag as $tag) {
+						// echo "<pre>" . print_r($tag, TRUE) . "</pre>";
+
+						$data = array(
+					        'artist_id' => $row->artist_id,
+					        'tag_name' => $tag->name,
+					        'tag_url' => $tag->url,
+						);
+
+						$this->db->insert('artist_tags', $data);
+
+					}
+					// if($response->artist->bio->summary > '') {
+					// 		$udpates = array(
+					// 		    'artist_summary' => $response->artist->bio->summary
+					// 		);
+
+					// 		$this->db->where('artist_id', $row->artist_id);
+					// 		$this->db->update('artists', $udpates);
+					// }
+				}
+						// if($response->artist->image[3]->{'#text'} > '') {
+						// 	if ($image->{'#text'} > '') {
+						// 		$udpates = array(
+						// 		    'artist_image' => $response->artist->image[3]->{'#text'}
+						// 		);
+
+						// 		$this->db->where('artist_id', $row->artist_id);
+						// 		$this->db->update('artists', $udpates);
+						// 	} else {
+						// 		echo "Fuck <br>"; 
+						// 	}
+						// } else {
+						// 	// if ($image->{'#text'} > '') {
+						// 	// 	$udpates = array(
+						// 	// 	    'artist_image' => $image->{'#text'}
+						// 	// 	);
+
+						// 	// 	$this->db->where('artist_id', $row->artist_id);
+						// 	// 	$this->db->update('artists', $udpates);
+						// 	// } else {
+						// 	// 	echo "Fuck <br>"; 
+						// 	// }
+						// 	continue;
+						// }
+				// 	}
+				// }
+
+				// echo "<pre>" . print_r($response, TRUE) . "</pre>";
+				// echo "<pre>" . print_r($response->artist->image, TRUE) . "</pre><br>";
+			}
+		}
+
+	}
+
 	public function getSimilarArtists($artistName) {
 		$url = 'http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='. urlencode($artistName) .'&api_key=797d57115973701485bcb92ebb8ea847&format=json';
 

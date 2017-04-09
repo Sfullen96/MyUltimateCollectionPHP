@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -58,7 +59,7 @@ $route['get-rating/(:num)'] = 'item/rating/$1';
 $route['update-rating/(:num)/(:num)'] = 'item/updateRating/$1/$2';
 $route['spotify'] = 'spotify';
 $route['spotify-auth/(:any)'] = 'spotify/auth/$1';
-$route['last-fm'] = 'lastFmApi';
+$route['last-fm'] = 'lastFmApi/getImages';
 $route['temp'] = 'item/temp';
 $route['add-note/(:num)/(:any)'] = 'note/addNote/$1/$2';
 $route['updateItem/(:any)/(:any)/(:any)/(:any)'] = 'item/updateItem/$1/$2/$3/$4';
@@ -73,3 +74,6 @@ $route['login'] = 'login/index';
 $route['artists'] = 'artist/index';
 $route['artist/(:num)'] = 'artist/showIndividualArtist/$1';
 $route['setlist/(:any)'] = 'setlist/showSetlistView/$1';
+$route['addListen/(:num)'] = 'item/addListen/$1';
+$route['addSummary/(:num)'] = 'artist/addSummaryView/$1';
+$route['editSummary/(:num)'] = 'artist/editSummaryView/$1';

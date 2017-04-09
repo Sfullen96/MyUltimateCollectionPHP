@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+set_time_limit(0);
+
 
 class Item extends CI_Controller {
 
@@ -65,24 +67,86 @@ class Item extends CI_Controller {
 	}
 
 	public function temp() {
-		$query = $this->db->select()
-			->get('library');
+		// $query = $this->db->select()
+		// 	->where('mb_id IS NULL', null, false)
+		// 	->where('mb_id <', 'N/A')
+		// 	// ->limit(10)
+		// 	->get('artists');
+		$sql = "
+			SELECT * 
+			FROM artists
+			WHERE mb_id IS NULL
+		";
+
+		$query = $this->db->query($sql);
+
+		// echo $query->num_rows();
+		// $options  = array('http' => array('user_agent' => 'CD Library/1.0.0 ( sam_fullen2@hotmail.co.uk )'));
+		// $context  = stream_context_create($options);
+		// header('Content-Type: text/xml');
 
 		foreach ($query->result() as $row) {
-			$sql = $this->db->select()
-				->where('format_name', $row->format)
-				->get('formats');
+			$name = urlencode($row->artist_name);
+			$url = "http://musicbrainz.org/ws/2/artist/?query=artist:". $name . "&limit=1";
 
-			$stuff = $sql->result();
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt( $ch, CURLOPT_USERAGENT, "CD Library/1.0.0 ( sam_fullen2@hotmail.co.uk )" );
+			$content = curl_exec( $ch );
+			
 
-			$data = array(
-	            'format' => $stuff[0]->format_id
-	        );
+		 	$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-	        $this->db->where('item_id', $row->item_id);
-	        $this->db->update('library', $data);
-			// echo "<pre>" . print_r($sql->result(), TRUE) . "</pre><br>";
+			if ($resultStatus == 200) {
+
+				// echo '200 - ' . $row->artist_id . "<br>";
+
+				$dom = simplexml_load_string($content);
+
+				if ($dom->{'artist-list'}->artist->attributes()->id) {
+
+					// echo "<pre>" . print_r($dom->{'artist-list'}->artist->attributes()->id, TRUE) . "</pre>";
+					$id = $dom->{'artist-list'}->artist->attributes()->id;
+
+					$data = array(
+				        'mb_id' => $id,
+					);
+
+					$this->db->where('artist_id', $row->artist_id);
+					$this->db->update('artists', $data);
+				}
+			} else if($resultStatus == 400) {
+
+				$data = array(
+			        'mb_id' => 'N/A',
+				);
+
+				$this->db->where('artist_id', $row->artist_id);
+				$this->db->update('artists', $data);
+			} else if($resultStatus == 503) {
+				// echo 'LOL';
+			}
+
+			curl_close ( $ch );
+
+			// echo $dom->artist;
+			// echo $dom->{'artist-list'}->artist->{'@attributes'}['id'];
+
+			// $response = file_get_contents($url, false, $context);
+
+			// if ($response) {
+				// echo 
+				// echo $response;
+				// $artist = simplexml_load_string($response);
+
+				// var_dump($artist);
+				// echo $obj->metadata->{'artist-list'};
+			// }
 		}
+
+		// redirect('/temp');
+
 	}
 
 	public function addCdForm() {
@@ -95,7 +159,6 @@ class Item extends CI_Controller {
 	}
 
 	public function addCd() {
-
 
 		// Deal with artist first, need to check if it is an existing artist or a new one
 		$checkArtist = $this->artistmodel->getArtist($_POST['artist']);
@@ -128,12 +191,17 @@ class Item extends CI_Controller {
 		$tracksInserted = false;
 
 		// Add track listing
-		if (isset($_POST['tracks'])) {
-			foreach ($_POST['tracks'] as $track) {
+		if (isset($_POST['track'])) {
+			foreach ($_POST['track'] as $track) {
+
+				$explode = explode(':', $track['duration']);
+
+				$minutes = $explode[0];
+				$seconds = $explode[1];
+				$duration = ($minutes * 60) + $seconds; 
 
 				$name = $track['name'];
 				$order = $track['order'];
-				$duration = $track['duration'];
 
 				if($this->trackmodel->addTrack($item_id, $artist_id, $name, $order, $duration)) {
 					$tracksInserted = true;
@@ -141,7 +209,6 @@ class Item extends CI_Controller {
 
 			}
 		}
-
 		redirect('/item/' . $item_id . '?success=1');
 
 	}
@@ -156,5 +223,13 @@ class Item extends CI_Controller {
 		$data['title'] = "Library | CD Library";
         $data['main_content'] = 'library';
         $this->load->view('includes/template', $data);
+	}
+
+	public function addListen($itemId) {
+		if($this->itemmodel->addListen($itemId)) {
+			echo '1';
+		} else {
+			echo '0';
+		}
 	}
 }

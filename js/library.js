@@ -28,6 +28,13 @@ $(function() {
 				$(element).text('');
 				$(element).text('Yes');
 				$(element).attr('data-value', 1);
+				$.get('/addListen/' + itemId, function(data) {
+					if(data == '1') {
+						console.log('Listen Added');
+					} else {
+						console.log('Could not add the listen');
+					}
+				});
 			}
 
 		});

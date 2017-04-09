@@ -31,7 +31,8 @@ class Artist extends CI_Controller {
 		$data['gigs_attended_count'] = $this->gigmodel->getArtistGigs($id)->num_rows();
 		$data['title'] = $data['artist'][0]->artist_name . ' | CD Library';
         $data['main_content'] = 'artist';
-        
+        $data['tags'] = $this->artistmodel->getArtistTags($id);
+
         $this->load->view('includes/template', $data);
 	}
 
@@ -52,5 +53,46 @@ class Artist extends CI_Controller {
 			echo 'no data';
 		}
 	}	
+
+	public function addSummaryView($artistId) {
+		$data['title'] = "CD Library | Add Summary";
+        $data['main_content'] = 'add-summary';
+        $data['artist_id'] = $artistId;
+
+        $this->load->view('includes/template', $data);
+	}
+
+	public function editSummaryView($artistId) {
+		$data['title'] = "CD Library | Summary";
+        $data['main_content'] = 'add-summary';
+        $data['artist_id'] = $artistId;
+        $data['edit'] = true;
+
+        $summary = $this->artistmodel->getSummary($artistId);
+
+
+        $data['summary'] = $summary[0]->artist_summary;
+        	
+
+        $this->load->view('includes/template', $data);
+	}
+
+	public function addSummary() {
+		if (isset($_POST)) {
+			$id = $_POST['artist_id'];
+			$summary = $_POST['summary'];
+			$this->artistmodel->addSummary($id, $summary);
+			redirect('/artist/' . $id);
+		}
+	}
+
+	public function editSummary() {
+		if (isset($_POST)) {
+			$id = $_POST['artist_id'];
+			$summary = $_POST['summary'];
+			$this->artistmodel->editSummary($id, $summary);
+			redirect('/artist/' . $id);
+		}
+	}
 
 }

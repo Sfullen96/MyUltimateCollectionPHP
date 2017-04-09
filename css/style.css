@@ -19,7 +19,7 @@
 	.navbar li > a {
 		height: 70px;
 	    line-height: 40px;
-	    width: 200px;
+	    width: 150px;
 	    text-align: center;
 	}
 	.navbar {
@@ -31,7 +31,7 @@
     background-color: #e11f27;
     border-color: #e11f27;
     border-radius: 0px;
-    width: 100px;
+    min-width: 100px;
 }
 .form-control {
 	border-radius: 0px;
@@ -299,14 +299,14 @@ body {
 }
 .albumPreview > img {
 	width: 100%;
-	height: 250px;
+	height: 225px;
 }
 .albumPreview .overlay {
 	position: absolute;
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	height: 250px;
+	height: 225px;
 	background-color: rgba(0,0,0,0.5);
 	line-height: 250px;
 	text-align: center;
@@ -365,6 +365,7 @@ body {
 }
 
 footer {
+	display: none;
 	min-height: 100px;
 	line-height: 100px;
 	background-color: #333;
@@ -388,4 +389,26 @@ footer .container {
 }
 .carousel {
 	min-height: 420px;
+}
+.moreInfoList {
+	list-style-type: none;
+	margin-bottom: 50px;
+	margin-left: 0px;
+}
+.moreInfoList > li > i.fa {
+	color: #e11f27;
+}
+.moreInfoList > li {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.bold {
+	font-weight: bold;
+}
+i.fa-tags {
+	color: #e11f27;
+}
+.tags a {
+	color: #fff;
+	font-size: 18px;
 }

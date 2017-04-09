@@ -1,6 +1,40 @@
-<div class="row">
+<!-- <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
 		<h2> <?= $artist[0]->artist_name; ?> </h2>
+	</div>
+</div> -->
+<div class="row margin-bottom">
+	<div class="col-xs-12 col-sm-4">
+		<img src="<?= ($artist[0]->artist_image > ''?$artist[0]->artist_image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
+	</div>
+	<div class="col-xs-12 col-sm-8 ratingContainer">
+		<div class="albumInfo">
+			<h2 class="albumTitle"> <?= $artist[0]->artist_name ?> </h2>
+			<p class="albumSummary margin-bottom" id="summary">
+				<?= (isset($artist[0]->artist_summary)?trim($artist[0]->artist_summary) . '<br><a href="/editSummary/'. $artist[0]->artist_id .'"> Edit this Summary </a>':'No summary found. <a href="/addSummary/'. $artist[0]->artist_id .'"> Add Your Own </a>'); ?>
+			</p>
+		</div>
+	</div>
+</div>
+<!-- <h3> Tags </h3> -->
+<div class="row">
+	<div class="moreInfoBanner col-xs-12 tags">
+		<div class="row">
+			<?php foreach ($tags as $tag) { ?>
+				<div class="col-xs-12 col-sm-3">
+					<p> <i class="fa fa-tags"></i> <a href="<?= $tag->tag_url ?>" target="_blank"> <?= ucwords($tag->tag_name) ?></a> </p>
+				</div>
+				<!-- <div class="col-xs-12 col-sm-3">
+					<i class="fa fa-tags"></i>
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<i class="fa fa-tags"></i>
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<i class="fa fa-tags"></i>
+				</div> -->
+			<?php } ?>
+		</div>
 	</div>
 </div>
 <div class="row margin-bottom">

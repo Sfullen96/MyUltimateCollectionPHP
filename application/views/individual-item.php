@@ -38,13 +38,13 @@ if(!empty($tracks)) {
 
 <?php } ?>
 
-<div class="row">
+<div class="row margin-bottom">
 	<div class="col-xs-12 col-sm-4">
 		<img src="<?= ($item->album_image > ''?$item->album_image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-			<h5 class="albumFormat"> <?= $item->format_name ?> | #<?= $item->item_id; ?> </h5>
+			<h5 class="albumFormat"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
 			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= $item->item_id ?>"> <?= $item_info[0]->title ?> </h2>
 			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= $item_info[0]->artist_name ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
 			<div class="rating">
@@ -69,32 +69,13 @@ if(!empty($tracks)) {
 			<?= ($review?'<a href="/review-edit/' . $item->item_id . '" class="reviewLink"> Edit Album Review </a>':'<a href="/review/' . $item->item_id . '" class="reviewLink"> Review This Album </a>'); ?>
 			
 			<br>
-			<p class="albumSummary " id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
+			<p class="albumSummary margin-bottom" id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
 				<?= (isset($item->summary)?trim($item->summary):'No summary found.'); ?>
 			</p>
 		</div>
 	</div>
 </div>
 
-<div class="row">
-	<div class="moreInfoBanner col-xs-12">
-		<div class="row">
-			<div class="col-xs-12 col-sm-3">
-				<p> Purchased On: <span class="editable" id="purchase_date" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchase_date) && $item->purchase_date > ''?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?>
-				</span></p>
-			</div>
-			<div class="col-xs-12 col-sm-3">
-				<p> Purchased at: <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span></p>
-			</div>
-			<div class="col-xs-12 col-sm-3">
-				<p> Item Ref: <span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span></p>
-			</div>
-			<div class="col-xs-12 col-sm-3">
-				<p> CD Count: <span class="editable" id="cd_count" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </span></p>
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="row">
 	<div class="col-xs-12 col-sm-6 trackListContainer">
@@ -153,11 +134,19 @@ if(!empty($tracks)) {
 		<h4> Notes </h4>
 		<div class="notes">
 			<?php 
-
-				foreach ($notes as $note) {
+				if($notes) {
+					foreach ($notes as $note) {
+						echo '
+							<div class="note">
+								<p> '. $note->note .' | <small>'. date('d/m/y H:i:s', strtotime($note->note_timestamp)) .'</small> </p>
+								<hr>
+							</div>
+						';
+					}
+				} else {
 					echo '
 						<div class="note">
-							<p> '. $note->note .' | <small>'. date('d/m/y H:i:s', strtotime($note->note_timestamp)) .'</small> </p>
+							<p> No notes added yet </p>
 							<hr>
 						</div>
 					';
@@ -167,6 +156,26 @@ if(!empty($tracks)) {
 		</div>
 		<textarea class="form-control noteText" id="textarea" data-id="<?= $item->item_id; ?>" rows="3" placeholder="Add a note..."></textarea>
 		<button class="btn addNote"> Add Note </button>
+	</div>
+</div>
+
+<div class="row">
+	<div class="moreInfoBanner col-xs-12">
+		<div class="row">
+			<div class="col-xs-12">
+				<p> Purchased from <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span> on <span class="editable" id="purchase_date" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchase_date) && $item->purchase_date > ''?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?>
+				</span></p>
+			</div>
+		<!-- 	<div class="col-xs-12 col-sm-6">
+				<p> Purchased at: <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span></p>
+			</div> -->
+		<!-- 	<div class="col-xs-12 col-sm-4">
+				<p> Item Ref: <span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span></p>
+			</div> -->
+			<!-- <div class="col-xs-12 col-sm-4">
+				<p> CD Count: <span class="editable" id="cd_count" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </span></p>
+			</div> -->
+		</div>
 	</div>
 </div>
 

@@ -118,12 +118,12 @@
                             </ul>
                             <form class="navbar-form navbar-left" method="POST" action="/search/index">
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-8">
+                                    <div class="col-xs-12 col-sm-9">
                                         <div class="form-group">
                                             <input type="text" class="form-control margin-bottom" name="keyword" placeholder="Search..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4">
+                                    <div class="col-xs-12 col-sm-3">
                                         <button type="submit" class="btn btn-default headerSearch">Search</button>
                                     </div>
                                 </div>

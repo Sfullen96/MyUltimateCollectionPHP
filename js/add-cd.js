@@ -96,6 +96,8 @@ function ajaxLookup() {
 								</tr>\
 							');
 
+							$('#step3Header, .step3').show();
+
 							count++;
 
 						});

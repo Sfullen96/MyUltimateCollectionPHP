@@ -6,14 +6,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="recentlyAddedCarousel" class="carousel slide" data-ride="carousel" data-interval="3000" data-pause="false">
+			<div id="recentlyAddedCarousel" class="carousel slide" data-ride="carousel" data-interval="11000" data-pause="false">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#recentlyAddedCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#recentlyAddedCarousel" data-slide-to="1"></li>
-					<li data-target="#recentlyAddedCarousel" data-slide-to="2"></li>
-					<li data-target="#recentlyAddedCarousel" data-slide-to="3"></li>
-					<li data-target="#recentlyAddedCarousel" data-slide-to="4"></li>
+					<?php $counter = 0; ?>
+					<?php foreach ($recently_added as $item) { ?>
+						<li data-target="#recentlyAddedCarousel" data-slide-to="<?= $counter ?>" class="<?= ($counter == 0?'active':'') ?>"></li>
+						<?php $counter++; ?>
+					<?php } ?>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
@@ -46,14 +46,16 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="recentlyViewedCarousel" class="carousel slide" data-ride="carousel" data-interval="3500" data-pause="false">
+			<div id="recentlyViewedCarousel" class="carousel slide" data-ride="carousel" data-interval="10000" data-pause="false">
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
-					<li data-target="#recentlyViewedCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#recentlyViewedCarousel" data-slide-to="1"></li>
-					<li data-target="#recentlyViewedCarousel" data-slide-to="2"></li>
-					<li data-target="#recentlyViewedCarousel" data-slide-to="3"></li>
-					<li data-target="#recentlyViewedCarousel" data-slide-to="4"></li>
+					<?php $counter = 0; ?>
+					<?php if($recently_viewed) { ?>
+					<?php foreach ($recently_viewed as $item) { ?>
+						<li data-target="#recentlyViewedCarousel" data-slide-to="<?= $counter ?>" class="<?= ($counter == 0?'active':'') ?>"></li>
+						<?php $counter++; ?>
+					<?php } ?>
+					<?php } ?>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
@@ -164,6 +166,6 @@
 </table>
 <script type="text/javascript">
 	$('.carousel').carousel({
-	pause: "false",
+		pause: "false",
 	});
 </script>
