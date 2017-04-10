@@ -40,16 +40,25 @@ class Login extends CI_Controller
             
             $userInfo = $this->loginmodel->checkUser($email, $password);
 
-            if($userInfo)//if users username, password and role match then create a session.
-            {
-                $data = array(
-                    'user_id' => $companyInfo->company_id,
-                    'is_logged_in' => true,
-                );
-
-
-                $this->session->set_userdata($data);
-                redirect(base_url() . 'home');
+            if($userInfo) {
+                
+                if($userInfo->account_type == 1) {
+                    $data = array(
+                        'user_id' => $userInfo->user_id,
+                        'is_logged_in' => true,
+                        'admin' => false,
+                    );
+                    $this->session->set_userdata($data);
+                    redirect(base_url() . 'home');
+                } else {
+                    $data = array(
+                        'user_id' => $userInfo->user_id,
+                        'is_logged_in' => true,
+                        'admin' => true,
+                    );
+                    $this->session->set_userdata($data);
+                    redirect(base_url() . 'admin');
+                }
 
             }
             else

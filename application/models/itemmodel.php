@@ -219,6 +219,7 @@ class ItemModel extends CI_Model
             ON l.item_id = v.item_id
             LEFT JOIN artists a
             ON a.artist_id = l.artist_id
+            GROUP BY v.item_id
             ORDER BY timestamp DESC
             LIMIT 5
         ";

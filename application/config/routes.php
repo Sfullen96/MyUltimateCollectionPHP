@@ -77,3 +77,4 @@ $route['setlist/(:any)'] = 'setlist/showSetlistView/$1';
 $route['addListen/(:num)'] = 'item/addListen/$1';
 $route['addSummary/(:num)'] = 'artist/addSummaryView/$1';
 $route['editSummary/(:num)'] = 'artist/editSummaryView/$1';
+$route['admin'] = 'admin';
