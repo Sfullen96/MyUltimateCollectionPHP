@@ -112,7 +112,7 @@
 		</tr>
 		<tr>
 			<td> CD's Listened to: </td>
-			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> </td>
+			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> | <?= round(($cd_listened_count / $cd_count) * 100, 2) ?>%</td>
 		</tr>
 	</tbody>
 </table>

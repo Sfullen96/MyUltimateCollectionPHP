@@ -40,7 +40,7 @@
 	$(document).ready(function(){
 	    $('#libraryTable').DataTable({
 	    	"pageLength": 50,
-	    	"order": [0, 'ASC'],
+    	 	"order": [[ 3, "asc" ]],
 	    	"initComplete": function(settings, json) {
 	    		$('.loading').hide(500);
 			    $('#libraryTable').show(500);

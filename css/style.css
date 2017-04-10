@@ -13,8 +13,8 @@
 	}
 	.main-content {
 		padding-top: 15px;
-	    padding-left: 100px;
-	    padding-right: 100px;
+	    /*padding-left: 100px;
+	    padding-right: 100px;*/
 	}
 	.navbar li > a {
 		height: 70px;
@@ -428,4 +428,7 @@ i.fa-tags {
 	font-size: 18px;
 	font-weight: bold;
 	float: left;
+}
+.headerstat {
+	font-size: 18px;
 }

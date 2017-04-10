@@ -118,19 +118,33 @@
                             </ul>
                             <form class="navbar-form navbar-left" method="POST" action="/search/index">
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-9">
+                                    <div class="col-xs-12 col-sm-12">
                                         <div class="form-group">
                                             <input type="text" class="form-control margin-bottom" name="keyword" placeholder="Search..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
+                                            <button type="submit" class="btn btn-default headerSearch margin-bottom">Search</button>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-sm-3">
-                                        <button type="submit" class="btn btn-default headerSearch">Search</button>
                                     </div>
                                 </div>
                                 
                             </form>
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
+                                <?php 
+                                    $this->load->model('itemmodel');
+                                    $data['cd_week'] = $this->itemmodel->cdStats('week');
+                                    $data['cd_month'] = $this->itemmodel->cdStats('month');
+                                    $data['cd_year'] = $this->itemmodel->cdStats('year');
+                                    $data['cd_count'] = $this->itemmodel->getCDcount();
+                                    $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
+                                ?>
+                                <li><a href="javascript:void(0)" class="statsLink" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content="
+                                    <p class='headerstat'> Listened to <?= $data['cd_listened_count'] ?>/<?= $data['cd_count'] ?> (<?= round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) ?>%) </p>
+                                    <p class='headerstat'> Added this week: <?= $data['cd_week']; ?> </p>
+                                    <p class='headerstat'> Added this month: <?= $data['cd_month'] ?> </p>
+                                    <p class='headerstat'> Added this year: <?= $data['cd_year'] ?> </p>
+                                "> Stats </a></li>
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/add-cd'?'active':'') ?>"><a href="/add-cd">Add to Library</a></li>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/library'?'active':'') ?>"><a href="/library">View Library</a></li>

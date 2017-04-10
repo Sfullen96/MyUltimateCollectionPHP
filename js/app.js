@@ -82,6 +82,8 @@ $(function(){
 		});
 	});
 
+
+
 });
 
 function switchItem(currentItem) {
@@ -96,3 +98,7 @@ function switchItem(currentItem) {
 	});
 
 }
+
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
