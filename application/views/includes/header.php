@@ -70,7 +70,7 @@
         <script src="<?= base_url(); ?>js/add-cd.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/setlist.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/library.js?cache=<?= time(); ?>"></script>
-        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+        <script src="<?= base_url(); ?>js/search.js?cache=<?= time(); ?>"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>
@@ -139,6 +139,16 @@
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/login'?'active':'') ?>"><a href="/login">Login</a></li>
                                 <?php } else { ?>
                                 <li class=""><a href="/logout">Logout</a></li>
+                                <?php } ?>
+                                <?php if($this->session->userdata('admin')) { ?>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Admin <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/admin/view-accounts"> View Accounts </a></li>
+                                        <li><a href="/admin/manage-library"> Manage Library </a></li>
+                                        <li><a href="/admin/manage-artists"> Manage Artists </a></li>
+                                    </ul>
+                                </li>
                                 <?php } ?>
                             </ul>
                             </div><!-- /.navbar-collapse -->

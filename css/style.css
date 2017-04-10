@@ -413,3 +413,19 @@ i.fa-tags {
 	font-size: 18px;
 	font-weight: bold;
 }
+.dropdown-menu>li>a {
+	line-height: 66px;
+	width: auto;
+}
+.results {
+	max-height: 500px;
+	overflow: hidden;
+}
+.showMoreResults {
+	display: none;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	font-size: 18px;
+	font-weight: bold;
+	float: left;
+}

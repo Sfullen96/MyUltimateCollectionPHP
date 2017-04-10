@@ -5,9 +5,10 @@
 		<h2> <i class="fa fa-music"></i> Album Results </h2>
 	</div>
 </div>
+<div class="results">
 <?php foreach ($item_results as $item) { ?>
 <?php foreach ($item as $i) { ?>
-<div class="row">
+<div class="row result">
 	<div class="col-xs-3">
 		<a href="/item/<?= $i->item_id ?>"><img src="<?= ($i->album_image?$i->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive resultImage"></a>
 	</div>
@@ -22,6 +23,8 @@
 <hr>
 <?php } ?>
 <?php } ?>
+</div>
+<a class="showMoreResults" href="javascript:void(0)"> Show All Results... </a>
 <?php } else { ?>
 	<h4 class="margin-bottom"> No Albums Found </h4>
 <?php } ?>

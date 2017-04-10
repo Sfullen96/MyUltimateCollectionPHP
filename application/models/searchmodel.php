@@ -19,7 +19,11 @@ class SearchModel extends CI_Model
                 ON artists.artist_id = library.artist_id
                 LEFT JOIN formats
                 ON formats.format_id = library.format_id
-                WHERE library.title LIKE '%$keyword%'
+                WHERE (
+                    library.title LIKE '%$keyword%'
+                    OR
+                    artists.artist_name LIKE '%$keyword%'
+                )
             ";
             
             $item = $this->db->query($sqlItem);
@@ -29,6 +33,8 @@ class SearchModel extends CI_Model
             }
         // }
 
+            // echo "<pre>" . print_r($resultsItem, TRUE) . "</pre>";
+            // die();
         return $resultsItem;
            
     }
