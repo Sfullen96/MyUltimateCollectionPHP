@@ -43,18 +43,19 @@
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <!-- JS LIBS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+        <script src="<?= base_url() ?>/js/jquery-3.2.1.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
         <script src="https://use.fontawesome.com/f2ac442258.js"></script>
-        <script src="//cdn.rawgit.com/tonystar/bootstrap-hover-tabs/master/bootstrap-hover-tabs.js"></script>
         <script
         src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
         integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
         crossorigin="anonymous"></script>
         <script type="text/javascript" src=//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js></script>
         <!-- CSS LIBS -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="<?= base_url() ?>/css/bootstrap.min.css">
+        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>css/jquery-ui-theme.css?cache=<?= time(); ?>">
         <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
@@ -71,6 +72,8 @@
         <script src="<?= base_url(); ?>js/setlist.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/library.js?cache=<?= time(); ?>"></script>
         <script src="<?= base_url(); ?>js/search.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/bootstrap.min.js?cache=<?= time(); ?>"></script>
+        <script src="<?= base_url(); ?>js/validate.js?cache=<?= time(); ?>"></script>
         <!-- IE -->
         <!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
         <!--[if gte IE 9]>
@@ -132,19 +135,21 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
                                 <?php 
-                                    $this->load->model('itemmodel');
-                                    $data['cd_week'] = $this->itemmodel->cdStats('week');
-                                    $data['cd_month'] = $this->itemmodel->cdStats('month');
-                                    $data['cd_year'] = $this->itemmodel->cdStats('year');
-                                    $data['cd_count'] = $this->itemmodel->getCDcount();
-                                    $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
+                                    if(!empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register' && $_SERVER['REQUEST_URI'] != '/register/registerAccount') {
+                                        $this->load->model('itemmodel');
+                                        $data['cd_week'] = $this->itemmodel->cdStats('week');
+                                        $data['cd_month'] = $this->itemmodel->cdStats('month');
+                                        $data['cd_year'] = $this->itemmodel->cdStats('year');
+                                        $data['cd_count'] = $this->itemmodel->getCDcount();
+                                        $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
                                 ?>
                                 <li><a href="javascript:void(0)" class="statsLink" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content="
-                                    <p class='headerstat'> Listened to <?= $data['cd_listened_count'] ?>/<?= $data['cd_count'] ?> (<?= round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) ?>%) </p>
+                                    <p class='headerstat'> Listened to <?= $data['cd_listened_count'] ?>/<?= $data['cd_count'] ?> (<?= ($data['cd_listened_count'] > 0 ? round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) : '0') ?>%) </p>
                                     <p class='headerstat'> Added this week: <?= $data['cd_week']; ?> </p>
                                     <p class='headerstat'> Added this month: <?= $data['cd_month'] ?> </p>
                                     <p class='headerstat'> Added this year: <?= $data['cd_year'] ?> </p>
                                 "> Stats </a></li>
+                                <?php } ?>
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/add-cd'?'active':'') ?>"><a href="/add-cd">Add to Library</a></li>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/library'?'active':'') ?>"><a href="/library">View Library</a></li>
@@ -173,7 +178,7 @@
                 <!--/ Primary Navigation -->
                 <div class="<?= ($_SERVER['REQUEST_URI'] == '/' || $_SERVER['REQUEST_URI'] == '/home'?'container-fluid':'container') ?> main-content">
                     <?php
-                    if(empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login') {
+                    if(empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register' && $_SERVER['REQUEST_URI'] != '/register/registerAccount') {
                     header('Location: ' . base_url() . 'login');
                     exit();
                     }

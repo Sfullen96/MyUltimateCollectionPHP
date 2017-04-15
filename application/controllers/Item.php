@@ -22,7 +22,13 @@ class Item extends CI_Controller {
 	public function showIndividualItem($itemId) {
 
 		$this->itemmodel->addView($itemId);
-     	
+
+		$user_id = $this->session->userdata('user_id');
+
+		if(!$this->itemmodel->doesBelongToUser($user_id, $itemId)) {
+			redirect('/home');
+		}
+
      	$data['item_info'] = $this->itemmodel->getItemInfo($itemId);
      	$data['notes'] = $this->notemodel->getItemNotes($itemId);
      	$data['tracks'] = $this->trackmodel->getItemTracks($itemId);
@@ -176,6 +182,9 @@ class Item extends CI_Controller {
 			}
 		}
 
+		// Now we need to get the logged in user's ID to put as owner
+		$user_id = $this->session->userdata('user_id');
+
 		$title = isset($_POST['title']) ? $_POST['title'] : '';
 		$reference = isset($_POST['reference']) ? $_POST['reference'] : '';
 		$summary = isset($_POST['summary']) ? $_POST['summary'] : '';
@@ -186,7 +195,7 @@ class Item extends CI_Controller {
 		$purchaseDate = isset($_POST['purchase_date']) ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
 		$price = isset($_POST['price']) ? '&pound;' . $_POST['price'] : '';
 
-		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price);
+		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price, $user_id);
 
 		$tracksInserted = false;
 

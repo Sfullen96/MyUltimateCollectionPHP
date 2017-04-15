@@ -42,15 +42,13 @@ class Artist extends CI_Controller {
 
 			if(count($query) > 0) {
 				foreach($query as $artist) {
-					echo '
-						<div class="option" value="'. $artist->artist_id .'">'. $artist->artist_name .'</div>
-					';
+					echo '<div class="option" value="'. $artist->artist_id .'">'. $artist->artist_name .'</div>';
 				}
 			} else {
-				echo 'no data';
+				echo 'false';
 			}
 		} else {
-			echo 'no data';
+			echo 'false';
 		}
 	}	
 
@@ -96,3 +94,5 @@ class Artist extends CI_Controller {
 	}
 
 }
+
+?>

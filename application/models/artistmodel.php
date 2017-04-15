@@ -106,6 +106,7 @@ class ArtistModel extends CI_Model
 	public function addView($id) {
 		$data = array(
 	        'artist_id' => $id,
+	        'user_id' => $this->session->userdata('user_id'),
 		);
 
 		$query = $this->db->insert('artist_views', $data);
@@ -118,11 +119,14 @@ class ArtistModel extends CI_Model
 	}
 
 	public function getFavArtists() {
+		$user_id = $this->session->userdata('user_id');
+
         $sql = "
             SELECT COUNT(view_id) as views, artist_views.artist_id, artist_name
             FROM artist_views
             LEFT JOIN artists
             ON artists.artist_id = artist_views.artist_id
+            WHERE user_id = '$user_id'
             GROUP BY artist_views.artist_id
             ORDER BY COUNT(view_id) DESC,
             timestamp DESC

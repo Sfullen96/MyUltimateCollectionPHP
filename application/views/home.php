@@ -10,14 +10,17 @@
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<?php $counter = 0; ?>
+					<?php if($recently_added) { ?>
 					<?php foreach ($recently_added as $item) { ?>
 						<li data-target="#recentlyAddedCarousel" data-slide-to="<?= $counter ?>" class="<?= ($counter == 0?'active':'') ?>"></li>
 						<?php $counter++; ?>
+					<?php } ?>
 					<?php } ?>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<?php $counter = 0; ?>
+					<?php if($recently_added) { ?>
 					<?php foreach ($recently_added as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
 						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
@@ -25,6 +28,9 @@
 						<h5> Added: <?= date('d/m/Y', strtotime($item->created_at)) ?> </h5>
 					</div>
 					<?php $counter++; ?>
+					<?php } ?>
+					<?php } else { ?>
+						<h4 class="text-center"> No items added yet <a href="/add-cd"> Add one here. </a> </h4>
 					<?php } ?>
 				</div>
 				<!-- Left and right controls -->
@@ -112,7 +118,7 @@
 		</tr>
 		<tr>
 			<td> CD's Listened to: </td>
-			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> | <?= round(($cd_listened_count / $cd_count) * 100, 2) ?>%</td>
+			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> | <?= ($cd_listened_count > 0 ? round(($cd_listened_count / $cd_count) * 100, 2) : '0' ) ?>%</td>
 		</tr>
 	</tbody>
 </table>

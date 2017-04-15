@@ -4,8 +4,9 @@ $(function(){
 
 		var text = $(this).val();
 
-		$.post('/artist/ajaxFindArtist', {'text' : text}, function(data, textStatus, xhr) {
-			if(data != 'no data') {
+		$.post('/artist/ajaxFindArtist', {'text' : text}, function(data) {
+			data = $.trim(data);
+			if(data != 'false') {
 				if(text > '') {
 					$('.existingArtist').parent().find('.options').remove();
 					$('.existingArtist').after('<div class="options">'+ data +'</div>');
@@ -14,6 +15,7 @@ $(function(){
 					$('.existingArtist').val('');
 					$('.existingArtist').attr('value', '');
 					$('input[name=artist_az], #az').show();
+					$('.options').remove();
 				}
 			} else {
 				$('input[name=artist_az], #az').show();
@@ -29,7 +31,6 @@ $(function(){
 		
 		$('.existingArtist').val(text);
 		$('.existingArtist').attr('value', id);
-
 		$('.options').remove();
 	});
 
