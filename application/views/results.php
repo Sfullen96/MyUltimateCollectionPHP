@@ -15,8 +15,8 @@
 	<div class="col-xs-9">
 		<div class="albumInfo">
 			<h5 class="albumFormat"> <?= $i->format_name ?> | #<?= $i->item_id; ?> </h5>
-			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= $i->item_id ?>"> <?= $i->title ?> </h2>
-			<h5 class="extraInfo"> By <a href="/artist/<?= $i->artist_id ?>"> <?= $i->artist_name ?> </a> </h5>
+			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= $i->item_id ?>"> <?= ucwords($i->title) ?> </h2>
+			<h5 class="extraInfo"> By <a href="/artist/<?= $i->artist_id ?>"> <?= ucwords($i->artist_name) ?> </a> </h5>
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 <div class="row">
 	<div class="col-xs-12">
 		<div class="albumInfo">
-			<h2 class="extraInfo"> <a href="/artist/<?= $a->artist_id ?>"> <?= $a->artist_name ?> </a> </h2>
+			<h2 class="extraInfo"> <a href="/artist/<?= $a->artist_id ?>"> <?= ucwords($a->artist_name) ?> </a> </h2>
 		</div>
 	</div>
 </div>

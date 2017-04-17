@@ -155,7 +155,7 @@ class Item extends CI_Controller {
 
 	}
 
-	public function addCdForm() {
+public function addCdForm() {
 
 		$data['formats'] = $this->itemmodel->getList('formats');
 

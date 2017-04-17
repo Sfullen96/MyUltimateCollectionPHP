@@ -23,15 +23,20 @@ class Artist extends CI_Controller {
 
 	public function showIndividualArtist($id) {
 
-		$this->artistmodel->addView($id);
 		
 		$data['artist'] = $this->artistmodel->getArtistInfo($id);
+
+		if($data['artist'][0]->user_id != $this->session->userdata('user_id')) {
+			redirect('/home');
+		}
+
 		$data['albums'] = $this->artistmodel->getArtistAlbums($id);
 		$data['gigs_attended'] = $this->gigmodel->getArtistGigs($id)->result();
 		$data['gigs_attended_count'] = $this->gigmodel->getArtistGigs($id)->num_rows();
 		$data['title'] = $data['artist'][0]->artist_name . ' | CD Library';
         $data['main_content'] = 'artist';
         $data['tags'] = $this->artistmodel->getArtistTags($id);
+		$this->artistmodel->addView($id);
 
         $this->load->view('includes/template', $data);
 	}

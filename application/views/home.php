@@ -24,7 +24,7 @@
 					<?php foreach ($recently_added as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
 						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
-						<h3> <a href="/item/<?= $item->item_id ?>"><?= $item->title; ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= $item->artist_name ?></a> </h3>
+						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Added: <?= date('d/m/Y', strtotime($item->created_at)) ?> </h5>
 					</div>
 					<?php $counter++; ?>
@@ -70,7 +70,7 @@
 					<?php foreach ($recently_viewed as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
 						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
-						<h3> <a href="/item/<?= $item->item_id ?>"><?= $item->title; ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= $item->artist_name ?></a> </h3>
+						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Viewed: <?= date('d/m/Y H:i:s', strtotime($item->timestamp)) ?> </h5>
 					</div>
 					<?php $counter++; ?>
@@ -137,7 +137,7 @@
 		<?php if($favourite_albums) { ?>
 		<?php foreach ($favourite_albums as $album) { ?>
 		<tr>
-			<td> <?= $album->title; ?> </td>
+			<td> <?= ucwords($album->title); ?> </td>
 			<td> Viewed <?= $album->views ?> times </td>
 		</tr>
 		<?php } ?>
@@ -161,7 +161,7 @@
 		<?php if($favourite_artists) { ?>
 			<?php foreach ($favourite_artists as $artist) { ?>
 			<tr>
-				<td> <?= $artist->artist_name; ?> </td>
+				<td> <?= ucwords($artist->artist_name); ?> </td>
 				<td> Viewed <?= $artist->views ?> times </td>
 			</tr>
 			<?php } ?>

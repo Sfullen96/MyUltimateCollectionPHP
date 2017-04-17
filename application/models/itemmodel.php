@@ -28,7 +28,7 @@ class ItemModel extends CI_Model
                 ->join('artists', 'artists.artist_id = library.artist_id')
                 ->join('formats', 'formats.format_id = library.format_id')
                 ->where('item_id', $itemId)
-                ->where('user_id', $this->user_id)
+                ->where('library.user_id', $this->user_id)
                 ->get('library');
 
        return $query->result();
@@ -38,7 +38,7 @@ class ItemModel extends CI_Model
     public function getRecentlyAdded() {
         $query = $this->db->select()
                 ->join('artists', 'artists.artist_id = library.artist_id')
-                ->where('user_id', $this->user_id)
+                ->where('library.user_id', $this->user_id)
                 ->order_by('library.created_at DESC')
                 ->limit(5)
                 ->get('library');
@@ -127,7 +127,7 @@ class ItemModel extends CI_Model
         $query = $this->db->select()
                 ->join('artists', 'artists.artist_id = library.artist_id')
                 ->join('formats', 'formats.format_id = library.format_id')
-                ->where('user_id', $this->user_id)
+                ->where('library.user_id', $this->user_id)
                 ->get('library');
 
        return $query->result();
@@ -233,7 +233,7 @@ class ItemModel extends CI_Model
             FROM item_views
             LEFT JOIN library 
             ON library.item_id = item_views.item_id
-            WHERE user_id = '$this->user_id'
+            WHERE library.user_id = '$this->user_id'
             GROUP BY item_views.item_id
             ORDER BY COuNT(view_id) DESC,
             timestamp DESC
@@ -259,7 +259,7 @@ class ItemModel extends CI_Model
             ON l.item_id = v.item_id
             LEFT JOIN artists a
             ON a.artist_id = l.artist_id
-            WHERE user_id = '$this->user_id'
+            WHERE a.user_id = '$this->user_id'
             GROUP BY v.item_id
             ORDER BY timestamp DESC
             LIMIT 5

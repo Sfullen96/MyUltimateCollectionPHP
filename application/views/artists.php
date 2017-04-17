@@ -11,8 +11,8 @@
 		<?php foreach($artists as $artist) { ?>
 		<tr>
 			<td style="display: none"><?= $artist->artist_id; ?></td>
-			<td><a href="/artist/<?= $artist->artist_id; ?>"><?= $artist->artist_name; ?></a></td>
-			<td><?= $artist->artist_az_name; ?></td>
+			<td><a href="/artist/<?= $artist->artist_id; ?>"><?= ucwords($artist->artist_name); ?></a></td>
+			<td><?= ucwords($artist->artist_az_name); ?></td>
 			<td><?= $artist->cd_count; ?></td>
 		</tr>
 		<?php } ?>
