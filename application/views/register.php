@@ -24,7 +24,6 @@
 			</div>
 		</div>
 	</div>
-
 	<div class="form-group">
 		<input type="text" class="form-control" id="" name="email" placeholder="Email Address" value="<?= (isset($email)?$email:''); ?>">
 	</div>

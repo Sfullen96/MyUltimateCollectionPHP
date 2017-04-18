@@ -222,4 +222,16 @@ class lastFmApi extends CI_Controller {
 		}
 	}
 
+	public function getArtistTags($artistName) {
+		$name = urlencode($artistName);
+
+		$url = "http://ws.audioscrobbler.com/2.0/?method=artist.getTags&artist=". $name ."&user=RJ&api_key=797d57115973701485bcb92ebb8ea847&format=json";
+
+		$response = json_decode(file_get_contents($url));
+
+		if ($response) {
+			print_r($response);
+		}
+	}
+
 }

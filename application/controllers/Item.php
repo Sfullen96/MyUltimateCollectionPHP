@@ -171,6 +171,7 @@ public function addCdForm() {
 
 		if(!$checkArtist > 0) {
 			$artist_id = $this->artistmodel->createNewArtist($_POST['artist'], $_POST['artist_az']);
+			// TODO: Get tags for artist from last FM API on creation of new artist.
 		} else {
 			$artist_id = $checkArtist;
 
