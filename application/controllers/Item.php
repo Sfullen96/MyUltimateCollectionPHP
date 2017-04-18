@@ -12,6 +12,7 @@ class Item extends CI_Controller {
         $this->load->model('trackmodel');
         $this->load->model('artistmodel');
         $this->load->model('reviewmodel');
+        $this->load->model('lastfmmodel');
 	}
 
 	public function index()
@@ -172,6 +173,7 @@ public function addCdForm() {
 		if(!$checkArtist > 0) {
 			$artist_id = $this->artistmodel->createNewArtist($_POST['artist'], $_POST['artist_az']);
 			// TODO: Get tags for artist from last FM API on creation of new artist.
+			$this->lastfmmodel->getArtistTags($_POST['artist'], $artist_id);
 		} else {
 			$artist_id = $checkArtist;
 
