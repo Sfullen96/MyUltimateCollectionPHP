@@ -112,6 +112,7 @@ class ItemModel extends CI_Model
 
     function checkIfExists($name, $artist) {
         $query = $this->db->select()
+                ->where('user_id', $this->session->userdata('user_id'))
                 ->where('title', $name)
                 ->where('artist_id', $artist)
                 ->get('library');

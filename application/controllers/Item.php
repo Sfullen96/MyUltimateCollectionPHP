@@ -74,68 +74,97 @@ class Item extends CI_Controller {
 	}
 
 	public function temp() {
+
+		$query = $this->db->select()
+				->where('user_id', 1)
+				->get('artists');
+
+		foreach ($query->result() as $row) {
+			$data = array(
+				'user_id' => 1,
+				'artist_id' => $row->artist_id,
+			);
+
+			$this->db->insert('user_artists', $data);
+		}
+
+		// $query = $this->db->select()
+		// 		->where('user_id', 1)
+		// 		->get('library');
+
+		// foreach ($query->result() as $row) {
+		// 	$data = array(
+		// 		'user_id' => 1,
+		// 		'item_id' => $row->item_id,
+		// 	);
+
+		// 	$this->db->insert('user_items', $data);
+		// }
+
+
+
 		// $query = $this->db->select()
 		// 	->where('mb_id IS NULL', null, false)
 		// 	->where('mb_id <', 'N/A')
 		// 	// ->limit(10)
 		// 	->get('artists');
-		$sql = "
-			SELECT * 
-			FROM artists
-			WHERE mb_id IS NULL
-		";
+		// $sql = "
+		// 	SELECT * 
+		// 	FROM artists
+		// 	WHERE mb_id IS NULL
+		// ";
 
-		$query = $this->db->query($sql);
+		// $query = $this->db->query($sql);
 
 		// echo $query->num_rows();
 		// $options  = array('http' => array('user_agent' => 'CD Library/1.0.0 ( sam_fullen2@hotmail.co.uk )'));
 		// $context  = stream_context_create($options);
 		// header('Content-Type: text/xml');
 
-		foreach ($query->result() as $row) {
-			$name = urlencode($row->artist_name);
-			$url = "http://musicbrainz.org/ws/2/artist/?query=artist:". $name . "&limit=1";
+		// foreach ($query->result() as $row) {
+		// 	$name = urlencode($row->artist_name);
+		// 	$url = "http://musicbrainz.org/ws/2/artist/?query=artist:". $name . "&limit=1";
 
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt( $ch, CURLOPT_USERAGENT, "CD Library/1.0.0 ( sam_fullen2@hotmail.co.uk )" );
-			$content = curl_exec( $ch );
+		// 	$ch = curl_init();
+		// 	curl_setopt($ch, CURLOPT_URL, $url);
+		// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		// 	curl_setopt( $ch, CURLOPT_USERAGENT, "CD Library/1.0.0 ( sam_fullen2@hotmail.co.uk )" );
+		// 	$content = curl_exec( $ch );
 			
 
-		 	$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		//  	$resultStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-			if ($resultStatus == 200) {
+		// 	if ($resultStatus == 200) {
 
-				// echo '200 - ' . $row->artist_id . "<br>";
+		// 		// echo '200 - ' . $row->artist_id . "<br>";
 
-				$dom = simplexml_load_string($content);
+		// 		$dom = simplexml_load_string($content);
 
-				if ($dom->{'artist-list'}->artist->attributes()->id) {
+		// 		if ($dom->{'artist-list'}->artist->attributes()->id) {
 
-					// echo "<pre>" . print_r($dom->{'artist-list'}->artist->attributes()->id, TRUE) . "</pre>";
-					$id = $dom->{'artist-list'}->artist->attributes()->id;
+		// 			// echo "<pre>" . print_r($dom->{'artist-list'}->artist->attributes()->id, TRUE) . "</pre>";
+		// 			$id = $dom->{'artist-list'}->artist->attributes()->id;
 
-					$data = array(
-				        'mb_id' => $id,
-					);
+		// 			$data = array(
+		// 		        'mb_id' => $id,
+		// 			);
 
-					$this->db->where('artist_id', $row->artist_id);
-					$this->db->update('artists', $data);
-				}
-			} else if($resultStatus == 400) {
+		// 			$this->db->where('artist_id', $row->artist_id);
+		// 			$this->db->update('artists', $data);
+		// 		}
+		// 	} else if($resultStatus == 400) {
 
-				$data = array(
-			        'mb_id' => 'N/A',
-				);
+		// 		$data = array(
+		// 	        'mb_id' => 'N/A',
+		// 		);
 
-				$this->db->where('artist_id', $row->artist_id);
-				$this->db->update('artists', $data);
-			} else if($resultStatus == 503) {
-				// echo 'LOL';
-			}
+		// 		$this->db->where('artist_id', $row->artist_id);
+		// 		$this->db->update('artists', $data);
+		// 	} else if($resultStatus == 503) {
+		// 		// echo 'LOL';
+		// 	}
 
-			curl_close ( $ch );
+		// 	curl_close ( $ch );
 
 			// echo $dom->artist;
 			// echo $dom->{'artist-list'}->artist->{'@attributes'}['id'];
@@ -150,7 +179,7 @@ class Item extends CI_Controller {
 				// var_dump($artist);
 				// echo $obj->metadata->{'artist-list'};
 			// }
-		}
+		// }
 
 		// redirect('/temp');
 
@@ -172,7 +201,6 @@ public function addCdForm() {
 
 		if(!$checkArtist > 0) {
 			$artist_id = $this->artistmodel->createNewArtist($_POST['artist'], $_POST['artist_az']);
-			// TODO: Get tags for artist from last FM API on creation of new artist.
 			$this->lastfmmodel->getArtistTags($_POST['artist'], $artist_id);
 		} else {
 			$artist_id = $checkArtist;

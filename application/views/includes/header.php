@@ -135,7 +135,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
                                 <?php 
-                                    if(!empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register' && $_SERVER['REQUEST_URI'] != '/register/registerAccount') {
+                                    if(!empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login' && $_SERVER['REQUEST_URI'] != '/register' && $_SERVER['REQUEST_URI'] != '/register/registerAccount' && $_SERVER['REQUEST_URI'] != '/search/index') {
                                         $this->load->model('itemmodel');
                                         $data['cd_week'] = $this->itemmodel->cdStats('week');
                                         $data['cd_month'] = $this->itemmodel->cdStats('month');
