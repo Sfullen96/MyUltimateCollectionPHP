@@ -72,6 +72,21 @@ class ArtistModel extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function addUserArtist($artistId) {
+		$data = array(
+			'user_id' => $this->session->userdata('user_id'),
+			'artist_id' => $artistId,
+		);
+
+		$query = $this->db->insert('user_artists', $data);
+
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function getArtistAlbums($id) {
 		$query = $this->db->select()
 				->where('artist_id', $id)
@@ -95,7 +110,10 @@ public function getArtistInfo($id) {
 				SELECT COUNT(item_id) FROM library WHERE artist_id = a.artist_id
 			) AS cd_count
 			FROM artists a
-			WHERE user_id = '$this->user_id'
+			LEFT JOIN user_artists ua
+			ON ua.user_id = '$this->user_id'
+			WHERE ua.user_id = '$this->user_id'
+			GROUP BY a.artist_id
 			ORDER BY artist_id DESC
 		";
 

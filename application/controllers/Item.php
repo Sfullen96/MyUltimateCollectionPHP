@@ -213,6 +213,12 @@ public function addCdForm() {
 			}
 		}
 
+		// Add into user_artists table
+		if(!$this->artistmodel->addUserArtist($artist_id)) {
+			// TODO: Add error_log table and log here
+			die('500 Error, contact system admin');
+		}
+
 		// Now we need to get the logged in user's ID to put as owner
 		$user_id = $this->session->userdata('user_id');
 
