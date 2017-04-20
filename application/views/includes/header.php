@@ -132,6 +132,8 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/home' || $_SERVER['REQUEST_URI'] == '/'?'active':'') ?>"><a href="/">Home</a></li>
                                 <?php 
+                                    if(!empty($this->session->userdata('is_logged_in')) && $_SERVER['REQUEST_URI'] != '/login') {
+
                                     $this->load->model('itemmodel');
                                     $data['cd_week'] = $this->itemmodel->cdStats('week');
                                     $data['cd_month'] = $this->itemmodel->cdStats('month');
@@ -145,6 +147,7 @@
                                     <p class='headerstat'> Added this month: <?= $data['cd_month'] ?> </p>
                                     <p class='headerstat'> Added this year: <?= $data['cd_year'] ?> </p>
                                 "> Stats </a></li>
+                                <?php } ?>
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/add-cd'?'active':'') ?>"><a href="/add-cd">Add to Library</a></li>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/library'?'active':'') ?>"><a href="/library">View Library</a></li>

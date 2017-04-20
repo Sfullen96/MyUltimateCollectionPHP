@@ -39,8 +39,8 @@
 		<label for="reference"> Album Reference </label>
 		<input type="text" id="reference" class="form-control" name="reference" placeholder="Album Reference" />
 
-		<label for="summary"> Summary </label>
-		<textarea placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
+		<label for="summary" style="display: none"> Summary </label>
+		<textarea style="display: none" placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
 
 		<div class="form-group">
 		  	<label for="format"> Format </label>
