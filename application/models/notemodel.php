@@ -11,6 +11,7 @@ class NoteModel extends CI_Model
         $note = urldecode($note);
 		$data = array(
 		   	'item_id' => $item_id,
+            'user_id' => $this->session->userdata('user_id'),
 		   	'note' => $note
 		);
 

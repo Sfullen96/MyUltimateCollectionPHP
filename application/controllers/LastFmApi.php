@@ -13,9 +13,9 @@ class lastFmApi extends CI_Controller {
 	{
 
 		$query = $this->db->select()
-				->join('artists', 'library.artist_id = artists.artist_id')
+				->join('artists', 'items.artist_id = artists.artist_id')
 				->limit(200)
-				->get('library');
+				->get('items');
 
 		$found = 0;
 		$notFound = 0;
@@ -65,35 +65,35 @@ class lastFmApi extends CI_Controller {
 				// if(isset($response->album->image)) {
 				// 	if($response->album->image[4]->{'#text'} > '') {
 				// 		$udpates = array(
-				// 		    'album_image' => $response->album->image[4]->{'#text'}
+				// 		    'image' => $response->album->image[4]->{'#text'}
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('library', $udpates);
+				// 		$this->db->update('items', $udpates);
 				// 	} else if($response->album->image[3]->{'#text'} > '') {
 				// 		$udpates = array(
-				// 		    'album_image' => $response->album->image[3]->{'#text'}
+				// 		    'image' => $response->album->image[3]->{'#text'}
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('library', $udpates);
+				// 		$this->db->update('items', $udpates);
 				// 	} else if($response->album->image[2]->{'#text'} > '') {
 				// 		$udpates = array(
-				// 		    'album_image' => $response->album->image[2]->{'#text'}
+				// 		    'image' => $response->album->image[2]->{'#text'}
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('library', $udpates);
+				// 		$this->db->update('items', $udpates);
 				// 	}
  
 				// 	// foreach ($response->album->image as $data) {
 				// 	// 	if ($data->{'#text'} > '') {
 				// 	// 		$udpates = array(
-				// 	// 		    'album_image' => $data->{'#text'}
+				// 	// 		    'image' => $data->{'#text'}
 				// 	// 		);
 
 				// 	// 		$this->db->where('item_id', $row->item_id);
-				// 	// 		$this->db->update('library', $udpates);
+				// 	// 		$this->db->update('items', $udpates);
 				// 	// 	} else {
 				// 	// 		echo "Fuck <br>";
 				// 	// 	}
@@ -144,7 +144,6 @@ class lastFmApi extends CI_Controller {
 			if (!isset($response->error)) {
 				if (isset($response->artist->tags)) {
 					foreach ($response->artist->tags->tag as $tag) {
-						// echo "<pre>" . print_r($tag, TRUE) . "</pre>";
 
 						$data = array(
 					        'artist_id' => $row->artist_id,
@@ -155,44 +154,9 @@ class lastFmApi extends CI_Controller {
 						$this->db->insert('artist_tags', $data);
 
 					}
-					// if($response->artist->bio->summary > '') {
-					// 		$udpates = array(
-					// 		    'artist_summary' => $response->artist->bio->summary
-					// 		);
-
-					// 		$this->db->where('artist_id', $row->artist_id);
-					// 		$this->db->update('artists', $udpates);
-					// }
+					
 				}
-						// if($response->artist->image[3]->{'#text'} > '') {
-						// 	if ($image->{'#text'} > '') {
-						// 		$udpates = array(
-						// 		    'artist_image' => $response->artist->image[3]->{'#text'}
-						// 		);
-
-						// 		$this->db->where('artist_id', $row->artist_id);
-						// 		$this->db->update('artists', $udpates);
-						// 	} else {
-						// 		echo "Fuck <br>"; 
-						// 	}
-						// } else {
-						// 	// if ($image->{'#text'} > '') {
-						// 	// 	$udpates = array(
-						// 	// 	    'artist_image' => $image->{'#text'}
-						// 	// 	);
-
-						// 	// 	$this->db->where('artist_id', $row->artist_id);
-						// 	// 	$this->db->update('artists', $udpates);
-						// 	// } else {
-						// 	// 	echo "Fuck <br>"; 
-						// 	// }
-						// 	continue;
-						// }
-				// 	}
-				// }
-
-				// echo "<pre>" . print_r($response, TRUE) . "</pre>";
-				// echo "<pre>" . print_r($response->artist->image, TRUE) . "</pre><br>";
+						
 			}
 		}
 
@@ -221,5 +185,6 @@ class lastFmApi extends CI_Controller {
 			}
 		}
 	}
+
 
 }

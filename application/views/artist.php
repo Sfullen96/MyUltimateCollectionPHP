@@ -1,6 +1,6 @@
 <!-- <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
-		<h2> <?= $artist[0]->artist_name; ?> </h2>
+		<h2> <?= ucwords($artist[0]->artist_name); ?> </h2>
 	</div>
 </div> -->
 <div class="row margin-bottom">
@@ -9,7 +9,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-			<h2 class="albumTitle"> <?= $artist[0]->artist_name ?> </h2>
+			<h2 class="albumTitle"> <?= ucwords($artist[0]->artist_name) ?> </h2>
 			<p class="albumSummary margin-bottom" id="summary">
 				<?= (isset($artist[0]->artist_summary)?trim($artist[0]->artist_summary) . '<br><a href="/editSummary/'. $artist[0]->artist_id .'"> Edit this Summary </a>':'No summary found. <a href="/addSummary/'. $artist[0]->artist_id .'"> Add Your Own </a>'); ?>
 			</p>
@@ -20,6 +20,7 @@
 <div class="row">
 	<div class="moreInfoBanner col-xs-12 tags">
 		<div class="row">
+		<?php if ($tags) { ?>
 			<?php foreach ($tags as $tag) { ?>
 				<div class="col-xs-12 col-sm-3">
 					<p> <i class="fa fa-tags"></i> <a href="<?= $tag->tag_url ?>" target="_blank"> <?= ucwords($tag->tag_name) ?></a> </p>
@@ -34,20 +35,21 @@
 					<i class="fa fa-tags"></i>
 				</div> -->
 			<?php } ?>
+			<?php } ?>
 		</div>
 	</div>
 </div>
 <div class="row margin-bottom">
 	<!-- <div class="col-xs-12 col-sm-6">
-		<h4 class="text-center"> Upcoming Gigs for <?= $artist[0]->artist_name; ?> </h4>
+		<h4 class="text-center"> Upcoming Gigs for <?= ucwords($artist[0]->artist_name); ?> </h4>
 	</div> -->
 	<div class="col-sm-2"></div>
 	<div class="col-xs-12 col-sm-8 attendedGigs">
 		<?php if($gigs_attended_count > 0) { ?>
-		<h4 class="text-center attendedGigsHeader"> Gigs Attended for <?= $artist[0]->artist_name ?> </h4>
+		<h4 class="text-center attendedGigsHeader"> Gigs Attended for <?= ucwords($artist[0]->artist_name) ?> </h4>
 		<?php foreach ($gigs_attended as $gig) { ?>
 		<h6> <?= (isset($gig->gig_tour)?'' . $gig->gig_tour:''); ?> </h6>
-		<p> <?= $artist[0]->artist_name; ?> at <?= ($gig->gig_venue?$gig->gig_venue.', ':'unknown venue'); ?><?= ($gig->gig_city?$gig->gig_city.', ':''); ?><?= ($gig->gig_country?$gig->gig_country:''); ?> on <?= ($gig->gig_date?date('d/m/Y', strtotime($gig->gig_date)):'unknown date'); ?></p>
+		<p> <?= ucwords($artist[0]->artist_name); ?> at <?= ($gig->gig_venue?$gig->gig_venue.', ':'unknown venue'); ?><?= ($gig->gig_city?$gig->gig_city.', ':''); ?><?= ($gig->gig_country?$gig->gig_country:''); ?> on <?= ($gig->gig_date?date('d/m/Y', strtotime($gig->gig_date)):'unknown date'); ?></p>
 		<?php if($gig->setlistId) { ?>
 		<small class="margin-bottom"> <a href="/setlist/<?= $gig->setlistId; ?>"> View Setlist </a> </small><br><br>
 		<?php } else { ?>
@@ -74,12 +76,12 @@
 			</div>
 			<input type="hidden" name="setlist_id">
 			<input type="hidden" name="country" value="UK">
-			<input type="hidden" name="artistName" id="artistName" value="<?= $artist[0]->artist_name; ?>">
+			<input type="hidden" name="artistName" id="artistName" value="<?= ucwords($artist[0]->artist_name); ?>">
 			<input type="hidden" name="artist_id" value="<?= $artist[0]->artist_id; ?>">
 			<input type="submit" class="btn btn-primary" name="submit" value="Add Gig">
 		</form>
 		<?php } else { ?>
-		<h4 class="text-center attendedGigsHeader"> Add a Gig for <?= $artist[0]->artist_name ?>? </h4>
+		<h4 class="text-center attendedGigsHeader"> Add a Gig for <?= ucwords($artist[0]->artist_name) ?>? </h4>
 		<form action="/gig/addGig" method="POST">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
@@ -99,7 +101,7 @@
 			</div>
 			<input type="hidden" name="setlist_id">
 			<input type="hidden" name="country" value="UK">
-			<input type="hidden" name="artistName" id="artistName" value="<?= $artist[0]->artist_name; ?>">
+			<input type="hidden" name="artistName" id="artistName" value="<?= ucwords($artist[0]->artist_name); ?>">
 			<input type="hidden" name="artist_id" value="<?= $artist[0]->artist_id; ?>">
 			<input type="submit" class="btn btn-primary" name="submit" value="Add Gig">
 		</form>
@@ -116,9 +118,9 @@
 		<a href="/item/<?= $album->item_id; ?>">
 			<div class="albumPreview" style="background-image: url('');background-size: cover">
 				<div class="overlay">
-					<h4> <?= $album->title; ?> </h4>
+					<h4> <?= ucwords($album->title); ?> </h4>
 				</div>
-				<img src="<?= ($album->album_image?$album->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive">
+				<img src="<?= ($album->image?$album->image:base_url() . 'images/default.png'); ?>" class="img-responsive">
 			</div>
 		</a>
 	</div>

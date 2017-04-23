@@ -2,26 +2,58 @@
 
 class ItemModel extends CI_Model
 {
+
+    public $user_id;
+
     function __construct() {
         parent::__construct();
+        $this->user_id = ($this->session->userdata('user_id')) ? $this->session->userdata('user_id') : 0;
+    }
+
+    function doesBelongToUser($id, $itemId) {
+        $query = $this->db->select()
+                ->where('user_id', $id)
+                ->where('item_id', $itemId)
+                ->get('items');
+
+        if($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function getItemInfo($itemId) {
-
         $query = $this->db->select()
-                ->join('artists', 'artists.artist_id = library.artist_id')
-                ->join('formats', 'formats.format_id = library.format_id')
+                ->join('artists', 'artists.artist_id = items.artist_id')
+                ->join('formats', 'formats.format_id = items.format_id')
                 ->where('item_id', $itemId)
-                ->get('library');
+                ->where('items.user_id', $this->user_id)
+                ->get('items');
 
        return $query->result();
 
     }
 
+    public function getRecentlyAdded() {
+        $query = $this->db->select()
+                ->join('artists', 'artists.artist_id = items.artist_id')
+                ->where('items.user_id', $this->user_id)
+                ->order_by('items.created_at DESC')
+                ->limit(5)
+                ->get('items');
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
+
     function getItemRating($itemId) {
         $rating = $this->db->select('rating')
                 ->where('item_id', $itemId)
-                ->get('library');
+                ->get('items');
 
         return $rating->result();
     }
@@ -32,7 +64,7 @@ class ItemModel extends CI_Model
         );
 
         $this->db->where('item_id', $itemId);
-        $this->db->update('library', $data);
+        $this->db->update('items', $data);
     }
 
     function updateItem($field, $value, $table, $itemId) {
@@ -56,7 +88,7 @@ class ItemModel extends CI_Model
         return $query;
     }
 
-    function addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price) {
+    function addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price, $user_id) {
 
         $data = array(
             'artist_id' => $artist_id,
@@ -68,10 +100,11 @@ class ItemModel extends CI_Model
             'purchased_from' => $purchasedFrom,
             'price' => $price,
             'summary' => $summary,
-            'album_image' => $image
+            'image' => $image,
+            'user_id' => $user_id,
         );
 
-        $query = $this->db->insert('library', $data);
+        $query = $this->db->insert('items', $data);
 
         return $this->db->insert_id();
 
@@ -79,9 +112,10 @@ class ItemModel extends CI_Model
 
     function checkIfExists($name, $artist) {
         $query = $this->db->select()
+                ->where('user_id', $this->session->userdata('user_id'))
                 ->where('title', $name)
                 ->where('artist_id', $artist)
-                ->get('library');
+                ->get('items');
 
         if($query->num_rows() > 0) {
             return $query->result()[0]->item_id;
@@ -92,9 +126,10 @@ class ItemModel extends CI_Model
 
     function getAllitems() {
         $query = $this->db->select()
-                ->join('artists', 'artists.artist_id = library.artist_id')
-                ->join('formats', 'formats.format_id = library.format_id')
-                ->get('library');
+                ->join('artists', 'artists.artist_id = items.artist_id')
+                ->join('formats', 'formats.format_id = items.format_id')
+                ->where('items.user_id', $this->user_id)
+                ->get('items');
 
        return $query->result();
     }
@@ -143,15 +178,15 @@ class ItemModel extends CI_Model
                 
                 break;
         }
-
        
         $sql = "
             SELECT 
               * 
             FROM
-              library 
+              items 
             WHERE created_at BETWEEN FROM_UNIXTIME($from) 
             AND FROM_UNIXTIME($to)
+            AND user_id = '$this->user_id'
         ";
 
         $query = $this->db->query($sql);
@@ -162,7 +197,8 @@ class ItemModel extends CI_Model
 
     function getCDcount() {
         $query = $this->db->select()
-                    ->get('library');
+                    ->where('user_id',$this->user_id)
+                    ->get('items');
 
         return $query->num_rows();
     }
@@ -170,7 +206,8 @@ class ItemModel extends CI_Model
     function getCDListenedCount() {
         $query = $this->db->select()
                 ->where('listened', 1)
-                ->get('library');
+                ->where('user_id',$this->user_id)
+                ->get('items');
 
         return $query->num_rows();
     }
@@ -190,11 +227,14 @@ class ItemModel extends CI_Model
     }
 
     public function getFavAlbums() {
+        $id =$this->user_id;
+
         $sql = "
             SELECT COUNT(view_id) as views, item_views.item_id, title
             FROM item_views
-            LEFT JOIN library 
-            ON library.item_id = item_views.item_id
+            LEFT JOIN items 
+            ON items.item_id = item_views.item_id
+            WHERE items.user_id = '$this->user_id'
             GROUP BY item_views.item_id
             ORDER BY COuNT(view_id) DESC,
             timestamp DESC
@@ -212,13 +252,15 @@ class ItemModel extends CI_Model
     }
 
     public function getRecentlyViewed() {
+        $id =$this->user_id;
         $sql = "
             SELECT *
             FROM item_views v
-            LEFT JOIN library l
+            LEFT JOIN items l
             ON l.item_id = v.item_id
             LEFT JOIN artists a
             ON a.artist_id = l.artist_id
+            WHERE a.user_id = '$this->user_id'
             GROUP BY v.item_id
             ORDER BY timestamp DESC
             LIMIT 5
@@ -238,7 +280,7 @@ class ItemModel extends CI_Model
             'item_id' => $itemId,
         );
 
-        $query = $this->db->insert('cd_listens', $data);
+        $query = $this->db->insert('item_listens', $data);
 
         if($query) {
             return true;

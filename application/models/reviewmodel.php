@@ -9,6 +9,7 @@ class ReviewModel extends CI_Model
     function addReview($id, $review) {
         $data = array(
             'item_id' => $id,
+            'user_id' => $this->session->userdata('user_id'),
             'review' => $review
         );
 

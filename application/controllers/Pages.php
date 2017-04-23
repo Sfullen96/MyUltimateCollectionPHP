@@ -16,13 +16,9 @@ class Pages extends CI_Controller {
 	{	
 		$this->load->model('itemmodel');
 
-		$query = $this->db->select()
-				->join('artists', 'artists.artist_id = library.artist_id')
-				->order_by('library.created_at DESC')
-                ->limit(5)
-                ->get('library');
 
-        $data['recently_added'] = $query->result();
+
+        $data['recently_added'] = $this->itemmodel->getRecentlyAdded();
 
         $data['cd_week'] = $this->itemmodel->cdStats('week');
         $data['cd_month'] = $this->itemmodel->cdStats('month');

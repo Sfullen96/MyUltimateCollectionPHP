@@ -9,10 +9,10 @@ class ItemModel extends CI_Model
     function getItemInfo($itemId) {
 
         $query = $this->db->select()
-                ->join('artists', 'artists.artist_id = library.artist_id')
-                ->join('formats', 'formats.format_id = library.format_id')
+                ->join('artists', 'artists.artist_id = items.artist_id')
+                ->join('formats', 'formats.format_id = items.format_id')
                 ->where('item_id', $itemId)
-                ->get('library');
+                ->get('items');
 
        return $query->result();
 
@@ -21,7 +21,7 @@ class ItemModel extends CI_Model
     function getItemRating($itemId) {
         $rating = $this->db->select('rating')
                 ->where('item_id', $itemId)
-                ->get('library');
+                ->get('items');
 
         return $rating->result();
     }
@@ -32,7 +32,7 @@ class ItemModel extends CI_Model
         );
 
         $this->db->where('item_id', $itemId);
-        $this->db->update('library', $data);
+        $this->db->update('items', $data);
     }
 
     function updateItem($field, $value, $table, $itemId) {

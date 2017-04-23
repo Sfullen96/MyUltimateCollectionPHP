@@ -24,9 +24,9 @@
 		<?php foreach($items as $item) { ?>
 		<tr data-id="<?= $item->item_id; ?>">
 			<td style="display: none"><?= $item->item_id; ?></td>
-			<td><a href="/item/<?=$item->item_id;  ?>"><?= $item->title; ?></a></td>
-			<td><a href="/artist/<?= $item->artist_id; ?>"><?= $item->artist_name; ?></a></td>
-			<td><?= $item->artist_az_name; ?></td>
+			<td><a href="/item/<?=$item->item_id;  ?>"><?= ucwords($item->title); ?></a></td>
+			<td><a href="/artist/<?= $item->artist_id; ?>"><?= ucwords($item->artist_name); ?></a></td>
+			<td><?= ucwords($item->artist_az_name); ?></td>
 			<!-- <td><?= $item->reference; ?></td> -->
 			<!-- <td><?= ($item->purchase_date != null?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?></td> -->
 			<!-- <td><?= $item->purchased_from; ?></td> -->

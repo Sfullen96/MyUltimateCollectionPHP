@@ -2,15 +2,20 @@
 
 class ArtistModel extends CI_Model
 {
+
+	public $user_id;
+
     function __construct()
     {
         parent::__construct();
+        $this->user_id = ($this->session->userdata('user_id')) ? $this->session->userdata('user_id') : 0;
     }
 
 	public function addArtist($artist_name, $artist_az) {
 		$data = array(
 		   	'artist_name' => $artist_name,
-		   	'artist_az_name' => $artist_az
+		   	'artist_az_name' => $artist_az,
+		   	'user_id' => $this->user_id,
 		);
 
 		$this->db->insert('artists', $data);
@@ -58,7 +63,8 @@ class ArtistModel extends CI_Model
 	public function createNewArtist($name, $az) {
 		$data = array(
 	        'artist_name' => $name,
-	        'artist_az_name' => $az
+	        'artist_az_name' => $az,
+	        'user_id' => $this->user_id,
 		);
 
 		$query = $this->db->insert('artists', $data);
@@ -66,15 +72,31 @@ class ArtistModel extends CI_Model
 		return $this->db->insert_id();
 	}
 
+	public function addUserArtist($artistId) {
+		$data = array(
+			'user_id' => $this->session->userdata('user_id'),
+			'artist_id' => $artistId,
+		);
+
+		$query = $this->db->insert('user_artists', $data);
+
+		if ($query) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function getArtistAlbums($id) {
 		$query = $this->db->select()
 				->where('artist_id', $id)
-				->get('library');
+				->where('items.user_id', $this->user_id)
+				->get('items');
 
 		return $query->result();
 	}
 
-	public function getArtistInfo($id) {
+public function getArtistInfo($id) {
 		$query = $this->db->select()
 			->where('artist_id', $id)
 			->get('artists');
@@ -85,14 +107,18 @@ class ArtistModel extends CI_Model
 	public function getAllArtists() {
 		$sql = "
 			SELECT a.artist_id, a.artist_name, a.artist_az_name, (
-				SELECT COUNT(item_id) FROM library WHERE artist_id = a.artist_id
+				SELECT COUNT(item_id) FROM items WHERE artist_id = a.artist_id
 			) AS cd_count
 			FROM artists a
+			LEFT JOIN user_artists ua
+			ON ua.user_id = '$this->user_id'
+			WHERE ua.user_id = '$this->user_id'
+			GROUP BY a.artist_id
 			ORDER BY artist_id DESC
 		";
 
 		// echo "SELECT a.artist_id, a.artist_name, a.artist_az_name, (
-		// 		SELECT COUNT(item_id) FROM library WHERE artist_id = a.artist_id
+		// 		SELECT COUNT(item_id) FROM items WHERE artist_id = a.artist_id
 		// 	) AS cd_count
 		// 	FROM artists a
 		// 	ORDER BY artist_id DESC";
@@ -106,6 +132,7 @@ class ArtistModel extends CI_Model
 	public function addView($id) {
 		$data = array(
 	        'artist_id' => $id,
+	        'user_id' => $this->session->userdata('user_id'),
 		);
 
 		$query = $this->db->insert('artist_views', $data);
@@ -118,11 +145,14 @@ class ArtistModel extends CI_Model
 	}
 
 	public function getFavArtists() {
+		$user_id = $this->session->userdata('user_id');
+
         $sql = "
             SELECT COUNT(view_id) as views, artist_views.artist_id, artist_name
             FROM artist_views
             LEFT JOIN artists
             ON artists.artist_id = artist_views.artist_id
+            WHERE artists.user_id = '$user_id'
             GROUP BY artist_views.artist_id
             ORDER BY COUNT(view_id) DESC,
             timestamp DESC

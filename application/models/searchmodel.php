@@ -13,14 +13,14 @@ class SearchModel extends CI_Model
 
         // foreach ($keywords as $keyword) {
             $sqlItem = "
-                SELECT library.item_id, library.title, artists.artist_name, library.album_image, formats.format_name, library.artist_id
-                FROM library
+                SELECT items.item_id, items.title, artists.artist_name, items.image, formats.format_name, items.artist_id
+                FROM items
                 LEFT JOIN artists
-                ON artists.artist_id = library.artist_id
+                ON artists.artist_id = items.artist_id
                 LEFT JOIN formats
-                ON formats.format_id = library.format_id
+                ON formats.format_id = items.format_id
                 WHERE (
-                    library.title LIKE '%$keyword%'
+                    items.title LIKE '%$keyword%'
                     OR
                     artists.artist_name LIKE '%$keyword%'
                 )
@@ -47,7 +47,7 @@ class SearchModel extends CI_Model
 
         // foreach ($keywords as $keyword) {
             $sqlArtist = "
-                SELECT artist_name, artist_id
+                SELECT artist_name, artist_id, artist_image
                 FROM artists
                 WHERE artist_name LIKE '%$keyword%'
             ";

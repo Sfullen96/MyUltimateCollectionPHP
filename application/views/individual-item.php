@@ -40,13 +40,13 @@ if(!empty($tracks)) {
 
 <div class="row margin-bottom">
 	<div class="col-xs-12 col-sm-4">
-		<img src="<?= ($item->album_image > ''?$item->album_image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
+		<img src="<?= ($item->image > ''?$item->image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
 			<h5 class="albumFormat"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
-			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= $item->item_id ?>"> <?= $item_info[0]->title ?> </h2>
-			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= $item_info[0]->artist_name ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
+			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
+			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= ucwords($item_info[0]->artist_name); ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
 			<div class="rating">
 			<?php 
 
@@ -98,7 +98,7 @@ if(!empty($tracks)) {
 							echo '
 								<tr data-trackid="'. $track->track_id .'">
 									<td>'. $track->track_album_number .'</td>
-									<td class="editableTrack" id="track_name" data-trackid="'. $track->track_id .'" data-itemid="'. $item->item_id .'" data-order="'. $track->track_album_number .'">'. $track->track_name .'</td>
+									<td class="editableTrack" id="track_name" data-trackid="'. $track->track_id .'" data-itemid="'. $item->item_id .'" data-order="'. $track->track_album_number .'">'. ucwords($track->track_name) .'</td>
 									<td class="editableTrack" id="track_duration" data-trackid="'. $track->track_id .'" data-itemid="'. $item->item_id .'" data-order="'. $track->track_album_number .'">'. $duration .'</td>
 									<td><i class="fa fa-times deleteTrack"></i></td>
 								</tr>

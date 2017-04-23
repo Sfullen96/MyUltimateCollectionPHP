@@ -10,21 +10,27 @@
 				<!-- Indicators -->
 				<ol class="carousel-indicators">
 					<?php $counter = 0; ?>
+					<?php if($recently_added) { ?>
 					<?php foreach ($recently_added as $item) { ?>
 						<li data-target="#recentlyAddedCarousel" data-slide-to="<?= $counter ?>" class="<?= ($counter == 0?'active':'') ?>"></li>
 						<?php $counter++; ?>
+					<?php } ?>
 					<?php } ?>
 				</ol>
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner" role="listbox">
 					<?php $counter = 0; ?>
+					<?php if($recently_added) { ?>
 					<?php foreach ($recently_added as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
-						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
-						<h3> <a href="/item/<?= $item->item_id ?>"><?= $item->title; ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= $item->artist_name ?></a> </h3>
+						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->image?$item->image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
+						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Added: <?= date('d/m/Y', strtotime($item->created_at)) ?> </h5>
 					</div>
 					<?php $counter++; ?>
+					<?php } ?>
+					<?php } else { ?>
+						<h4 class="text-center"> No items added yet <a href="/add-cd"> Add one here. </a> </h4>
 					<?php } ?>
 				</div>
 				<!-- Left and right controls -->
@@ -63,8 +69,8 @@
 					<?php if($recently_viewed) { ?>
 					<?php foreach ($recently_viewed as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
-						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
-						<h3> <a href="/item/<?= $item->item_id ?>"><?= $item->title; ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= $item->artist_name ?></a> </h3>
+						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->image?$item->image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
+						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Viewed: <?= date('d/m/Y H:i:s', strtotime($item->timestamp)) ?> </h5>
 					</div>
 					<?php $counter++; ?>
@@ -112,7 +118,7 @@
 		</tr>
 		<tr>
 			<td> CD's Listened to: </td>
-			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> | <?= round(($cd_listened_count / $cd_count) * 100, 2) ?>%</td>
+			<td> <?= $cd_listened_count; ?>/<?= $cd_count; ?> | <?= ($cd_listened_count > 0 ? round(($cd_listened_count / $cd_count) * 100, 2) : '0' ) ?>%</td>
 		</tr>
 	</tbody>
 </table>
@@ -131,7 +137,7 @@
 		<?php if($favourite_albums) { ?>
 		<?php foreach ($favourite_albums as $album) { ?>
 		<tr>
-			<td> <?= $album->title; ?> </td>
+			<td> <?= ucwords($album->title); ?> </td>
 			<td> Viewed <?= $album->views ?> times </td>
 		</tr>
 		<?php } ?>
@@ -155,7 +161,7 @@
 		<?php if($favourite_artists) { ?>
 			<?php foreach ($favourite_artists as $artist) { ?>
 			<tr>
-				<td> <?= $artist->artist_name; ?> </td>
+				<td> <?= ucwords($artist->artist_name); ?> </td>
 				<td> Viewed <?= $artist->views ?> times </td>
 			</tr>
 			<?php } ?>

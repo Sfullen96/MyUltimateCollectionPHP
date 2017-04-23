@@ -58,7 +58,7 @@ class Spotify extends CI_Controller {
 		// Start using the API!
 
 		$query = $this->db->select()
-				->join('library', 'library.artist_id = artists.artist_id')
+				->join('items', 'items.artist_id = artists.artist_id')
 				->get('artists');
 
 		$found = 0;
