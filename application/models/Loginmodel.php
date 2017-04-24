@@ -13,7 +13,7 @@ class LoginModel extends CI_Model
         $this->db->where('email', $email);
         $this->db->where('password', $password);
 
-        $query = $this->db->get('users');
+        $query = $this->db->get('user');
 
         if($query->num_rows() == 1)
         {

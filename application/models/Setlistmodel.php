@@ -54,7 +54,7 @@ class SetlistModel extends CI_Model
 
             $query = $this->db->select('item_id')
                 ->like('track_name', $value)
-                ->get('tracks');
+                ->get('track');
 
             if($query->num_rows() > 0) {
                 $itemId = $query->result()[0]->item_id;
@@ -70,7 +70,7 @@ class SetlistModel extends CI_Model
                 'item_id' => $itemId,
             );
 
-            $this->db->insert('setlists', $data);
+            $this->db->insert('setlist', $data);
         }
 
         return true;

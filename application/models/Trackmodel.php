@@ -12,7 +12,7 @@ class TrackModel extends CI_Model
                 ->where('item_id', $itemId)
                 ->where('del', 0)
                 ->order_by('track_album_number ASC')
-                ->get('tracks');
+                ->get('track');
 
         return $tracks->result();
     }
@@ -24,7 +24,7 @@ class TrackModel extends CI_Model
 
         $this->db->where('item_id', $itemId);
         $this->db->where('track_album_number', $order);
-        $query = $this->db->update('tracks', $data);
+        $query = $this->db->update('track', $data);
 
         if ($query) {
             return true;
@@ -36,7 +36,7 @@ class TrackModel extends CI_Model
     public function addNewTrack($trackName, $duration, $itemId, $albumNumber, $artist) {
        
         $sql = "
-            INSERT INTO tracks
+            INSERT INTO track
             (item_id, track_album_number, artist_id, track_name, track_duration)
             VALUES ($itemId, $albumNumber, $artist, '$trackName', '$duration')
         ";
@@ -61,7 +61,7 @@ class TrackModel extends CI_Model
     }
 
     public function deleteTrack($id) {
-        $sql = "UPDATE tracks SET del = 1 WHERE track_id = $id";
+        $sql = "UPDATE track SET del = 1 WHERE track_id = $id";
 
         $query = $this->db->query($sql);
 
@@ -81,7 +81,7 @@ class TrackModel extends CI_Model
             'track_duration' => $duration
         );
 
-        $query = $this->db->insert('tracks', $data);
+        $query = $this->db->insert('track', $data);
 
     }
 

@@ -9,7 +9,7 @@ class Registermodel extends CI_Model
 
     public function createAccount($params) {
        
-        $this->db->insert('users', $params);
+        $this->db->insert('user', $params);
 
         return $this->db->insert_id();
 

@@ -6,3 +6,4 @@
 !*/cache/.htaccess
 */config/database.php
 */config/config.php
+.idea/workspace.xml
