@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="969f9cad-627f-4fdf-86ed-8edf39f1daaa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Gig.php" afterPath="$PROJECT_DIR$/application/controllers/Gig.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Item.php" afterPath="$PROJECT_DIR$/application/controllers/Item.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/LastFmApi.php" afterPath="$PROJECT_DIR$/application/controllers/LastFmApi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Spotify.php" afterPath="$PROJECT_DIR$/application/controllers/Spotify.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Lastfmmodel.php" afterPath="$PROJECT_DIR$/application/models/Lastfmmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Registermodel.php" afterPath="$PROJECT_DIR$/application/models/Registermodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/artistmodel.php" afterPath="$PROJECT_DIR$/application/models/artistmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/gigmodel.php" afterPath="$PROJECT_DIR$/application/models/gigmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/index.html" afterPath="$PROJECT_DIR$/application/models/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/itemmodel.php" afterPath="$PROJECT_DIR$/application/models/itemmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/loginmodel.php" afterPath="$PROJECT_DIR$/application/models/loginmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/notemodel.php" afterPath="$PROJECT_DIR$/application/models/notemodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/reviewmodel.php" afterPath="$PROJECT_DIR$/application/models/reviewmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/searchmodel.php" afterPath="$PROJECT_DIR$/application/models/searchmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/setlistmodel.php" afterPath="$PROJECT_DIR$/application/models/setlistmodel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/trackmodel.php" afterPath="$PROJECT_DIR$/application/models/trackmodel.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -254,12 +239,12 @@
       <option name="presentableId" value="Default" />
       <updated>1492984112007</updated>
       <workItem from="1492984114467" duration="1000" />
-      <workItem from="1493063237109" duration="3083000" />
+      <workItem from="1493063237109" duration="3145000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3818000" />
+    <option name="totallyTimeSpent" value="3880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
