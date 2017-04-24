@@ -93,7 +93,7 @@ class ItemModel extends CI_Model
         $data = array(
             'artist_id' => $artist_id,
             'format_id' => $format_id,
-            'cd_count' => $cd_count,
+            'disc_count' => $cd_count,
             'title' => $title,
             'reference' => $reference,
             'purchase_date' => $purchaseDate,
