@@ -24,7 +24,7 @@ class Lastfmmodel extends CI_Model
 				        'tag_url' => $tag->url,
 					);
 
-					$this->db->insert('artist_tags', $data);
+					$this->db->insert('artist_tag', $data);
 
 				}
 			}

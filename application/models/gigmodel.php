@@ -9,20 +9,20 @@ class GigModel extends CI_Model
 
     public function getArtistGigs($id) {
     	// $query = $this->db->select()
-     //            ->join('setlists', 'setlists.gig_id = gigs.gig_id', 'left outer')
+     //            ->join('setlist', 'setlist.gig_id = gig.gig_id', 'left outer')
     	// 		->where('gig_artist_id', $id)
-     //            ->group_by('setlists.gig_id')
-    	// 		->get('gigs');
+     //            ->group_by('setlist.gig_id')
+    	// 		->get('gig');
 
         $query = "SELECT 
           *,
           (SELECT 
             setlist_id 
           FROM
-            setlists 
-          WHERE setlists.`gig_id` = gigs.`gig_id` LIMIT 1) AS setlistId 
+            setlist 
+          WHERE setlist.`gig_id` = gig.`gig_id` LIMIT 1) AS setlistId 
         FROM
-          `gigs` 
+          `gig` 
         WHERE `gig_artist_id` = $id 
         ";
 
@@ -68,18 +68,19 @@ class GigModel extends CI_Model
             'gig_country' => $params['country'],
             'gig_artist_id' => $params['artistId'],
             'status' => 1,
+            'user_id' => $this->session->userdata('user_id'),
         );
 
-        $query = $this->db->insert('gigs', $data);
+        $query = $this->db->insert('gig', $data);
 
         return $this->db->insert_id();
     }
 
     public function getGig($id) {
         $query = $this->db->select()
-                ->join('artists', 'gigs.gig_artist_id = artists.artist_id')
+                ->join('artist', 'gig.gig_artist_id = artists.artist_id')
                 ->where('gig_id', $id)
-                ->get('gigs');
+                ->get('gig');
 
         if($query->num_rows() > 0) {
             return $query->result();
@@ -93,7 +94,7 @@ class GigModel extends CI_Model
         $query = $this->db->select()
                 // ->join('')
                 ->where('gig_id', $gigId)
-                ->get('setlists');
+                ->get('setlist');
 
         if ($query->num_rows() > 0) {
             return $query->result();
@@ -105,7 +106,7 @@ class GigModel extends CI_Model
     // function doesGigHaveSetlist($gigId) {
     //     $query = $this->db->select()
     //         ->where('gig_id', $gigId)
-    //         ->get('setlists');
+    //         ->get('setlist');
 
     //     if($query->num_rows() > 0) {
     //         return true;

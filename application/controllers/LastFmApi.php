@@ -13,9 +13,9 @@ class lastFmApi extends CI_Controller {
 	{
 
 		$query = $this->db->select()
-				->join('artists', 'items.artist_id = artists.artist_id')
+				->join('artist', 'items.artist_id = artists.artist_id')
 				->limit(200)
-				->get('items');
+				->get('item');
 
 		$found = 0;
 		$notFound = 0;
@@ -55,7 +55,7 @@ class lastFmApi extends CI_Controller {
 			// 		        'track_lastfm_url' => $track->url
 			// 			);
 
-			// 			$this->db->insert('tracks', $data);
+			// 			$this->db->insert('track', $data);
 			// 			$trackCount++;
 			// 		}
 			// 		// echo "<hr>";
@@ -69,21 +69,21 @@ class lastFmApi extends CI_Controller {
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('items', $udpates);
+				// 		$this->db->update('item', $udpates);
 				// 	} else if($response->album->image[3]->{'#text'} > '') {
 				// 		$udpates = array(
 				// 		    'image' => $response->album->image[3]->{'#text'}
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('items', $udpates);
+				// 		$this->db->update('item', $udpates);
 				// 	} else if($response->album->image[2]->{'#text'} > '') {
 				// 		$udpates = array(
 				// 		    'image' => $response->album->image[2]->{'#text'}
 				// 		);
 
 				// 		$this->db->where('item_id', $row->item_id);
-				// 		$this->db->update('items', $udpates);
+				// 		$this->db->update('item', $udpates);
 				// 	}
  
 				// 	// foreach ($response->album->image as $data) {
@@ -93,7 +93,7 @@ class lastFmApi extends CI_Controller {
 				// 	// 		);
 
 				// 	// 		$this->db->where('item_id', $row->item_id);
-				// 	// 		$this->db->update('items', $udpates);
+				// 	// 		$this->db->update('item', $udpates);
 				// 	// 	} else {
 				// 	// 		echo "Fuck <br>";
 				// 	// 	}
@@ -128,9 +128,9 @@ class lastFmApi extends CI_Controller {
 	public function getImages() {
 		// $query = $this->db->select()
 		// 			->limit(10)
-		// 			->get('artists');
+		// 			->get('artist');
 
-		$sql = "SELECT artist_name, artist_id FROM artists";
+		$sql = "SELECT artist_name, artist_id FROM artist";
 		//  WHERE artist_image IS NULL
 		$query = $this->db->query($sql);
 
@@ -151,7 +151,7 @@ class lastFmApi extends CI_Controller {
 					        'tag_url' => $tag->url,
 						);
 
-						$this->db->insert('artist_tags', $data);
+						$this->db->insert('artist_tag', $data);
 
 					}
 					
