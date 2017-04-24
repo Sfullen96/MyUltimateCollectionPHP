@@ -25,8 +25,8 @@ class ItemModel extends CI_Model
 
     function getItemInfo($itemId) {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = items.artist_id')
-                ->join('format', 'format.format_id = items.format_id')
+                ->join('artist', 'artists.artist_id = item.artist_id')
+                ->join('format', 'format.format_id = item.format_id')
                 ->where('item_id', $itemId)
                 ->where('item.user_id', $this->user_id)
                 ->get('item');
@@ -37,7 +37,7 @@ class ItemModel extends CI_Model
 
     public function getRecentlyAdded() {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = items.artist_id')
+                ->join('artist', 'artists.artist_id = item.artist_id')
                 ->where('item.user_id', $this->user_id)
                 ->order_by('item.created_at DESC')
                 ->limit(5)
@@ -126,8 +126,8 @@ class ItemModel extends CI_Model
 
     function getAllitems() {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = items.artist_id')
-                ->join('format', 'format.format_id = items.format_id')
+                ->join('artist', 'artists.artist_id = item.artist_id')
+                ->join('format', 'format.format_id = item.format_id')
                 ->where('item.user_id', $this->user_id)
                 ->get('item');
 
@@ -183,7 +183,7 @@ class ItemModel extends CI_Model
             SELECT 
               * 
             FROM
-              items 
+              item 
             WHERE created_at BETWEEN FROM_UNIXTIME($from) 
             AND FROM_UNIXTIME($to)
             AND user_id = '$this->user_id'
@@ -233,9 +233,9 @@ class ItemModel extends CI_Model
         $sql = "
             SELECT COUNT(view_id) as views, item_view.item_id, title
             FROM item_view
-            LEFT JOIN items 
-            ON items.item_id = item_view.item_id
-            WHERE items.user_id = '$this->user_id'
+            LEFT JOIN item 
+            ON item.item_id = item_view.item_id
+            WHERE item.user_id = '$this->user_id'
             GROUP BY item_view.item_id
             ORDER BY COuNT(view_id) DESC,
             timestamp DESC
@@ -257,7 +257,7 @@ class ItemModel extends CI_Model
         $sql = "
             SELECT *
             FROM item_view v
-            LEFT JOIN items l
+            LEFT JOIN item l
             ON l.item_id = v.item_id
             LEFT JOIN artists a
             ON a.artist_id = l.artist_id
