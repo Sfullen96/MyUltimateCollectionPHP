@@ -26,7 +26,7 @@ class lastFmApi extends CI_Controller {
 
 			echo "<pre>" . print_r($response, TRUE) . "</pre><br>";
 
-			die();
+
 
 		foreach ($query->result() as $row) {
 
@@ -181,7 +181,7 @@ class lastFmApi extends CI_Controller {
 			if (isset($response)) {
 				echo $response;
 			} else {
-				echo 'No Data Found for Album: ' + $_POST['album'] + '. Artist: ' + $_POST['artist'];
+				echo 'No Data Found for Album: ' . $_POST['album'] . '. Artist: ' . $_POST['artist'];
 			}
 		}
 	}

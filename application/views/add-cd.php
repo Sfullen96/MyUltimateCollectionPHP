@@ -1,7 +1,3 @@
-<!-- <div class="loading">
-	<img src="<?= base_url() ?>/images/loading-gif1.gif">
-</div>
- -->
 <?php if(isset($_GET['exists'])) { ?>
 		
 	<div class="alert alert-danger">
@@ -12,89 +8,103 @@
 
 <?php } ?>
 
+<div class="alert alert-danger addError">
+</div>
+
 <form action="/item/addCd" method="POST" role="form">
 	<legend> Add a new item to the library </legend>
-	<div class="stepHeader">
-		<h4> Step 1: Artist & Album Name </h4>
-	</div>
-	<div class="step">
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
-				<label> Choose from an existing artist, or add a new artist: </label>
-				<input type="text" name="artist" class="form-control existingArtist" placeholder="Artist Name" autocomplete="off" required />
-				<br>
-				<label id="az"> Artist A-Z Name </label>
-				<input type="text" name="artist_az" class="form-control" placeholder="Artist A-Z Name" autocomplete="off" />
-			</div>
-			<div class="col-xs-12 col-sm-6">
-				<label for="title"> Album Title </label>
-				<input type="text" id="title" class="form-control" name="title" placeholder="Album Title" autocomplete="off" required />
-			</div>
-		</div>
-	</div>
+    <div class="step1">
+        <div class="stepHeader">
+            <h4> Step 1: Artist & Album Name </h4>
+        </div>
+        <div class="step">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <label> Choose from an existing artist, or add a new artist: </label>
+                    <input type="text" name="artist" class="form-control existingArtist" placeholder="Artist Name" autocomplete="off" required />
+                    <br>
+                    <label id="az"> Artist A-Z Name </label>
+                    <input type="text" name="artist_az" class="form-control" placeholder="Artist A-Z Name" autocomplete="off" />
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <label for="title"> Album Title </label>
+                    <input type="text" id="title" class="form-control" name="title" placeholder="Album Title" autocomplete="off" required />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step2">
 	<div class="stepHeader">
 		<h4> Step 2: Item Details </h4>
 	</div>
-	<div class="step">
-		<label for="reference"> Album Reference </label>
-		<input type="text" id="reference" class="form-control" name="reference" placeholder="Album Reference" />
+        <div class="step">
+            <label for="reference"> Album Reference </label>
+            <input type="text" id="reference" class="form-control" name="reference" placeholder="Album Reference" />
 
-		<label for="summary" style="display: none"> Summary </label>
-		<textarea style="display: none" placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
+            <label for="summary" style="display: none"> Summary </label>
+            <textarea style="display: none" placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
 
-		<div class="form-group">
-		  	<label for="format"> Format </label>
-		  	<select class="form-control" id="format" name="format">
-		  	<option selected="selected" disabled="disabled" value="0"> Choose a CD Format </option>
-	    	<?php 
-	    		foreach ($formats->result() as $row) {
-	    			echo '<option value="'. $row->format_id .'">'. $row->format_name .'</option>';
-	    		}
-	    	?>
-		  	</select>
-		</div>
+            <div class="form-group">
+                <label for="format"> Format </label>
+                <select class="form-control" id="format" name="format">
+                <option selected="selected" disabled="disabled" value="0"> Choose a CD Format </option>
+                <?php
+                    foreach ($formats->result() as $row) {
+                        echo '<option value="'. $row->format_id .'">'. $row->format_name .'</option>';
+                    }
+                ?>
+                </select>
+            </div>
 
-		<label for="cd_count"> CD Count </label>
-		<input type="number" id="cd_count" class="form-control" name="cd_count" placeholder="CD Count" />
+            <label for="cd_count"> CD Count </label>
+            <input type="number" id="cd_count" class="form-control" name="cd_count" placeholder="CD Count" />
 
-		<div class="albumImage">
-			<label for="title"> Album Image </label>
-		</div>
+            <div class="albumImage">
+                <label for="title"> Album Image </label>
+            </div>
 
-		<div class="row">
-			<div class="col-xs-12 col-sm-4">
-				<label> Purchased From: </label>
-				<input type="text" name="purchased_from" placeholder="Purchased From" class="form-control">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label> On: </label>
-				<input type="text" id="datepicker" name="purchase_date" placeholder="Purchase Date" class="form-control">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label> For: </label>
-				<div class="input-group">
-				  	<span class="input-group-addon" id="basic-addon1">&pound;</span>
-				  	<input type="text" class="form-control" placeholder="Price" name="price" aria-describedby="basic-addon1">
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="stepHeader" id="step3Header">
-		<h4> Step 3: Tracklist </h4>
-	</div>
-	<div class="step step3">
-		<table class="table table-hover tracks">
-			<thead>
-				<tr>
-					<th> # </th>
-					<th> Track </th>
-					<th> Duration </th>
-				</tr>
-			</thead>
-			<tbody>
-			
-			</tbody>
-		</table>
-	</div>
-	<button type="submit" class="btn btn-primary margin-bottom"> Add CD </button>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                    <label> Purchased From: </label>
+                    <input type="text" name="purchased_from" placeholder="Purchased From" class="form-control">
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <label> On: </label>
+                    <input type="text" id="datepicker" name="purchase_date" placeholder="Purchase Date" class="form-control">
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <label> For: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">&pound;</span>
+                        <input type="text" class="form-control" placeholder="Price" name="price" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step3">
+        <h3> Saving your item... </h3>
+    </div>
+    <div class="stepThree">
+        <div class="stepHeader" id="step3Header">
+            <h4> Step 3: Tracklist </h4>
+        </div>
+        <div class="step">
+            <table class="table table-hover tracks">
+                <thead>
+                    <tr>
+                        <th> # </th>
+                        <th> Track </th>
+                        <th> Duration </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-next margin-bottom pull-right"> Next Step </button>
+    <button type="button" class="btn btn-primary btn-back margin-bottom"> Back </button>
+	<button type="submit" class="btn btn-primary addCdBtn margin-bottom"> Add CD </button>
 </form>

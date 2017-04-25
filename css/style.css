@@ -212,6 +212,8 @@ body {
 .albumSummary {
 	float: left;
 	margin-top: 10px;
+	max-height: 400px;
+	overflow: auto;
 }
 #newTrackTr i.fa-plus, .tracks i.fa, .addSetTrack {
     cursor: pointer;
@@ -221,6 +223,9 @@ body {
 }
 .addReview {
 	margin-bottom: 15px;
+}
+.addError, .btn-back, .addCdBtn, .stepThree, .step2 {
+    display: none;
 }
 .stepHeader {
 	width: 100%;

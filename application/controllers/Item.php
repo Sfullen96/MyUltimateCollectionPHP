@@ -75,18 +75,20 @@ class Item extends CI_Controller {
 
 	public function temp() {
 
-		$query = $this->db->select()
-				->where('user_id', 1)
-				->get('artist');
+	    $this->lastfmmodel->getArtistInfo( 'The Courteeners', 494 );
 
-		foreach ($query->result() as $row) {
-			$data = array(
-				'user_id' => 1,
-				'artist_id' => $row->artist_id,
-			);
-
-			$this->db->insert('user_artist', $data);
-		}
+//		$query = $this->db->select()
+//				->where('user_id', 1)
+//				->get('artist');
+//
+//		foreach ($query->result() as $row) {
+//			$data = array(
+//				'user_id' => 1,
+//				'artist_id' => $row->artist_id,
+//			);
+//
+//			$this->db->insert('user_artist', $data);
+//		}
 
 		// $query = $this->db->select()
 		// 		->where('user_id', 1)
@@ -202,6 +204,7 @@ public function addCdForm() {
 		if(!$checkArtist > 0) {
 			$artist_id = $this->artistmodel->createNewArtist($_POST['artist'], $_POST['artist_az']);
 			$this->lastfmmodel->getArtistTags($_POST['artist'], $artist_id);
+            $this->lastfmmodel->getArtistInfo( $_POST['artist'], $artist_id );
 		} else {
 			$artist_id = $checkArtist;
 
@@ -229,10 +232,12 @@ public function addCdForm() {
 		$cd_count = isset($_POST['cd_count']) ? $_POST['cd_count'] : '';
 		$image = isset($_POST['image']) ? $_POST['image'] : '';
 		$purchasedFrom = isset($_POST['purchased_from']) ? $_POST['purchased_from'] : '';
-		$purchaseDate = isset($_POST['purchase_date']) ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
+		$purchaseDate = isset($_POST['purchase_date'])
+            ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
 		$price = isset($_POST['price']) ? '&pound;' . $_POST['price'] : '';
 
-		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price, $user_id);
+		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count,
+            $image, $purchasedFrom, $purchaseDate, $price, $user_id);
 
 		$tracksInserted = false;
 
