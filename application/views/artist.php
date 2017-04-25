@@ -120,7 +120,7 @@
 				<div class="overlay">
 					<h4> <?= ucwords($album->title); ?> </h4>
 				</div>
-				<img src="<?= ($album->album_image?$album->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive">
+				<img src="<?= ($album->image?$album->image:base_url() . 'images/default.png'); ?>" class="img-responsive">
 			</div>
 		</a>
 	</div>

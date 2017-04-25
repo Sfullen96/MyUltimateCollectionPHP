@@ -63,7 +63,8 @@ class Login extends CI_Controller
             }
             else
             {
-                redirect(base_url() . 'login', 'Wrong username or password');
+                $this->session->set_flashdata('error', 'error'); 
+                redirect(base_url() . 'login');
             }
         }
     }

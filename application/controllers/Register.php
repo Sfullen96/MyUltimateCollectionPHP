@@ -24,7 +24,7 @@ class Register extends CI_Controller
 
 		$this->form_validation->set_rules('fname', 'First Name', 'trim|required');
  	  	$this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
- 	  	$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.email]');
+ 	  	$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[user.email]');
        	$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[password_confirm]');
        	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required');
        	$this->form_validation->set_error_delimiters('<li>', '</li>');

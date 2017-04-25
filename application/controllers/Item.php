@@ -77,7 +77,7 @@ class Item extends CI_Controller {
 
 		$query = $this->db->select()
 				->where('user_id', 1)
-				->get('artists');
+				->get('artist');
 
 		foreach ($query->result() as $row) {
 			$data = array(
@@ -85,12 +85,12 @@ class Item extends CI_Controller {
 				'artist_id' => $row->artist_id,
 			);
 
-			$this->db->insert('user_artists', $data);
+			$this->db->insert('user_artist', $data);
 		}
 
 		// $query = $this->db->select()
 		// 		->where('user_id', 1)
-		// 		->get('library');
+		// 		->get('item');
 
 		// foreach ($query->result() as $row) {
 		// 	$data = array(
@@ -107,10 +107,10 @@ class Item extends CI_Controller {
 		// 	->where('mb_id IS NULL', null, false)
 		// 	->where('mb_id <', 'N/A')
 		// 	// ->limit(10)
-		// 	->get('artists');
+		// 	->get('artist');
 		// $sql = "
 		// 	SELECT * 
-		// 	FROM artists
+		// 	FROM artist
 		// 	WHERE mb_id IS NULL
 		// ";
 
@@ -150,7 +150,7 @@ class Item extends CI_Controller {
 		// 			);
 
 		// 			$this->db->where('artist_id', $row->artist_id);
-		// 			$this->db->update('artists', $data);
+		// 			$this->db->update('artist', $data);
 		// 		}
 		// 	} else if($resultStatus == 400) {
 
@@ -159,7 +159,7 @@ class Item extends CI_Controller {
 		// 		);
 
 		// 		$this->db->where('artist_id', $row->artist_id);
-		// 		$this->db->update('artists', $data);
+		// 		$this->db->update('artist', $data);
 		// 	} else if($resultStatus == 503) {
 		// 		// echo 'LOL';
 		// 	}
@@ -187,7 +187,7 @@ class Item extends CI_Controller {
 
 public function addCdForm() {
 
-		$data['formats'] = $this->itemmodel->getList('formats');
+		$data['formats'] = $this->itemmodel->getList('format');
 
 		$data['title'] = 'Add a CD';
         $data['main_content'] = 'add-cd';
@@ -213,7 +213,7 @@ public function addCdForm() {
 			}
 		}
 
-		// Add into user_artists table
+		// Add into user_artist table
 		if(!$this->artistmodel->addUserArtist($artist_id)) {
 			// TODO: Add error_log table and log here
 			die('500 Error, contact system admin');

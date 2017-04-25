@@ -23,7 +23,7 @@
 					<?php if($recently_added) { ?>
 					<?php foreach ($recently_added as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
-						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
+						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->image?$item->image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
 						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Added: <?= date('d/m/Y', strtotime($item->created_at)) ?> </h5>
 					</div>
@@ -69,7 +69,7 @@
 					<?php if($recently_viewed) { ?>
 					<?php foreach ($recently_viewed as $item) { ?>
 					<div class="item <?= ($counter == 0?'active':'') ?> homeCarItem">
-						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->album_image?$item->album_image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
+						<a href="/item/<?= $item->item_id ?>"><img src="<?= ($item->image?$item->image:base_url() . 'images/default.png'); ?>" class="img-responsive"></a>
 						<h3> <a href="/item/<?= $item->item_id ?>"><?= ucwords($item->title); ?></a> by <a href="/artist/<?= $item->artist_id ?>"><?= ucwords($item->artist_name); ?></a> </h3>
 						<h5> Viewed: <?= date('d/m/Y H:i:s', strtotime($item->timestamp)) ?> </h5>
 					</div>

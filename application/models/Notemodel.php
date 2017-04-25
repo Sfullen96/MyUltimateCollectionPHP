@@ -11,10 +11,11 @@ class NoteModel extends CI_Model
         $note = urldecode($note);
 		$data = array(
 		   	'item_id' => $item_id,
+            'user_id' => $this->session->userdata('user_id'),
 		   	'note' => $note
 		);
 
-		$this->db->insert('notes', $data);
+		$this->db->insert('note', $data);
 
         return true;
 	}
@@ -23,7 +24,7 @@ class NoteModel extends CI_Model
         $notes = $this->db->select()
                 ->where('item_id', $itemId)
                 ->order_by('note_timestamp DESC')
-                ->get('notes');
+                ->get('note');
 
         return $notes->result();
     }

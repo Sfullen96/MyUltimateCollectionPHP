@@ -13,7 +13,7 @@
 <?php } ?>
 
 <form action="/item/addCd" method="POST" role="form">
-	<legend> Add a new CD to the library </legend>
+	<legend> Add a new item to the library </legend>
 	<div class="stepHeader">
 		<h4> Step 1: Artist & Album Name </h4>
 	</div>
@@ -33,14 +33,14 @@
 		</div>
 	</div>
 	<div class="stepHeader">
-		<h4> Step 2: CD Details </h4>
+		<h4> Step 2: Item Details </h4>
 	</div>
 	<div class="step">
 		<label for="reference"> Album Reference </label>
 		<input type="text" id="reference" class="form-control" name="reference" placeholder="Album Reference" />
 
-		<label for="summary"> Summary </label>
-		<textarea placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
+		<label for="summary" style="display: none"> Summary </label>
+		<textarea style="display: none" placeholder="Album Summary" id="summary" class="form-control" rows="7" name="summary"></textarea>
 
 		<div class="form-group">
 		  	<label for="format"> Format </label>

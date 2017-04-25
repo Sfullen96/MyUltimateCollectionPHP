@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/cds.iml" filepath="$PROJECT_DIR$/.idea/cds.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/cd-library.iml" filepath="$PROJECT_DIR$/.idea/cd-library.iml" />
+>>>>>>> b851553508bb8e9cebe544c1192b3687710e36b6
     </modules>
   </component>
 </project>

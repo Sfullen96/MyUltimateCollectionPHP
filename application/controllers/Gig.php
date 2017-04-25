@@ -68,7 +68,7 @@ class Gig extends CI_Controller {
                 'item_id' => $item_id
             );
 
-            $this->db->insert('setlists', $data);
+            $this->db->insert('setlist', $data);
         }
 
         redirect($_SERVER['HTTP_REFERER']);

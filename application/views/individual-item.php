@@ -40,7 +40,7 @@ if(!empty($tracks)) {
 
 <div class="row margin-bottom">
 	<div class="col-xs-12 col-sm-4">
-		<img src="<?= ($item->album_image > ''?$item->album_image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
+		<img src="<?= ($item->image > ''?$item->image:base_url().'images/default.png'); ?>" class="img-responsive albumImage">
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">

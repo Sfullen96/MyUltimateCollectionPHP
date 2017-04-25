@@ -9,10 +9,11 @@ class ReviewModel extends CI_Model
     function addReview($id, $review) {
         $data = array(
             'item_id' => $id,
+            'user_id' => $this->session->userdata('user_id'),
             'review' => $review
         );
 
-        $query = $this->db->insert('reviews', $data);
+        $query = $this->db->insert('review', $data);
 
         if($query) {
             return true;
@@ -27,7 +28,7 @@ class ReviewModel extends CI_Model
         );
 
         $this->db->where('item_id', $id);
-        $query = $this->db->update('reviews', $data);
+        $query = $this->db->update('review', $data);
 
         if($query) {
             return true;
@@ -39,7 +40,7 @@ class ReviewModel extends CI_Model
     function getReview($item_id) {
         $query = $this->db->select()
             ->where('item_id', $item_id)
-            ->get('reviews');
+            ->get('review');
 
         return $query->result();
     }
@@ -47,7 +48,7 @@ class ReviewModel extends CI_Model
     function doesItemHaveReview($item_id) {
         $query = $this->db->select()
             ->where('item_id', $item_id)
-            ->get('reviews');
+            ->get('review');
 
         if ($query->num_rows()) {
             return true;
