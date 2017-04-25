@@ -150,9 +150,9 @@ public function getArtistInfo($id) {
         $sql = "
             SELECT COUNT(view_id) as views, artist_view.artist_id, artist_name
             FROM artist_view
-            LEFT JOIN artists
-            ON artists.artist_id = artist_view.artist_id
-            WHERE artists.user_id = '$user_id'
+            LEFT JOIN artist
+            ON artist.artist_id = artist_view.artist_id
+            WHERE artist.user_id = '$user_id'
             GROUP BY artist_view.artist_id
             ORDER BY COUNT(view_id) DESC,
             timestamp DESC

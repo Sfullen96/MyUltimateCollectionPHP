@@ -2,7 +2,7 @@
 <h3 class="loading"> Loading... <img src="<?= base_url() ?>/images/loading.gif" class="img-responsive" width="100px"> </h3>
 
 <div style="display: none" id="tableHeaderLibrary">
-<h3> Your CD library </h3>
+<h3> Your library </h3>
 <!-- <p> Click on an album name to see the album in more detail. <br> Click the artist name to see the artist in more detail. <br> Double click on 'Yes' or 'No' in the end column to change. <br> Use the 'Filter records' box on the right to instantly filter through every record. <br> Click on a column heading to sort by the column, click again to reverse the sort order. </p> -->
 </div>
 

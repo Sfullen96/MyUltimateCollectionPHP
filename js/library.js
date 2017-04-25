@@ -6,7 +6,7 @@ $(function() {
 		event.preventDefault();
 
 		var field = 'listened';
-		var table = 'library';
+		var table = 'item';
 		var itemId = $(this).parents('tr').attr('data-id');
 		var current = $(this).attr('data-value');
 		var element = $(this);

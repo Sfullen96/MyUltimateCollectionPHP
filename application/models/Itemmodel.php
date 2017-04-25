@@ -25,7 +25,7 @@ class ItemModel extends CI_Model
 
     function getItemInfo($itemId) {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = item.artist_id')
+                ->join('artist', 'artist.artist_id = item.artist_id')
                 ->join('format', 'format.format_id = item.format_id')
                 ->where('item_id', $itemId)
                 ->where('item.user_id', $this->user_id)
@@ -37,7 +37,7 @@ class ItemModel extends CI_Model
 
     public function getRecentlyAdded() {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = item.artist_id')
+                ->join('artist', 'artist.artist_id = item.artist_id')
                 ->where('item.user_id', $this->user_id)
                 ->order_by('item.created_at DESC')
                 ->limit(5)
@@ -93,7 +93,7 @@ class ItemModel extends CI_Model
         $data = array(
             'artist_id' => $artist_id,
             'format_id' => $format_id,
-            'cd_count' => $cd_count,
+            'disc_count' => $cd_count,
             'title' => $title,
             'reference' => $reference,
             'purchase_date' => $purchaseDate,
@@ -126,7 +126,7 @@ class ItemModel extends CI_Model
 
     function getAllitems() {
         $query = $this->db->select()
-                ->join('artist', 'artists.artist_id = item.artist_id')
+                ->join('artist', 'artist.artist_id = item.artist_id')
                 ->join('format', 'format.format_id = item.format_id')
                 ->where('item.user_id', $this->user_id)
                 ->get('item');
@@ -259,7 +259,7 @@ class ItemModel extends CI_Model
             FROM item_view v
             LEFT JOIN item l
             ON l.item_id = v.item_id
-            LEFT JOIN artists a
+            LEFT JOIN artist a
             ON a.artist_id = l.artist_id
             WHERE a.user_id = '$this->user_id'
             GROUP BY v.item_id
