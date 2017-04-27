@@ -88,7 +88,14 @@ class ItemModel extends CI_Model
         return $query;
     }
 
-    function addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price, $user_id) {
+    function getItemTypes() {
+        $query = $this->db->select()
+            ->get( 'item_type' );
+
+        return $query->result();
+    }
+
+    function addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count, $image, $purchasedFrom, $purchaseDate, $price, $user_id, $itemType) {
 
         $data = array(
             'artist_id' => $artist_id,
@@ -102,6 +109,7 @@ class ItemModel extends CI_Model
             'summary' => $summary,
             'image' => $image,
             'user_id' => $user_id,
+            'item_type' => $itemType,
         );
 
         $query = $this->db->insert('item', $data);

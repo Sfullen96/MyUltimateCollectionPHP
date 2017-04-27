@@ -1,7 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-set_time_limit(0);
-
 
 class Item extends CI_Controller {
 
@@ -13,12 +11,29 @@ class Item extends CI_Controller {
         $this->load->model('artistmodel');
         $this->load->model('reviewmodel');
         $this->load->model('lastfmmodel');
+        $this->load->model('formatmodel');
 	}
 
 	public function index()
 	{
 		// $this->load->view('welcome_message');
 	}
+
+	public function getFormats() {
+	    if ( isset( $_POST['itemType'] ) ) {
+	        $itemType = $_POST['itemType'];
+        }
+
+	    $formats = $this->formatmodel->getFormatList( $itemType );
+
+	    foreach( $formats as $format ) {
+            echo "
+                <option value='" . $format->format_id . "'> " . $format->format_name . " </option>
+            ";
+        }
+
+	    exit();
+    }
 
 	public function showIndividualItem($itemId) {
 
@@ -187,10 +202,10 @@ class Item extends CI_Controller {
 
 	}
 
-public function addCdForm() {
+    public function addCdForm() {
 
-		$data['formats'] = $this->itemmodel->getList('format');
-
+//		$data['formats'] = $this->formatmodel->getFormatList();
+        $data['itemTypes'] = $this->itemmodel->getItemTypes();
 		$data['title'] = 'Add a CD';
         $data['main_content'] = 'add-cd';
         $this->load->view('includes/template', $data);
@@ -235,9 +250,10 @@ public function addCdForm() {
 		$purchaseDate = isset($_POST['purchase_date'])
             ? date('Y-m-d H:i:s', strtotime($_POST['purchase_date'])) : '';
 		$price = isset($_POST['price']) ? '&pound;' . $_POST['price'] : '';
+		$itemType = isset( $_POST['itemType'] ) ? $_POST['itemType'] : 1;
 
 		$item_id = $this->itemmodel->addNewCd($title, $artist_id, $summary, $format_id, $reference, $cd_count,
-            $image, $purchasedFrom, $purchaseDate, $price, $user_id);
+            $image, $purchasedFrom, $purchaseDate, $price, $user_id, $itemType);
 
 		$tracksInserted = false;
 

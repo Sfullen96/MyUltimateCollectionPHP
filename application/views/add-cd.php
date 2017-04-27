@@ -11,7 +11,19 @@
 <div class="alert alert-danger addError">
 </div>
 
-<form action="/item/addCd" method="POST" role="form">
+<div class="chooseFormat">
+    <h3 class="text-center margin-bottom"> What type of item are you adding today? </h3>
+    <div class="row">
+        <?php foreach( $itemTypes as $itemType ) { ?>
+            <div class="col-xs-12 col-sm-<?= 12 / count( $itemTypes ) ?> itemType square" data-id="<?= $itemType->id ?>" style="background-image: url( '<?= base_url() ?>images/<?= $itemType->name ?>.png' );background-size: cover">
+                <div class="overlayBox"></div>
+                <h1 class="text"> <?= strtoupper( $itemType->name ); ?> </h1>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+
+<form action="/item/addCd" method="POST" role="form" id="addCdForm">
 	<legend> Add a new item to the library </legend>
     <div class="step1">
         <div class="stepHeader">
@@ -46,17 +58,13 @@
 
             <div class="form-group">
                 <label for="format"> Format </label>
-                <select class="form-control" id="format" name="format">
-                <option selected="selected" disabled="disabled" value="0"> Choose a CD Format </option>
-                <?php
-                    foreach ($formats->result() as $row) {
-                        echo '<option value="'. $row->format_id .'">'. $row->format_name .'</option>';
-                    }
-                ?>
+                <select class="form-control formatDropdown" id="format" name="format">
+                <option selected="selected" disabled="disabled" value="0"> Choose a format </option>
+
                 </select>
             </div>
 
-            <label for="cd_count"> CD Count </label>
+            <label for="cd_count"> Disc Count </label>
             <input type="number" id="cd_count" class="form-control" name="cd_count" placeholder="CD Count" />
 
             <div class="albumImage">

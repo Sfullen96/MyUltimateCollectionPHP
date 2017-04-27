@@ -1,5 +1,20 @@
 $( function() {
 
+	$( document ).on( 'click', '.itemType', function() {
+
+		$( '.chooseFormat' ).hide( 500 );
+
+		var itemType = $( this ).attr( 'data-id' );
+
+		$.post( '/item/getFormats', { itemType: itemType }, function( data ) {
+			$( '.formatDropdown' ).append( data );
+		} );
+
+		$( '#addCdForm' ).append( '<input type="hidden" name="itemType" value=" ' + itemType + ' " />' );
+		$( '#addCdForm, .btn-next' ).show( 500 );
+
+	} );
+
 	$( document ).on( 'keyup', '.existingArtist', function( event ) {
 
 		var text = $( this ).val();
@@ -59,6 +74,9 @@ $( function() {
             event.preventDefault();
         } else {
             if ( currentStep > 1 ) {
+            	$( '.btn-next' ).hide();
+            	$( '.btn-back' ).hide();
+            	$( 'form > legend' ).hide();
                 $( 'form' ).submit();
             }
             hideError( currentStep );
