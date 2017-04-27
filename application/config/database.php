@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
     'dsn'	=> '',
-    'hostname' => '31.170.164.42',
+    'hostname' => 'mysql.hostinger.co.uk',
     'username' => 'u336089125_user',
     'password' => 'Pokemon1337',
     'database' => 'u336089125_cd',
