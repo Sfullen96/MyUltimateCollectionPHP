@@ -8,6 +8,7 @@ class SearchModel extends CI_Model
 
     function searchItems($keyword) {
         $resultsItem = array();
+        $userId = $this->session->userdata('user_id');
 
         // $keywords = explode(' ', $keyword);
 
@@ -24,6 +25,7 @@ class SearchModel extends CI_Model
                     OR
                     artist.artist_name LIKE '%$keyword%'
                 )
+                AND item.user_id = '$userId'
             ";
             
             $item = $this->db->query($sqlItem);
@@ -42,6 +44,7 @@ class SearchModel extends CI_Model
 
     function searchArtists($keyword) {
         $resultsArtist = array();
+        $userId = $this->session->userdata('user_id');
 
         // $keywords = explode(' ', $keyword);
 
@@ -50,6 +53,7 @@ class SearchModel extends CI_Model
                 SELECT artist_name, artist_id, artist_image
                 FROM artist
                 WHERE artist_name LIKE '%$keyword%'
+                AND artist.user_id = '$userId'
             ";
 
             $artists = $this->db->query($sqlArtist);

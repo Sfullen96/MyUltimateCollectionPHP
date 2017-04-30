@@ -13,8 +13,8 @@ class Note extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-	public function addNote($item_id, $note) {
-		if($this->notemodel->addNote($item_id, $note)) {
+	public function addNote($item_id) {
+		if($this->notemodel->addNote($item_id, $_POST['note'])) {
 			echo Date('d/m/Y H:i:s', time());
 		}
 	}

@@ -179,7 +179,12 @@ class lastFmApi extends CI_Controller {
 			$response = file_get_contents($url);
 
 			if (isset($response)) {
-				echo $response;
+			    $decoded = json_decode( $response );
+			    if ( isset( $decoded->message ) ) {
+                    echo $decoded->message;
+                } else {
+                    echo $response;
+                }
 			} else {
 				echo 'No Data Found for Album: ' . $_POST['album'] . '. Artist: ' . $_POST['artist'];
 			}

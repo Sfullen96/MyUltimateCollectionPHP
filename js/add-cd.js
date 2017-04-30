@@ -161,57 +161,70 @@ function ajaxLookup() {
 				'album': album
 			}, 
 			function( data, textStatus, xhr ) {
-				var obj = JSON.parse( data );
+                if ($.trim(data) === 'Album not found') {
 
-				if( obj.album.hasOwnProperty('wiki') ) {
-					if( obj.album.wiki.hasOwnProperty('content') ) {
-						$( '#summary' ).val( obj.album.wiki.content );
-					}
-				}
+                } else {
 
-				var count = 0;
+                    // Reset all values incase a different album has been chosen on same page session
+                    $('.albumImage').find('img').remove();
+                    $('.albumImage').find('input').remove();
+                    $('#summary').val('');
+                    $('.tracks tbody').empty();
+                    $('.albumImage').append('<h5 class="loadingImage"> Loading Image... </h5>');
 
-				if( obj.album.hasOwnProperty( 'tracks' ) ) {
-					if ( obj.album.tracks.hasOwnProperty( 'track' ) ) {
-						obj.album.tracks.track.forEach( function( key, value ) {
-							var name = key.name;
-							var duration = key.duration;
-							var order = key['@attr'].rank;
-							var minutes = Math.floor(duration / 60);
-							var seconds = duration - minutes * 60;
+                    var obj = JSON.parse(data);
 
-							var finalTime = minutes + ':' + seconds;
+                    if (obj.album.hasOwnProperty('wiki')) {
+                        if (obj.album.wiki.hasOwnProperty('content')) {
+                            $('#summary').val(obj.album.wiki.content);
+                        }
+                    }
 
-							if( finalTime == '0:0' ) {
-								finalTime = '0:00';
-							}
+                    var count = 0;
 
-							$( '.tracks tbody' ).append(
-								'<tr id="newTrackTr" data-id="" data-itemid="" data-artist="">\
-									<td><input type="text" class="form-control" placeholder="Order" name="track['+ count +'][order]" id="order" value="'+ order +'" /></td>\
-									<td><input type="text" class="form-control" placeholder="Track Name" name="track['+ count +'][name]" id="trackName" value="'+ name +'" /></td>\
-									<td><input type="text" class="form-control" placeholder="Track Duration" name="track['+ count +'][duration]" value="'+ finalTime +'" /></td>\
+                    if (obj.album.hasOwnProperty('tracks')) {
+                        if (obj.album.tracks.hasOwnProperty('track')) {
+                            obj.album.tracks.track.forEach(function (key, value) {
+                                var name = key.name;
+                                var duration = key.duration;
+                                var order = key['@attr'].rank;
+                                var minutes = Math.floor(duration / 60);
+                                var seconds = duration - minutes * 60;
+
+                                var finalTime = minutes + ':' + seconds;
+
+                                if (finalTime == '0:0') {
+                                    finalTime = '0:00';
+                                }
+
+                                $('.tracks tbody').append(
+                                    '<tr id="newTrackTr" data-id="" data-itemid="" data-artist="">\
+                                        <td><input type="text" class="form-control" placeholder="Order" name="track[' + count + '][order]" id="order" value="' + order + '" /></td>\
+									<td><input type="text" class="form-control" placeholder="Track Name" name="track[' + count + '][name]" id="trackName" value="' + name + '" /></td>\
+									<td><input type="text" class="form-control" placeholder="Track Duration" name="track[' + count + '][duration]" value="' + finalTime + '" /></td>\
 								</tr>\
-							' );
+							');
 
-							// $( '#step3Header, .step3' ).show();
+                                // $( '#step3Header, .step3' ).show();
 
-							count++;
+                                count++;
 
-						});
-					}
-				}
+                            });
+                        }
+                    }
 
-				if( obj.album.hasOwnProperty( 'image' ) ) {
-					obj.album.image.forEach(function(key, value) {
-						if( key.size == 'large' ) {
-							$( '.albumImage' ).append( '<img src="'+ key['#text'] +'" class="img-responsive" width="250px">' );
-							$( '.albumImage' ).append( '<input type="hidden" name="image" value="'+ key['#text'] +'" />' );
-							$( '.albumImage' ).show();
-						}
-					});
-				}
-			}
+                    if (obj.album.hasOwnProperty('image')) {
+                        obj.album.image.forEach(function (key, value) {
+                            if (key.size == 'large') {
+                                $('.albumImage').append('<img src="' + key['#text'] + '" class="img-responsive" width="250px">');
+                                $('.albumImage').append('<input type="hidden" name="image" value="' + key['#text'] + '" />');
+                                $('.loadingImage').remove();
+                                $('.albumImage').show();
+                            }
+                        });
+                    }
+                }
+            }
 		);
 
 		// $.get('http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key=797d57115973701485bcb92ebb8ea847&artist=' + encodeURIComponent(artist) + '&album=' + encodeURIComponent(album) + '&format=json', function(data) {

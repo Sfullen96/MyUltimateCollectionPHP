@@ -26,7 +26,9 @@ class ArtistModel extends CI_Model
 
 		$response = json_decode(file_get_contents($url));
 
-		return $response;
+		if ( !isset( $response->error ) ) {
+            return $response;
+        }
 	}
 
 	public function getArtists($text) {

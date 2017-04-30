@@ -2,6 +2,10 @@ $(function() {
 
 	var editing = false;
 
+	$( document ).on( 'change', 'input[name=duration]', function() {
+
+	} );
+
 	$(document).on('dblclick', '.editableTrack', function(event) {
 		event.preventDefault();
 

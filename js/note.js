@@ -15,7 +15,9 @@ $(function() {
 
 			dateReadable = dateObject.toDateString();
 
-			$.get('/add-note/' + item_id + '/' + note, function(data) {
+			$.post('/add-note/' + item_id, {
+				note: note
+			}, function( data ) {
 				$('.noteText').val('');
 				$('.notes').prepend('<div class="note"><p> '+ note +' | <small> '+ data +' </small> </p><hr></div>');
 			});

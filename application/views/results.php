@@ -1,4 +1,8 @@
-<h1 class="margin-bottom"> Search Results for: <?= $keyword; ?> </h1>
+<?php if ( !$item_results && !$artist_results ) { ?>
+    <h1 class="margin-bottom"> No results found for: <?= $keyword; ?> </h1>
+<?php } else { ?>
+    <h1 class="margin-bottom"> Search Results for: <?= $keyword; ?> </h1>
+<?php } ?>
 <?php if($item_results) { ?>
 <div class="row">
 	<div class="artistBanner margin-bottom col-xs-12 text-center">
@@ -25,7 +29,7 @@
 <?php } ?>
 </div>
 <a class="showMoreResults" href="javascript:void(0)"> Show All Results... </a>
-<?php } else { ?>
+<?php } else if ( $artist_results ) { ?>
 	<h4 class="margin-bottom"> No Albums Found </h4>
 <?php } ?>
 
@@ -59,6 +63,6 @@
 <hr>
 <?php } ?>
 <?php } ?>
-<?php } else { ?>
+<?php } else if ( $item_results ) { ?>
 	<h4 class="margin-bottom"> No Artists Found </h4>
 <?php } ?>
