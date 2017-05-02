@@ -78,7 +78,7 @@ class GigModel extends CI_Model
 
     public function getGig($id) {
         $query = $this->db->select()
-                ->join('artist', 'gig.gig_artist_id = artists.artist_id')
+                ->join('artist', 'gig.gig_artist_id = artist.artist_id')
                 ->where('gig_id', $id)
                 ->get('gig');
 

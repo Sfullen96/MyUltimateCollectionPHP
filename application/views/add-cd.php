@@ -65,7 +65,7 @@
             </div>
 
             <label for="cd_count"> Disc Count </label>
-            <input type="number" id="cd_count" class="form-control" name="cd_count" placeholder="CD Count" />
+            <input type="number" id="cd_count" class="form-control" name="cd_count" placeholder="Disc Count" />
 
             <div class="albumImage">
                 <label for="title"> Album Image </label>

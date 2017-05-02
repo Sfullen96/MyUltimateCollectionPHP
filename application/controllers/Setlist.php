@@ -40,7 +40,7 @@ class Setlist extends CI_Controller {
         //     $data['db_tracks'] = $this->gigmodel->getGig($id);
         // }
 
-        $data['title'] = 'Setlist';
+        $data['title'] = 'Setlist | My Ultimate Collection';
         $data['main_content'] = 'setlist';
         $this->load->view('includes/template', $data);
 

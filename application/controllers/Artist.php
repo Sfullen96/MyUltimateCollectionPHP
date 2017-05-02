@@ -15,7 +15,7 @@ class Artist extends CI_Controller {
 
 	public function index() {
 		$data['artists'] = $this->artistmodel->getAllArtists();
-		$data['title'] = "CD Library | Artists";
+		$data['title'] = "Artists | My Ultimate Collection";
         $data['main_content'] = 'artists';
         
         $this->load->view('includes/template', $data);
@@ -33,7 +33,7 @@ class Artist extends CI_Controller {
 		$data['albums'] = $this->artistmodel->getArtistAlbums($id);
 		$data['gigs_attended'] = $this->gigmodel->getArtistGigs($id)->result();
 		$data['gigs_attended_count'] = $this->gigmodel->getArtistGigs($id)->num_rows();
-		$data['title'] = $data['artist'][0]->artist_name . ' | CD Library';
+		$data['title'] = $data['artist'][0]->artist_name . ' | My Ultimate Collection';
         $data['main_content'] = 'artist';
         $data['tags'] = $this->artistmodel->getArtistTags($id);
 		$this->artistmodel->addView($id);
@@ -58,7 +58,7 @@ class Artist extends CI_Controller {
 	}	
 
 	public function addSummaryView($artistId) {
-		$data['title'] = "CD Library | Add Summary";
+		$data['title'] = "Add Summary | My Ultimate Collection";
         $data['main_content'] = 'add-summary';
         $data['artist_id'] = $artistId;
 
@@ -66,7 +66,7 @@ class Artist extends CI_Controller {
 	}
 
 	public function editSummaryView($artistId) {
-		$data['title'] = "CD Library | Summary";
+		$data['title'] = "Summary | My Ultimate Collection";
         $data['main_content'] = 'add-summary';
         $data['artist_id'] = $artistId;
         $data['edit'] = true;

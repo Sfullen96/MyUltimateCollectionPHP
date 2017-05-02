@@ -31,7 +31,7 @@ class Pages extends CI_Controller {
 
     	$data['recently_viewed'] = $this->itemmodel->getRecentlyViewed();
 
-		$data['title'] = "CD Library | Home";
+		$data['title'] = "Home | My Ultimate Collection";
         $data['main_content'] = 'home';
         $this->load->view('includes/template', $data);
 	}

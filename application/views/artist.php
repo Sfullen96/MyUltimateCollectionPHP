@@ -16,29 +16,22 @@
 		</div>
 	</div>
 </div>
-<!-- <h3> Tags </h3> -->
+
+<?php if ( !count( $tags ) ) { ?>
 <div class="row">
 	<div class="moreInfoBanner col-xs-12 tags">
 		<div class="row">
-		<?php if ($tags) { ?>
-			<?php foreach ($tags as $tag) { ?>
-				<div class="col-xs-12 col-sm-3">
-					<p> <i class="fa fa-tags"></i> <a href="<?= $tag->tag_url ?>" target="_blank"> <?= ucwords($tag->tag_name) ?></a> </p>
-				</div>
-				<!-- <div class="col-xs-12 col-sm-3">
-					<i class="fa fa-tags"></i>
-				</div>
-				<div class="col-xs-12 col-sm-3">
-					<i class="fa fa-tags"></i>
-				</div>
-				<div class="col-xs-12 col-sm-3">
-					<i class="fa fa-tags"></i>
-				</div> -->
-			<?php } ?>
-			<?php } ?>
+            <?php if ($tags) { ?>
+                <?php foreach ($tags as $tag) { ?>
+                    <div class="col-xs-12 col-sm-3">
+                        <p> <i class="fa fa-tags"></i> <a href="<?= $tag->tag_url ?>" target="_blank"> <?= ucwords($tag->tag_name) ?></a> </p>
+                    </div>
+                <?php } ?>
+            <?php } ?>
 		</div>
 	</div>
 </div>
+<?php } ?>
 <div class="row margin-bottom">
 	<!-- <div class="col-xs-12 col-sm-6">
 		<h4 class="text-center"> Upcoming Gigs for <?= ucwords($artist[0]->artist_name); ?> </h4>
@@ -114,7 +107,7 @@
 <div class="row">
 	<?php $count = 0; ?>
 	<?php foreach($albums as $album) { ?>
-	<div class="col-xs-6 col-sm-3">
+	<div class="col-xs-12 col-sm-3">
 		<a href="/item/<?= $album->item_id; ?>">
 			<div class="albumPreview" style="background-image: url('');background-size: cover">
 				<div class="overlay">

@@ -55,7 +55,7 @@ class Item extends CI_Controller {
 
      	$data['review'] = $this->reviewmodel->doesItemHaveReview($itemId);
 
-		$data['title'] = $title . ' | ' . $artist;
+		$data['title'] = $title . ' | ' . $artist . ' | My Ultimate Collection ';
         $data['main_content'] = 'individual-item';
         $this->load->view('includes/template', $data);
 	}
@@ -206,7 +206,7 @@ class Item extends CI_Controller {
 
 //		$data['formats'] = $this->formatmodel->getFormatList();
         $data['itemTypes'] = $this->itemmodel->getItemTypes();
-		$data['title'] = 'Add a CD';
+		$data['title'] = 'Add an Item | My Ultimate Collection';
         $data['main_content'] = 'add-cd';
         $this->load->view('includes/template', $data);
 	}
@@ -223,7 +223,7 @@ class Item extends CI_Controller {
 		} else {
 			$artist_id = $checkArtist;
 
-			$checkIfExists = $this->itemmodel->checkIfExists($_POST['title'], $artist_id);
+			$checkIfExists = $this->itemmodel->checkIfExists($_POST['title'], $artist_id, $_POST['itemType']);
 
 			if($checkIfExists > 0) {
 				redirect($_SERVER['HTTP_REFERER'] . '?exists=1&id=' . $checkIfExists);
@@ -287,7 +287,7 @@ class Item extends CI_Controller {
 	public function library() {
 		$data['items'] = $this->itemmodel->getAllitems();
 
-		$data['title'] = "Library | CD Library";
+		$data['title'] = "Library | My Ultimate Collection";
         $data['main_content'] = 'library';
         $this->load->view('includes/template', $data);
 	}

@@ -14,7 +14,7 @@ class Review extends CI_Controller {
 
 	public function index($id)
     {
-        $data['title'] = "CD Library | Review";
+        $data['title'] = "Review | My Ultimate Collection";
         $data['main_content'] = 'review';
         $data['item_id'] = $id;
 
@@ -55,7 +55,7 @@ class Review extends CI_Controller {
 	}
 
 	public function editReviewView($item_id) {
-		$data['title'] = "CD Library | Review";
+		$data['title'] = "Review | My Ultimate Collection";
         $data['main_content'] = 'review';
         $data['item_id'] = $item_id;
         $data['edit'] = true;

@@ -26,6 +26,7 @@ class ItemModel extends CI_Model
     function getItemInfo($itemId) {
         $query = $this->db->select()
                 ->join('artist', 'artist.artist_id = item.artist_id')
+                ->join( 'item_type', 'item_type.id = item.item_type' )
                 ->join('format', 'format.format_id = item.format_id')
                 ->where('item_id', $itemId)
                 ->where('item.user_id', $this->user_id)
@@ -90,6 +91,7 @@ class ItemModel extends CI_Model
 
     function getItemTypes() {
         $query = $this->db->select()
+            ->where('id != 4')
             ->get( 'item_type' );
 
         return $query->result();
@@ -118,10 +120,11 @@ class ItemModel extends CI_Model
 
     }
 
-    function checkIfExists($name, $artist) {
+    function checkIfExists($name, $artist, $type) {
         $query = $this->db->select()
                 ->where('user_id', $this->session->userdata('user_id'))
                 ->where('title', $name)
+                ->where( 'item_type', $type )
                 ->where('artist_id', $artist)
                 ->get('item');
 

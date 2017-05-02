@@ -44,7 +44,12 @@ if(!empty($tracks)) {
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-			<h5 class="albumFormat"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
+            <h5 class="albumFormat"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
+            <h5 class="albumFormat">
+                <span><?= (isset($item->name)? $item->name :'N/A'); ?> </span> |
+                <span><?= (isset($item->format_name)? $item->format_name:'N/A'); ?> </span> |
+                <span><?= (isset($item->disc_count)?$item->disc_count . ' Disc(s)':'N/A'); ?></span>
+            </h5>
 			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
 			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= ucwords($item_info[0]->artist_name); ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
 			<div class="rating">
@@ -180,7 +185,7 @@ if(!empty($tracks)) {
 </div>
 
 <!-- Similar Artists -->
-<?php if ( $similar_artists ) { ?>
+<?php if ( count( $similar_artists ) ) { ?>
 <h3> Similar Artists to <?= $item->artist_name; ?> </h3>
 
 <div class="row">

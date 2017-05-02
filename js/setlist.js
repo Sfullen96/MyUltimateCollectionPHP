@@ -4,10 +4,13 @@ $(function() {
 
 		var date = $(this).val();
 		var artistName = $('#artistName').val();
+        $('input[name=venue]').removeAttr('disabled').removeAttr('title').val('');
+        $('input[name=city]').removeAttr('disabled').removeAttr('title').val('');
+        $('input[name=tour]').removeAttr('disabled').removeAttr('title').val('');
 
 		$.get('/gig/getGigByDate/' + date + '/' + artistName, function(data) {
 
-			if(!data) {
+			if( !data || !$.trim( data ) > '' ) {
 
 				$('input[name=venue]').removeAttr('disabled').removeAttr('title').val('');
 				$('input[name=city]').removeAttr('disabled').removeAttr('title').val('');

@@ -212,7 +212,7 @@ body {
 .albumSummary {
 	float: left;
 	margin-top: 10px;
-	max-height: 400px;
+	max-height: 200px;
 	overflow: auto;
 }
 #newTrackTr i.fa-plus, .tracks i.fa, .addSetTrack {
@@ -347,7 +347,8 @@ body {
 	text-align: center;
 }
 .homeCarItem img, .resultImage {
-	margin: 0 auto !important;
+	margin: 0 auto;
+	margin-bottom: 15px;
 	width: 300px;
 }
 .noSelect {

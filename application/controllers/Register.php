@@ -12,7 +12,7 @@ class Register extends CI_Controller
     public function index()
     {
         //This function loads the login page.
-        $data['title'] = "Register | CD Library";
+        $data['title'] = "Register | My Ultimate Collection";
         $data['main_content'] = 'register';
         $this->load->view('includes/template', $data);
     }
@@ -36,7 +36,7 @@ class Register extends CI_Controller
         	$data['fname'] = $_POST['fname'];
             $data['lname'] = $_POST['lname'];
             $data['email'] = $_POST['email'];
-            $data['title'] = "Register | CD Library";
+            $data['title'] = "Register | My Ultimate Collection";
             $data['main_content'] = 'register';
             $this->load->view('includes/template', $data);
         } else {

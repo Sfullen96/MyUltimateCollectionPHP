@@ -144,6 +144,12 @@
                                         $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
                                 ?>
                                 <li><a href="javascript:void(0)" class="statsLink" data-container="body" data-toggle="popover" data-html="true" data-placement="bottom" data-content="
+                                    <p class='bold'>Library Progress: </p>
+                                    <div class='progress'>
+                                        <div class='progress-bar' role='progressbar' aria-valuenow='<?= ($data['cd_listened_count'] > 0 ? round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) : '0') ?>'
+                                             aria-valuemin='0' aria-valuemax='100' style='width:<?= ($data['cd_listened_count'] > 0 ? round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) : '0') ?>%'>
+                                        </div>
+                                    </div>
                                     <p class='headerstat'> Listened to <?= $data['cd_listened_count'] ?>/<?= $data['cd_count'] ?> (<?= ($data['cd_listened_count'] > 0 ? round( ($data['cd_listened_count'] / $data['cd_count'] ) * 100, 2 ) : '0') ?>%) </p>
                                     <p class='headerstat'> Added this week: <?= $data['cd_week']; ?> </p>
                                     <p class='headerstat'> Added this month: <?= $data['cd_month'] ?> </p>
