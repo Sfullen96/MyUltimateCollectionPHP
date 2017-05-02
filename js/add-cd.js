@@ -1,5 +1,25 @@
 $( function() {
 
+    $( document ).on( 'submit', 'form', function() {
+        if ( currentStep < 2 ) {
+            event.preventDefault();
+        }
+    } );
+
+    $( document ).on( 'keydown', 'input[name=artist]', function( e ) {
+        var pressCount = 0;
+        if ( e.which == 38 ) { // Up
+            var count = $( '.options' ).children().length;
+            pressCount++;
+            $( '.options :nth-child( pressCount )' ).hide(10000);
+        }
+        if ( e.which == 40 ) { // Up
+            pressCount--;
+            var count = $(".options").children().length;
+            $( '.options :nth-child( pressCount )' ).hide(10000);
+        }
+    } );
+
 	$( document ).on( 'click', '.itemType', function() {
 
 		$( '.chooseFormat' ).hide( 500 );

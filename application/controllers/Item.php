@@ -223,7 +223,7 @@ class Item extends CI_Controller {
 		} else {
 			$artist_id = $checkArtist;
 
-			$checkIfExists = $this->itemmodel->checkIfExists($_POST['title'], $artist_id, $_POST['itemType']);
+			$checkIfExists = $this->itemmodel->checkIfExists($_POST['title'], $artist_id, $_POST['itemType'], $_POST['format']);
 
 			if($checkIfExists > 0) {
 				redirect($_SERVER['HTTP_REFERER'] . '?exists=1&id=' . $checkIfExists);
