@@ -15,5 +15,33 @@ class Registermodel extends CI_Model
 
     }
 
+    public function checkEmail( $email ) {
+
+        $query = $this->db->select()
+            ->where( 'email', $email )
+            ->get( 'user' );
+
+        if ( $query->num_rows() > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function checkUsername( $username ) {
+
+        $query = $this->db->select()
+            ->where( 'username', $username )
+            ->get( 'user' );
+
+        if ( $query->num_rows() > 0 ) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
 }	
 

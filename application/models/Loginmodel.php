@@ -6,17 +6,28 @@ class LoginModel extends CI_Model
      {
         parent::__construct();
      }
-     function checkUser($email, $password)
-     {
 
-        //This function checks the users details against the database.
-        $this->db->where('email', $email);
-        $this->db->where('password', $password);
+    /**
+     * @param $loginCred
+     * @param $password
+     * @return mixed
+     */
+    function checkUser($loginCred, $password) {
 
-        $query = $this->db->get('user');
+         $sql = "
+          SELECT * FROM user 
+            WHERE (
+              username = '$loginCred'
+              OR 
+              email = '$loginCred'
+            )
+            AND password = '$password'
+          AND deleted_at IS NULL
+          ";
 
-        if($query->num_rows() == 1)
-        {
+         $query = $this->db->query( $sql );
+
+        if($query->num_rows() == 1) {
             return $query->row();
         }
 

@@ -27,6 +27,7 @@ class Register extends CI_Controller
  	  	$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[user.email]');
        	$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|matches[password_confirm]');
        	$this->form_validation->set_rules('password_confirm', 'Password Confirmation', 'trim|required');
+       	$this->form_validation->set_rules('username', 'Username', 'trim|required');
        	$this->form_validation->set_error_delimiters('<li>', '</li>');
        	$this->form_validation->set_message('is_unique', 'The %s provided is already taken');
 
@@ -36,6 +37,7 @@ class Register extends CI_Controller
         	$data['fname'] = $_POST['fname'];
             $data['lname'] = $_POST['lname'];
             $data['email'] = $_POST['email'];
+            $data['username'] = $_POST['username'];
             $data['title'] = "Register | My Ultimate Collection";
             $data['main_content'] = 'register';
             $this->load->view('includes/template', $data);
@@ -46,10 +48,14 @@ class Register extends CI_Controller
         		'email' => $_POST['email'],
         		'password' => hash('sha256', $_POST['password']),
         		'account_type' => 1,
+                'username' => $_POST['username'],
         	);
 
-        	if($newId = $this->registermodel->createAccount($params) > 0) {
-        		$data = array(
+            $newId = $this->registermodel->createAccount($params);
+
+        	if( $newId > 0) {
+
+        	    $data = array(
                     'user_id' => $newId,
                     'is_logged_in' => true,
                     'admin' => false,
@@ -61,6 +67,26 @@ class Register extends CI_Controller
         	}
         }
     }
+
+    public function checkEmail() {
+	    $email = $_POST['email'];
+
+	    if ( $this->registermodel->checkEmail( $email ) ) {
+	        echo 'exists';
+        } else {
+	        echo 'fine';
+        }
+    }
+
+    public function checkUsername() {
+        $username = $_POST['username'];
+
+        if ( $this->registermodel->checkUsername( $username ) ) {
+            echo 'exists';
+        } else {
+            echo 'fine';
+        }
+    }
+
 }
 
-?>

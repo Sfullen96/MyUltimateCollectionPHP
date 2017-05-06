@@ -12,33 +12,27 @@ class Login extends CI_Controller
     
     public function loginUser()
     {
-   
 
         $this->load->helper(array('form', 'url'));
 
         $this->load->library('form_validation');
 
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-
-        $this->form_validation->set_rules('email', 'Email',  'trim|required');
+        $this->form_validation->set_rules('loginCred', 'Username or Email',  'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
-        //This part of the function validates the users input and if it = false then it will load the index function agin.
 
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == FALSE) {
             $this->index();
-        }
-        else
-        {
+        } else {
             //This part of the function loads the login model.
 
             $this->load->model('loginmodel');
 
-            $email = $this->input->post('email');
+            $loginCred = $this->input->post('loginCred');
             $password = hash('sha256', $this->input->post('password'));
-            
-            $userInfo = $this->loginmodel->checkUser($email, $password);
+
+            $userInfo = $this->loginmodel->checkUser($loginCred, $password);
 
             if($userInfo) {
                 

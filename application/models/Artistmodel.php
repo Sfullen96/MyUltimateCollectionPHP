@@ -146,11 +146,15 @@ public function getArtistInfo($id) {
 		}
 	}
 
-	public function getFavArtists() {
-		$user_id = $this->session->userdata('user_id');
+	public function getFavArtists( $userId = false ) {
+        if ( !$userId  ) {
+            $user_id = $this->session->userdata('user_id');
+        } else {
+            $user_id = $userId;
+        }
 
         $sql = "
-            SELECT COUNT(view_id) as views, artist_view.artist_id, artist_name
+            SELECT COUNT(view_id) as views, artist_view.artist_id, artist_name, artist_image
             FROM artist_view
             LEFT JOIN artist
             ON artist.artist_id = artist_view.artist_id

@@ -26,6 +26,9 @@
 		margin-bottom: 0px !important;
 	}
 }
+.emailError {
+	margin-top: 8px;
+}
 .btn-primary {
     color: #fff;
     background-color: #e11f27;
@@ -256,13 +259,17 @@ body {
 	border-bottom-left-radius: 0px;
 }
 .options {
-    padding: 10px;
 	padding-top: 15px;
     border: 1px solid rgba(0,0,0,0.3);
 }
 .options > .option {
 	margin-bottom: 8px;
+	padding: 8px 10px;
 	cursor: pointer;
+}
+.options > .option.active {
+	background-color: #e11f27;
+	color: #fff;
 }
 .highlight {
     background: red;
@@ -329,6 +336,9 @@ body {
 }
 .margin-bottom {
 	margin-bottom: 15px;
+}
+.margin-top {
+	margin-top: 15px;
 }
 .attendedGigs {
 	text-align: left;	

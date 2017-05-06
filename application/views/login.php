@@ -8,7 +8,7 @@
 
 	<div class="form-group">
 		<!-- <label for="email"> Email Address </label> -->
-		<input type="text" class="form-control" name="email" id="email" placeholder="Email Address" required="required">
+		<input type="text" class="form-control" name="loginCred" id="loginCred" placeholder="Username or Email Address" required="required">
 	</div>
 
 	<div class="form-group">
@@ -16,6 +16,6 @@
 		<input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="Password" required="required">
 	</div>
 
-	<button type="submit" class="btn btn-primary margin-bottom"> Login </button>
+	<input type="submit" class="btn btn-primary margin-bottom" value="Login">
 	<a href="/register" class="btn btn-primary pull-right"> Register Now </a>
 </form>

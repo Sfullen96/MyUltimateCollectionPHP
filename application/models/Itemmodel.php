@@ -207,18 +207,26 @@ class ItemModel extends CI_Model
         return $query->num_rows();
     }
 
-    function getCDcount() {
+    function getCDcount( $userId = false ) {
+        if ( !$userId ) {
+            $userId = $this->user_id;
+        }
+
         $query = $this->db->select()
-                    ->where('user_id',$this->user_id)
+                    ->where('user_id', $userId)
                     ->get('item');
 
         return $query->num_rows();
     }
 
-    function getCDListenedCount() {
+    function getCDListenedCount( $userId = false ) {
+        if ( !$userId ) {
+            $userId = $this->user_id;
+        }
+
         $query = $this->db->select()
                 ->where('listened', 1)
-                ->where('user_id',$this->user_id)
+                ->where('user_id', $userId)
                 ->get('item');
 
         return $query->num_rows();
@@ -239,15 +247,21 @@ class ItemModel extends CI_Model
         }
     }
 
-    public function getFavAlbums() {
-        $id =$this->user_id;
+    public function getFavAlbums( $userId = false ) {
+        if ( !$userId  ) {
+            $id = $this->user_id;
+        } else {
+            $id = $userId;
+        }
 
         $sql = "
-            SELECT COUNT(view_id) as views, item_view.item_id, title
+            SELECT COUNT(view_id) as views, item_view.item_id, title, image, artist_name, artist.artist_id
             FROM item_view
             LEFT JOIN item 
             ON item.item_id = item_view.item_id
-            WHERE item.user_id = '$this->user_id'
+            LEFT JOIN artist
+            ON artist.artist_id = item.artist_id
+            WHERE item.user_id = '$id'
             GROUP BY item_view.item_id
             ORDER BY COuNT(view_id) DESC,
             timestamp DESC
@@ -265,7 +279,7 @@ class ItemModel extends CI_Model
     }
 
     public function getRecentlyViewed() {
-        $id =$this->user_id;
+        $id = $this->user_id;
         $sql = "
             SELECT *
             FROM item_view v

@@ -1,24 +1,71 @@
 $( function() {
 
-    $( document ).on( 'submit', 'form', function() {
+    $( document ).on( 'submit', '#addCdForm', function() {
         if ( currentStep < 2 ) {
             event.preventDefault();
         }
     } );
 
-    $( document ).on( 'keydown', 'input[name=artist]', function( e ) {
-        var pressCount = 0;
-        if ( e.which == 38 ) { // Up
-            var count = $( '.options' ).children().length;
-            pressCount++;
-            $( '.options :nth-child( pressCount )' ).hide(10000);
-        }
-        if ( e.which == 40 ) { // Up
-            pressCount--;
-            var count = $(".options").children().length;
-            $( '.options :nth-child( pressCount )' ).hide(10000);
-        }
-    } );
+    // WIP
+
+    // var pressCount = 1;
+    // var overAllCount = 0;
+    //
+    // $( document ).on( 'keydown', 'input[name=artist]', function( e ) {
+    //
+    //     if ( e.which === 40 ) { // Down
+    //         event.preventDefault();
+    //
+    //         if ( overAllCount > 0 && pressCount === 1 ) {
+    //             pressCount++;
+    //         }
+    //
+    //         $( '.options > .option' ).each( function ( index, element ) {
+    //             if ( ( index + 1 ) === pressCount ) {
+    //                 console.log( ( index + 1 ) +  '  '  + pressCount );
+    //                 $( this ).addClass( 'active' );
+    //             } else {
+    //                 $( this ).removeClass( 'active' );
+    //             }
+    //         });
+    //
+    //         if ( pressCount < $( '.options' ).children().length ) {
+    //             pressCount++;
+    //         }
+    //         overAllCount++;
+    //
+    //     }
+    //
+    //     if ( e.which === 38 ) { // Up
+    //         event.preventDefault();
+    //
+    //         if ( pressCount === $( '.options' ).children().length ) {
+    //             pressCount--;
+    //         }
+    //
+    //         $( '.options > .option' ).each( function( index, element ) {
+    //             if ( ( index + 1 ) === pressCount ) {
+    //                 console.log( ( index + 1 ) +  '  '  + pressCount );
+    //                 $( this ).addClass( 'active' );
+    //             } else {
+    //                 $( this ).removeClass( 'active' );
+    //             }
+    //         } );
+    //
+    //         if ( pressCount > 1 ) {
+    //             pressCount--;
+    //         }
+    //         overAllCount++;
+    //
+    //     }
+    //
+    //     if ( event.which === 13 && pressCount >= 1 ) {
+    //         event.preventDefault();
+    //         $( '.options > .option:nth-child( '+ pressCount +' )' ).click();
+    //     }
+    //
+    //
+    // } );
 
 	$( document ).on( 'click', '.itemType', function() {
 
@@ -37,26 +84,29 @@ $( function() {
 
 	$( document ).on( 'keyup', '.existingArtist', function( event ) {
 
-		var text = $( this ).val();
+        if ( event.which !== 38 && event.which !== 40 ) {
 
-		$.post( '/artist/ajaxFindArtist', { 'text' : text }, function( data ) {
-			data = $.trim( data );
-			if( data != 'false' ) {
-				if( text > '' ) {
-					$( '.existingArtist' ).parent().find( '.options' ).remove();
-					$( '.existingArtist' ).after( '<div class="options">'+ data +'</div>' );
-					$( 'input[name=artist_az], #az' ).hide();
-				} else {
-					$( '.existingArtist' ).val( '' );
-					$( '.existingArtist' ).attr( 'value', '' );
-					$( 'input[name=artist_az], #az' ).show();
-					$( '.options' ).remove();
-				}
-			} else {
-				$( 'input[name=artist_az], #az' ).show();
-				$( '.existingArtist' ).parent().find( '.options' ).remove();
-			}	
-		});
+            var text = $(this).val();
+
+            $.post('/artist/ajaxFindArtist', {'text': text}, function (data) {
+                data = $.trim(data);
+                if (data != 'false') {
+                    if (text > '') {
+                        $('.existingArtist').parent().find('.options').remove();
+                        $('.existingArtist').after('<div class="options">' + data + '</div>');
+                        $('input[name=artist_az], #az').hide();
+                    } else {
+                        $('.existingArtist').val('');
+                        $('.existingArtist').attr('value', '');
+                        $('input[name=artist_az], #az').show();
+                        $('.options').remove();
+                    }
+                } else {
+                    $('input[name=artist_az], #az').show();
+                    $('.existingArtist').parent().find('.options').remove();
+                }
+            });
+        }
 	});
 
 	$( document ).on( 'click', '.options .option', function( event ) {

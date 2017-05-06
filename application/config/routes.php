@@ -79,3 +79,6 @@ $route['addSummary/(:num)'] = 'artist/addSummaryView/$1';
 $route['editSummary/(:num)'] = 'artist/editSummaryView/$1';
 $route['admin'] = 'admin';
 $route['register'] = 'register';
+$route['profile/(:num)'] = 'user/profileView/$1';
+$route['manage-account'] = 'user/manageAccountView';
+$route['stats'] = 'pages/stats';

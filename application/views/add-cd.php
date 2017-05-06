@@ -12,7 +12,7 @@
 </div>
 
 <div class="chooseFormat">
-    <h3 class="text-center margin-bottom"> What type of item are you adding today? </h3>
+    <h3 class="text-center margin-bottom"> Please choose the type of item you are adding:  </h3>
     <div class="row">
         <?php foreach( $itemTypes as $itemType ) { ?>
             <div class="col-xs-12 col-sm-<?= 12 / count( $itemTypes ) ?> itemType square" data-id="<?= $itemType->id ?>" style="background-image: url( '<?= base_url() ?>images/<?= $itemType->name ?>.png' );background-size: cover">
@@ -24,7 +24,6 @@
 </div>
 
 <form action="/item/addCd" method="POST" role="form" id="addCdForm">
-	<legend> Add a new item to the library </legend>
     <div class="step1">
         <div class="stepHeader">
             <h4> Step 1: Artist & Album Name </h4>
@@ -33,7 +32,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <label> Choose from an existing artist, or add a new artist: </label>
-                    <input type="text" name="artist" class="form-control existingArtist" placeholder="Artist Name" autocomplete="off" required />
+                    <input type="text" name="artist" class="form-control existingArtist " placeholder="Artist Name" autocomplete="off" required />
                     <br>
                     <label id="az"> Artist A-Z Name </label>
                     <input type="text" name="artist_az" class="form-control" placeholder="Artist A-Z Name" autocomplete="off" />

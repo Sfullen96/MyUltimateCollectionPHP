@@ -7,16 +7,15 @@ class Pages extends CI_Controller {
         parent::__construct();
         $this->load->model('itemmodel');
         $this->load->model('notemodel');
+        $this->load->model('usermodel');
         $this->load->model('trackmodel');
         $this->load->model('artistmodel');
         $this->load->model('reviewmodel');
+        $this->load->model('statsmodel');
 	}
 
-	public function index()
-	{	
+	public function index() {
 		$this->load->model('itemmodel');
-
-
 
         $data['recently_added'] = $this->itemmodel->getRecentlyAdded();
 
@@ -35,4 +34,13 @@ class Pages extends CI_Controller {
         $data['main_content'] = 'home';
         $this->load->view('includes/template', $data);
 	}
+
+	public function stats() {
+        $data['cd_week'] = $this->statsmodel->cdStats('week');
+        $data['cd_month'] = $this->itemmodel->cdStats('month');
+        $data['cd_year'] = $this->itemmodel->cdStats('year');
+        $data['cd_count'] = $this->itemmodel->getCDcount();
+        $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount();
+        $this->load->view('stats', $data);
+    }
 }
