@@ -29,6 +29,7 @@
         <?php $counter++; ?>
     <?php } ?>
 </div>
+
 <div class="row margin-top">
     <div class="artistBanner margin-bottom col-xs-12 text-center">
         <h2> Top Artists... </h2>
