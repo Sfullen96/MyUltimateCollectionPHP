@@ -124,7 +124,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control margin-bottom" name="keyword" placeholder="Search..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
+                                            <input type="text" class="form-control margin-bottom" name="keyword" required placeholder="Search..." value="<?= (isset($_POST['keyword'])?$_POST['keyword']:''); ?>">
                                             <button type="submit" class="btn btn-default headerSearch margin-bottom">Search</button>
                                         </div>
                                     </div>

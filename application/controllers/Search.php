@@ -10,6 +10,7 @@ class Search extends CI_Controller
 
         $data['item_results'] = $this->searchmodel->searchItems($keyword);
         $data['artist_results'] = $this->searchmodel->searchArtists($keyword);
+        $data['profile_results'] = $this->searchmodel->searchUsers($keyword);
         $data['keyword'] = $keyword;
         $data['title'] = "Search | " . $keyword;
         $data['main_content'] = 'results';

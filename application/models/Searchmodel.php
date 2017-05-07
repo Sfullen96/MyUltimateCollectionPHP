@@ -46,25 +46,39 @@ class SearchModel extends CI_Model
         $resultsArtist = array();
         $userId = $this->session->userdata('user_id');
 
-        // $keywords = explode(' ', $keyword);
+        $sqlArtist = "
+            SELECT artist_name, artist_id, artist_image
+            FROM artist
+            WHERE artist_name LIKE '%$keyword%'
+            AND artist.user_id = '$userId'
+        ";
 
-        // foreach ($keywords as $keyword) {
-            $sqlArtist = "
-                SELECT artist_name, artist_id, artist_image
-                FROM artist
-                WHERE artist_name LIKE '%$keyword%'
-                AND artist.user_id = '$userId'
-            ";
+        $artists = $this->db->query($sqlArtist);
 
-            $artists = $this->db->query($sqlArtist);
-
-            if ($artists->num_rows() > 0) {
-                $resultsArtist[] = $artists->result();
-            }
-        // }
+        if ($artists->num_rows() > 0) {
+            $resultsArtist[] = $artists->result();
+        }
 
         return $resultsArtist;
            
+    }
+
+    public function searchUsers( $keyword ) {
+        $resultsUser = array();
+
+        $sqlUser = "
+            SELECT first_name, user_id, last_name, username, image
+            FROM user
+            WHERE CONCAT_WS(' ',first_name, last_name, email, username) LIKE '%$keyword%'
+        ";
+
+        $users = $this->db->query($sqlUser);
+
+        if ($users->num_rows() > 0) {
+            $resultsUser[] = $users->result();
+        }
+
+        return $resultsUser;
     }
 }
  

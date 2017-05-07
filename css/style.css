@@ -356,10 +356,14 @@ body {
 .homeCarItem {
 	text-align: center;
 }
-.homeCarItem img, .resultImage {
+.homeCarItem img {
 	margin: 0 auto;
 	margin-bottom: 15px;
 	width: 300px;
+}
+.resultImage {
+	margin-bottom: 15px;
+	width: 250px;
 }
 .noSelect {
   -webkit-user-select: none;  
