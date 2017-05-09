@@ -17,6 +17,8 @@ class User extends CI_Controller
             redirect( '/manage-account' );
         }
 
+        echo "<pre>" . print_r( $data['recentActivity'] = $this->usermodel->getRecentActivity( $userId ), TRUE ) . "</pre>";
+        die();
         $data['accountInfo'] = $this->usermodel->getUserInfo( $userId );
         $data['title'] = $data['accountInfo']->username . " | My Ultimate Collection";
         $data['top_items'] = $this->itemmodel->getFavAlbums( $userId );

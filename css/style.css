@@ -377,11 +377,11 @@ body {
 	width: 100%;
 	float: left;
 	text-align: center;
-	min-height: 100px;
-	line-height: 100px;
+	min-height: 80px;
+	line-height: 80px;
 }
 .artistBanner h2 {
-	line-height: 100px;
+	line-height: 80px;
 	color: #fff;
 }
 
@@ -489,4 +489,10 @@ i.fa-tags {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+.profileFeed {
+	max-height: 300px;
+	overflow: auto;
+	min-height: 100px;
+	border: 1px solid #333;
 }

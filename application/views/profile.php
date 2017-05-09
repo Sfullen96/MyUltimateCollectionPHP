@@ -11,6 +11,12 @@
     </div>
 </div>
 
+<?php if ( isset( $recentActivity ) ) { ?>
+<div class="row profileFeed margin-bottom">
+
+</div>
+<?php } ?>
+
 <div class="row">
     <div class="artistBanner margin-bottom col-xs-12 text-center">
         <h2> Top Items... </h2>
