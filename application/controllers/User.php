@@ -13,12 +13,11 @@ class User extends CI_Controller
 
     public function profileView( $userId ) {
 
-        if ( $userId === $this->session->userdata( 'user_id' ) ) {
+        if ( $userId === $this->session->userdata( 'user_id' ) && !$_GET['preview'] ) {
             redirect( '/manage-account' );
         }
 
-        echo "<pre>" . print_r( $data['recentActivity'] = $this->usermodel->getRecentActivity( $userId ), TRUE ) . "</pre>";
-        die();
+        $data['recentActivity'] = $this->usermodel->getRecentActivity( $userId );
         $data['accountInfo'] = $this->usermodel->getUserInfo( $userId );
         $data['title'] = $data['accountInfo']->username . " | My Ultimate Collection";
         $data['top_items'] = $this->itemmodel->getFavAlbums( $userId );
@@ -27,7 +26,7 @@ class User extends CI_Controller
         $data['cd_listened_count'] = $this->itemmodel->getCDListenedCount( $userId );
         $data['main_content'] = 'profile';
 
-        if ( $data['accountInfo']->public == 0 ) {
+        if ( $data['accountInfo']->public == 0 && !$_GET['preview'] ) {
             $data['heading'] = 'User not found';
             $data['message'] = 'This user could not be found';
 

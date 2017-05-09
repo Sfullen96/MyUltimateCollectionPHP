@@ -490,9 +490,43 @@ i.fa-tags {
 	-ms-user-select: none;
 	user-select: none;
 }
+.profileBlock {
+	padding: 30px;
+	margin-bottom: 20px;
+	background-color: #e6e9ec;
+	-webkit-box-shadow: 4px 4px 3px -3px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 4px 4px 3px -3px rgba(0, 0, 0, 0.5);
+	box-shadow: 4px 4px 3px -3px rgba(0, 0, 0, 0.5)
+}
+.profileBlock .title {
+	font-size: 30px;
+}
+.profileBlock .progress {
+	margin-bottom: 0px !important;
+	height: 30px;
+	border-radius: 0px;
+}
+
 .profileFeed {
-	max-height: 300px;
+	padding-top: 15px;
+	max-height: 400px;
 	overflow: auto;
-	min-height: 100px;
-	border: 1px solid #333;
+	/*border: 1px solid #333;*/
+}
+.profileFeed .profileFeedItem {
+	margin-bottom: 20px;
+}
+.profileFeed .profileFeedItem img {
+	width: 100%;
+}
+.profileFeed .profileFeedItem h4 {
+	padding-top: 20px;
+}
+.profileFeedItem i {
+	color: #e11f27;
+	padding-top: 10px;
+	font-weight: bold;
+}
+.progress-bar {
+	background-color: #e11f27 !important;
 }

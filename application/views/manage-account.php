@@ -46,5 +46,6 @@ if(isset($errors)) {
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary"> Register Now </button>
+    <button type="submit" class="btn btn-primary"> Save </button>
+    <a type="button" href="/profile/<?= $accountInfo->user_id ?>?preview=1" target="_blank" class="pull-right btn btn-primary"> Preview My Profile </a>
 </form>
