@@ -1,4 +1,4 @@
-<h3> Welcome Back, <?= $accountInfo->username; ?> </h3>
+<h3 class="margin-bottom"> Welcome Back, <?= $accountInfo->username; ?> </h3>
 <?php
 
 if(isset($errors)) {
@@ -10,6 +10,9 @@ if(isset($errors)) {
 }
 
 ?>
+
+<h5 class="margin-bottom"> Update your details: </h5>
+
 <form action="/user/editAccount" method="POST" role="form" id="registerForm">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
@@ -35,7 +38,13 @@ if(isset($errors)) {
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-xs-12">
+            <label class="checkbox-inline margin-bottom">
+                <input type="checkbox" name="public" <?= ( $accountInfo->public == 1 ? 'checked' : '' ) ?>> Make my profile public?
+            </label>
+        </div>
+    </div>
 
     <button type="submit" class="btn btn-primary"> Register Now </button>
 </form>

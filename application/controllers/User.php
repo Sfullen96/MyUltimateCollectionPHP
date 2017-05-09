@@ -95,6 +95,7 @@ class User extends CI_Controller
                 'last_name' => $_POST['lname'],
                 'email' => $_POST['email'],
                 'username' => $_POST['username'],
+                'public' => $_POST['public'] ? 1 : 0,
             );
 
             if( $this->usermodel->updateAccount( $params, $userId ) ) {
