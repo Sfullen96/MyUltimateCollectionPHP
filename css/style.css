@@ -26,14 +26,14 @@
 		margin-bottom: 0px !important;
 	}
 }
-a {
-	color: #e11f27;
-}
-a:hover,
-a:focus,
-a:visited {
-	color: #e11f27;
-}
+/*a {*/
+	/*color: #e11f27;*/
+/*}*/
+/*a:hover,*/
+/*a:focus,*/
+/*a:visited {*/
+	/*color: #e11f27;*/
+/*}*/
 .emailError {
 	margin-top: 8px;
 }
@@ -538,4 +538,7 @@ i.fa-tags {
 }
 .progress-bar {
 	background-color: #e11f27 !important;
+}
+.profilePicture {
+	margin: 0 auto;
 }

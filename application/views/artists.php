@@ -1,4 +1,4 @@
-<table class="table table-hover" id="artistsTable">
+<table class="table table-hover responsive" id="artistsTable">
 	<thead>
 		<tr>
 			<th style="display: none"> ID </th>

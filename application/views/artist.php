@@ -9,9 +9,12 @@
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-			<h2 class="albumTitle"> <?= ucwords($artist[0]->artist_name) ?> </h2>
+			<h2 class="albumTitle text-center-mobile"> <?= ucwords($artist[0]->artist_name) ?> </h2>
 			<p class="albumSummary margin-bottom" id="summary">
-				<?= (isset($artist[0]->artist_summary)?trim($artist[0]->artist_summary) . '<br><a href="/editSummary/'. $artist[0]->artist_id .'"> Edit this Summary </a>':'No summary found. <a href="/addSummary/'. $artist[0]->artist_id .'"> Add Your Own </a>'); ?>
+				<?= (isset($artist[0]->artist_summary)?trim($artist[0]->artist_summary) . '<br>
+                <a href="/editSummary/'. $artist[0]->artist_id .'" class="text-center-mobile"> Edit this Summary </a>'
+                :
+                'No summary found. <a href="/addSummary/'. $artist[0]->artist_id .'" class="text-center-mobile"> Add Your Own </a>'); ?>
 			</p>
 		</div>
 	</div>

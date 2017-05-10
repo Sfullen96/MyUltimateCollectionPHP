@@ -1,13 +1,13 @@
 <div class="profileBlock">
     <div class="row">
         <div class="col-xs-12 col-sm-4">
-            <img src="<?= ($accountInfo->image?$accountInfo->image:base_url() . 'images/default-user.png'); ?>" class="img-responsive resultImage">
+            <img src="<?= ($accountInfo->image?$accountInfo->image:base_url() . 'images/default-user.png'); ?>" class="img-responsive profilePicture">
         </div>
         <div class="col-xs-12 col-sm-8">
-            <h2 class="title margin-bottom"> <?= $accountInfo->username ?>'s Profile </h2>
-            <h5 class="margin-bottom"> Member Since: <?= date( 'd/m/Y', strtotime($accountInfo->created_at ) ); ?> </h5>
-            <h5> <?= $cd_count ?> items in their library </h5>
-            <ul>
+            <h2 class="title margin-bottom text-center-mobile"> <?= $accountInfo->username ?>'s Profile </h2>
+            <h5 class="margin-bottom text-center-mobile"> Member Since: <?= date( 'd/m/Y', strtotime($accountInfo->created_at ) ); ?> </h5>
+            <h5 class="text-center-mobile"> <?= $cd_count ?> items in their library </h5>
+            <ul class="text-center-mobile breakdown">
                 <li> <?= $breakdown['cds'] ?> CD's </li>
                 <li> <?= $breakdown['vinyls'] ?> Vinyls </li>
                 <li> <?= $breakdown['cassettes'] ?> Cassettes </li>
@@ -18,8 +18,8 @@
 </div>
 
 <div class="profileBlock">
-    <h2 class="title">Library Progress: </h2>
-    <p class='bold margin-bottom'><?= $cd_listened_count . '/' . $cd_count; ?> (<?= ($cd_listened_count > 0 ? round( ($cd_listened_count / $cd_count ) * 100, 2 ) : '0') ?>%) items listened to</p>
+    <h2 class="title text-center-mobile">Library Progress: </h2>
+    <p class='bold margin-bottom text-center-mobile'><?= $cd_listened_count . '/' . $cd_count; ?> (<?= ($cd_listened_count > 0 ? round( ($cd_listened_count / $cd_count ) * 100, 2 ) : '0') ?>%) items listened to</p>
     <div class="row">
         <div class="col-xs-12">
             <div class='progress'>
@@ -35,15 +35,15 @@
 
 <div class="profileBlock">
     <?php if ( isset( $recentActivity ) ) { ?>
-    <h2> Recent Activity </h2>
-    <div class="row profileFeed margin-bottom">
+    <h2 class="text-center-mobile"> Recent Activity </h2>
+    <div class="row profileFeed margin-bottom text-center-mobile">
         <div class="col-xs-12">
             <?php foreach( $recentActivity as $date => $activity ) { ?>
                 <div class="row profileFeedItem <?= $activity['type'] ?>">
-                    <div class="col-xs-2">
+                    <div class="col-xs-12 col-sm-2">
                         <img src="<?= ( $activity['image'] > '' ? $activity['image'] : base_url() . 'images/default.png' ) ?>" alt="" class="img-responsive">
                     </div>
-                    <div class="col-xs-10">
+                    <div class="col-xs-12 col-sm-10">
                         <h4>Recently <?= $activity['typeWord'] ?>:
                         <br>
                         <a href="/item/<?= $activity['itemId'] ?>"> <?= ucwords( $activity['title'] ) ?></a>
@@ -60,7 +60,7 @@
 </div>
 
 <div class="profileBlock">
-    <h2 class="title margin-bottom"> Top Items... </h2>
+    <h2 class="title margin-bottom text-center-mobile"> Top Items... </h2>
     <div class="row">
         <?php $counter = 0; ?>
         <?php foreach( $top_items as $item ) { ?>

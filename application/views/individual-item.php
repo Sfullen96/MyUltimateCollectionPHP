@@ -44,15 +44,15 @@ if(!empty($tracks)) {
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-            <h5 class="albumFormat"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
-            <h5 class="albumFormat">
+            <h5 class="albumFormat text-center-mobile"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
+            <h5 class="albumFormat text-center-mobile">
                 <span><?= (isset($item->name)? $item->name :'N/A'); ?> </span> |
                 <span><?= (isset($item->format_name)? $item->format_name:'N/A'); ?> </span> |
                 <span><?= (isset($item->disc_count)?$item->disc_count . ' Disc(s)':'N/A'); ?></span>
             </h5>
-			<h2 class="albumTitle editable" id="title" data-table="library" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
-			<h5 class="extraInfo"> By <a href="/artist/<?= $item->artist_id ?>"> <?= ucwords($item_info[0]->artist_name); ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
-			<div class="rating">
+			<h2 class="albumTitle editable text-center-mobile" id="title" data-table="library" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
+			<h5 class="extraInfo text-center-mobile"> By <a href="/artist/<?= $item->artist_id ?>"> <?= ucwords($item_info[0]->artist_name); ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
+			<div class="rating text-center-mobile">
 			<?php 
 
 				foreach ($item_info as $data) {
@@ -71,10 +71,16 @@ if(!empty($tracks)) {
 
 			?>
 			</div>
-			<?= ($review?'<a href="/review-edit/' . $item->item_id . '" class="reviewLink"> Edit Album Review </a>':'<a href="/review/' . $item->item_id . '" class="reviewLink"> Review This Album </a>'); ?>
+			<?=
+            ($review ?
+                '<a href="/review-edit/' . $item->item_id . '" class="reviewLink text-center-mobile"> Edit Album Review </a>'
+                :
+                '<a href="/review/' . $item->item_id . '" class="reviewLink text-center-mobile"> Review This Album </a>'
+            );
+			?>
 			
 			<br>
-			<p class="albumSummary margin-bottom" id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
+			<p class="albumSummary margin-bottom text-center-mobile" id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
 				<?= (isset($item->summary)?trim($item->summary):'No summary found.'); ?>
 			</p>
 		</div>
@@ -195,7 +201,7 @@ if(!empty($tracks)) {
 			$column = 12 / count($similar_artists->similarartists->artist);
 
 			echo '
-			<div class="col-xs-6 col-sm-'. $column .'">
+			<div class="col-xs-12 col-sm-'. $column .'">
 				<div class="similarArtist" style="background-image: url(\''. $similarArtist->image[2]->{'#text'} .'\');background-size: cover">
 					<div class="overlay">
 						<div class="text">
