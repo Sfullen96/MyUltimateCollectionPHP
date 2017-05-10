@@ -164,16 +164,22 @@
                                 <?php if(empty($this->session->userdata('is_logged_in'))) { ?>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/login'?'active':'') ?>"><a href="/login">Login</a></li>
                                 <?php } else { ?>
-<!--                                    <li class="dropdown">-->
-<!--                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Account <span class="caret"></span></a>-->
-<!--                                        <ul class="dropdown-menu">-->
-<!--<!--                                            <li><a href="/account/manage">Manage Account</a></li>-->-->
-<!--                                            <li><a href="#">Another action</a></li>-->
-<!--                                            <li><a href="/logout"> Logout </a></li>-->
-<!--                                        </ul>-->
-<!--                                    </li>-->
-
-                                <li class=""><a href="/logout">Logout</a></li>
+                                <li class="dropdown">
+                                    <a
+                                        href="#"
+                                        class="dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        role="button"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"> Account <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/manage-account">Manage Account</a></li>
+<!--                                        <li><a href="#">Another action</a></li>-->
+                                        <li><a href="/logout"> Logout </a></li>
+                                    </ul>
+                                </li>
+<!--                                <li class=""><a href="/logout">Logout</a></li>-->
                                 <?php } ?>
                                 <?php if($this->session->userdata('admin')) { ?>
                                 <li class="dropdown">

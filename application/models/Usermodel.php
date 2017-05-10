@@ -34,15 +34,6 @@ class UserModel extends CI_Model
     public function getRecentActivity( $userId ) {
         $activity = array();
 
-//        $activity['recentlyAdded']['content'] = 'Yep';
-//        $activity['recentlyAdded']['timestamp'] = 'Today';
-//
-//        $activity['recentlyListened']['content'] = 'Uhu';
-//        $activity['recentlyListened']['timestamp'] = 'Today';
-//
-//        $activity['recentlyViewed']['content'] = 'Viewed';
-//        $activity['recentlyViewed']['timestamp'] = 'Yesterday';
-
         $views = "
             SELECT i.title, a.artist_name, i.artist_id, i.item_id, iv.timestamp AS timestamp, i.image
             FROM item_view iv 
@@ -52,7 +43,7 @@ class UserModel extends CI_Model
             ON a.artist_id = i.artist_id
             WHERE iv.user_id = '$userId'
             ORDER BY `timestamp` DESC 
-            LIMIT 3
+            LIMIT 2
         ";
 
         $viewsQuery = $this->db->query( $views );
@@ -75,7 +66,7 @@ class UserModel extends CI_Model
             ON a.artist_id = i.artist_id
             WHERE i.user_id = '$userId'
             ORDER BY created_at DESC 
-            LIMIT 3
+            LIMIT 2
         ";
 
         $addsQuery = $this->db->query( $adds );
@@ -100,7 +91,7 @@ class UserModel extends CI_Model
             ON a.artist_id = i.artist_id
             WHERE i.user_id = '$userId'
             ORDER BY timestamp DESC 
-            LIMIT 3
+            LIMIT 2
         ";
 
         $listensQuery = $this->db->query( $listens );
@@ -114,6 +105,31 @@ class UserModel extends CI_Model
             $activity[ $listen->timestamp ]['typeWord'] = 'listened';
             $activity[ $listen->timestamp ]['image'] = $listen->image;
             $activity[ $listen->timestamp ]['type'] = 'listen';
+        }
+
+        $reviews = "
+            SELECT i.title, a.artist_name, i.artist_id, i.item_id, created_at AS timestamp, i.image
+            FROM review ir 
+            LEFT JOIN item i 
+            ON i.item_id = ir.item_id
+            LEFT JOIN artist a 
+            ON a.artist_id = i.artist_id
+            WHERE i.user_id = '$userId'
+            ORDER BY created_at DESC 
+            LIMIT 2
+        ";
+
+        $reviewsQuery = $this->db->query( $listens );
+        $reviewsResults = $reviewsQuery->result();
+
+        foreach( $reviewsResults as $review ) {
+            $activity[ $review->timestamp ]['title'] = $listen->title;
+            $activity[ $review->timestamp ]['itemId'] = $listen->item_id;
+            $activity[ $review->timestamp ]['artistId'] = $listen->artist_id;
+            $activity[ $review->timestamp ]['artist'] = $listen->artist_name;
+            $activity[ $review->timestamp ]['typeWord'] = 'reviewed';
+            $activity[ $review->timestamp ]['image'] = $listen->image;
+            $activity[ $review->timestamp ]['type'] = 'listen';
         }
 
         krsort( $activity );
