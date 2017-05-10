@@ -17,6 +17,7 @@ class User extends CI_Controller
             redirect( '/manage-account' );
         }
 
+        $data['breakdown'] = $this->usermodel->getItemBreakdown( $userId );
         $data['recentActivity'] = $this->usermodel->getRecentActivity( $userId );
         $data['accountInfo'] = $this->usermodel->getUserInfo( $userId );
         $data['title'] = $data['accountInfo']->username . " | My Ultimate Collection";

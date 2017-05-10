@@ -1,6 +1,20 @@
 <div class="profileBlock">
-    <h2 class="title"> <?= $accountInfo->username ?>'s Profile </h2>
-    <h5> Member Since: <?= date( 'd/m/Y', strtotime( $accountInfo->created_at ) ); ?> </h5>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4">
+            <img src="<?= ($accountInfo->image?$accountInfo->image:base_url() . 'images/default-user.png'); ?>" class="img-responsive resultImage">
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <h2 class="title margin-bottom"> <?= $accountInfo->username ?>'s Profile </h2>
+            <h5 class="margin-bottom"> Member Since: <?= date( 'd/m/Y', strtotime($accountInfo->created_at ) ); ?> </h5>
+            <h5> <?= $cd_count ?> items in their library </h5>
+            <ul>
+                <li> <?= $breakdown['cds'] ?> CD's </li>
+                <li> <?= $breakdown['vinyls'] ?> Vinyls </li>
+                <li> <?= $breakdown['cassettes'] ?> Cassettes </li>
+                <li> <?= $breakdown['dvds'] ?> DVD's </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="profileBlock">
@@ -27,7 +41,7 @@
             <?php foreach( $recentActivity as $date => $activity ) { ?>
                 <div class="row profileFeedItem <?= $activity['type'] ?>">
                     <div class="col-xs-2">
-                        <img src="<?= ( isset( $activity['image'] ) ? $activity['image'] : base_url() . 'images/default.png' ) ?>" alt="" class="img-responsive">
+                        <img src="<?= ( $activity['image'] > '' ? $activity['image'] : base_url() . 'images/default.png' ) ?>" alt="" class="img-responsive">
                     </div>
                     <div class="col-xs-10">
                         <h4>Recently <?= $activity['typeWord'] ?>:
@@ -69,7 +83,7 @@
         <?php foreach( $top_artists as $artist ) { ?>
             <?php if ( $counter < 4 ) { ?>
                 <div class="col-xs-12 col-sm-6 col-md-3 homeCarItem">
-                    <a href="/artist/<?= $artist->artist_id ?>"><img src="<?= ($artist->artist_image?$artist->artist_image:base_url() . 'images/default.png'); ?>" class="img-responsive margin-bottom"></a>
+                    <a href="/artist/<?= $artist->artist_id ?>"><img src="<?= ($artist->artist_image > ''?$artist->artist_image:base_url() . 'images/default.png'); ?>" class="img-responsive margin-bottom"></a>
                     <h4 class="margin-bottom"> <a href="/artist/<?= $artist->artist_id ?>"><?= ucwords($artist->artist_name); ?></a> </h4>
                 </div>
             <?php } ?>

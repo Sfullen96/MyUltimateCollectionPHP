@@ -26,6 +26,14 @@
 		margin-bottom: 0px !important;
 	}
 }
+a {
+	color: #e11f27;
+}
+a:hover,
+a:focus,
+a:visited {
+	color: #e11f27;
+}
 .emailError {
 	margin-top: 8px;
 }
@@ -500,6 +508,8 @@ i.fa-tags {
 }
 .profileBlock .title {
 	font-size: 30px;
+	/*color: #e11f27;*/
+	font-weight: 800;
 }
 .profileBlock .progress {
 	margin-bottom: 0px !important;
@@ -523,7 +533,6 @@ i.fa-tags {
 	padding-top: 20px;
 }
 .profileFeedItem i {
-	color: #e11f27;
 	padding-top: 10px;
 	font-weight: bold;
 }

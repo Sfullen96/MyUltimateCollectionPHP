@@ -138,4 +138,42 @@ class UserModel extends CI_Model
 
     }
 
+    public function getItemBreakdown( $userId ) {
+        $cds = 0;
+        $vinyls = 0;
+        $cassettes = 0;
+        $dvds = 0;
+        $breakdown = array();
+
+        $query = $this->db->select()
+            ->where( 'user_id', $userId )
+            ->get( 'item' );
+
+        foreach ( $query->result() as $item ) {
+            if ( $item->item_type == 1 ) {
+                $cds++;
+            }
+
+            if ( $item->item_type == 2 ) {
+                $vinyls++;
+            }
+
+            if ( $item->item_type == 3 ) {
+                $cassettes++;
+            }
+
+            if ( $item->item_type == 4 ) {
+                $dvds++;
+            }
+        }
+
+        $breakdown['cds'] = $cds;
+        $breakdown['vinyls'] = $vinyls;
+        $breakdown['cassettes'] = $cassettes;
+        $breakdown['dvds'] = $dvds;
+
+        return $breakdown;
+
+    }
+
 }
