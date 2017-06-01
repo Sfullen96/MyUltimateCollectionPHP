@@ -31,6 +31,7 @@ $(function() {
 		var itemId = $(this).attr('data-itemid');
 
 		valueToSend = value.replace(/[/]/g, '-slash-');
+		valueToSend = encodeURI(valueToSend);
 
 		$.get('updateItem/' + field + '/' + valueToSend + '/' + table + '/' +itemId, function(data) {
 			/*optional stuff to do after success */
