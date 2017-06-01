@@ -164,7 +164,7 @@
                                 <!-- <li><a href="/get-listed">Get listed</a></li> -->
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/add-cd'?'active':'') ?>"><a href="/add-cd">Add to Library</a></li>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/library'?'active':'') ?>"><a href="/library">View Library</a></li>
-                                <li><a class="<?= ($_SERVER['REQUEST_URI'] == '/artists'?'active':'') ?>" href="/artists"> Artists </a></li>
+<!--                                <li><a class="--><?//= ($_SERVER['REQUEST_URI'] == '/artists'?'active':'') ?><!--" href="/artists"> Artists </a></li>-->
                                 <?php if(empty($this->session->userdata('is_logged_in'))) { ?>
                                 <li class="<?= ($_SERVER['REQUEST_URI'] == '/login'?'active':'') ?>"><a href="/login">Login</a></li>
                                 <?php } else { ?>

@@ -44,13 +44,13 @@ if(!empty($tracks)) {
 	</div>
 	<div class="col-xs-12 col-sm-8 ratingContainer">
 		<div class="albumInfo">
-            <h5 class="albumFormat text-center-mobile"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
+            <h5 class="albumFormat text-center-mobile"> <span class="bold"> Ref #</span><span class="editable" id="reference" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span> </h5>
             <h5 class="albumFormat text-center-mobile">
                 <span><?= (isset($item->name)? $item->name :'N/A'); ?> </span> |
                 <span><?= (isset($item->format_name)? $item->format_name:'N/A'); ?> </span> |
                 <span><?= (isset($item->disc_count)?$item->disc_count . ' Disc(s)':'N/A'); ?></span>
             </h5>
-			<h2 class="albumTitle editable text-center-mobile" id="title" data-table="library" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
+			<h2 class="albumTitle editable text-center-mobile" id="title" data-table="item" data-itemid="<?= ucwords($item->item_id) ?>"> <?= ucwords($item_info[0]->title); ?> </h2>
 			<h5 class="extraInfo text-center-mobile"> By <a href="/artist/<?= $item->artist_id ?>"> <?= ucwords($item_info[0]->artist_name); ?> </a> <?= (isset($trackCount)?' | ' . $trackCount . ' tracks, ':''); ?>  <?= (isset($totalAlbumTime)?$totalAlbumTime:''); ?> </h5>
 			<div class="rating text-center-mobile">
 			<?php 
@@ -80,7 +80,7 @@ if(!empty($tracks)) {
 			?>
 			
 			<br>
-			<p class="albumSummary margin-bottom text-center-mobile" id="summary" data-table="library" data-itemid="<?= $item->item_id; ?>">
+			<p class="albumSummary margin-bottom text-center-mobile" id="summary" data-table="item" data-itemid="<?= $item->item_id; ?>">
 				<?= (isset($item->summary)?trim($item->summary):'No summary found.'); ?>
 			</p>
 		</div>
@@ -174,17 +174,17 @@ if(!empty($tracks)) {
 	<div class="moreInfoBanner col-xs-12">
 		<div class="row">
 			<div class="col-xs-12">
-				<p> Purchased from <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span> on <span class="editable" id="purchase_date" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchase_date) && $item->purchase_date > ''?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?>
+				<p> Purchased from <span class="editable" id="purchased_from" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span> on <span class="editable" id="purchase_date" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchase_date) && $item->purchase_date > ''?date('d/m/Y', strtotime($item->purchase_date)):'N/A'); ?>
 				</span></p>
 			</div>
 		<!-- 	<div class="col-xs-12 col-sm-6">
-				<p> Purchased at: <span class="editable" id="purchased_from" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span></p>
+				<p> Purchased at: <span class="editable" id="purchased_from" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->purchased_from) && $item->purchased_from > ''?$item->purchased_from:'N/A'); ?></span></p>
 			</div> -->
 		<!-- 	<div class="col-xs-12 col-sm-4">
-				<p> Item Ref: <span class="editable" id="reference" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span></p>
+				<p> Item Ref: <span class="editable" id="reference" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->reference)?$item->reference:'N/A'); ?> </span></p>
 			</div> -->
 			<!-- <div class="col-xs-12 col-sm-4">
-				<p> CD Count: <span class="editable" id="cd_count" data-table="library" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </span></p>
+				<p> CD Count: <span class="editable" id="cd_count" data-table="item" data-itemid="<?= $item->item_id; ?>"><?= (isset($item->cd_count)?$item->cd_count:'N/A'); ?> </span></p>
 			</div> -->
 		</div>
 	</div>
